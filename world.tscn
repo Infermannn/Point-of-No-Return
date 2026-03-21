@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://ctjn0nbgn4wkp"]
 
 [ext_resource type="PackedScene" uid="uid://df73ww2y0343v" path="res://player.tscn" id="1_f3sb7"]
-[ext_resource type="Texture2D" uid="uid://nsmhhdvs6duv" path="res://space1.jpg" id="1_fj7yv"]
+[ext_resource type="Texture2D" uid="uid://rp7fgxat4jbd" path="res://space2.jpg" id="1_fj7yv"]
+[ext_resource type="Script" uid="uid://d3orxh3y5biky" path="res://scripts/background.gd" id="2_tlwt5"]
 
 [node name="World" type="Node2D" unique_id=1221982499]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1582539085]
 texture = ExtResource("1_fj7yv")
-centered = false
-offset = Vector2(400, 200)
+script = ExtResource("2_tlwt5")
 
 [node name="Player" parent="." unique_id=1975230303 instance=ExtResource("1_f3sb7")]
