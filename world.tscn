@@ -1,13 +1,29 @@
 [gd_scene format=3 uid="uid://ctjn0nbgn4wkp"]
 
+[ext_resource type="Script" uid="uid://cktanxix855r2" path="res://scripts/world.gd" id="1_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://df73ww2y0343v" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://rp7fgxat4jbd" path="res://space2.jpg" id="1_fj7yv"]
 [ext_resource type="Script" uid="uid://d3orxh3y5biky" path="res://scripts/background.gd" id="2_tlwt5"]
 
-[node name="World" type="Node2D" unique_id=1221982499]
+[node name="World" type="Node2D" unique_id=1221982499 groups=["world"]]
+script = ExtResource("1_aqk2v")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1582539085]
 texture = ExtResource("1_fj7yv")
 script = ExtResource("2_tlwt5")
 
 [node name="Player" parent="." unique_id=1975230303 instance=ExtResource("1_f3sb7")]
+
+[node name="LivesLabel" type="Label" parent="." unique_id=31265183 groups=["lives_label"]]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 67.0
+offset_bottom = 33.0
+text = "Lives: 3"
+
+[node name="KillsLabel" type="Label" parent="." unique_id=661665204 groups=["kills_label"]]
+offset_left = 80.0
+offset_top = 10.0
+offset_right = 130.0
+offset_bottom = 33.0
+text = "Kills: 0/5"

@@ -3,8 +3,15 @@
 [ext_resource type="Script" uid="uid://cyy5shxmk4qst" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://b68vacop2vn6v" path="res://spaceship256.png" id="2_onrkg"]
 
-[node name="Player" type="Node2D" unique_id=1975230303]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+
+[node name="Player" type="Area2D" unique_id=1102285899]
+collision_mask = 2
 script = ExtResource("1_4flbx")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2130151358]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2130151358 groups=["player"]]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_onrkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=438039192]
+shape = SubResource("RectangleShape2D_onrkg")

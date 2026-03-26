@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d2fqn6f57os1n"]
+
+[ext_resource type="Script" uid="uid://d2ekfukowqwyq" path="res://scripts/enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://dn5bpm7bki5re" path="res://Postava 3_scaled_10x_pngcrushed.png" id="2_4gyqm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
+
+[node name="Enemy" type="Area2D" unique_id=1919326434]
+script = ExtResource("1_4gyqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1868867608]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_4gyqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=114330256]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_4gyqm")

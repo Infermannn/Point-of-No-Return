@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dx17drvwc5h10"]
+
+[ext_resource type="Texture2D" uid="uid://dwfkapcqeclvc" path="res://pistol_bullet_scaled_26x_pngcrushed.png" id="2_gl7bs"]
+[ext_resource type="Script" uid="uid://du18ujeilpgyu" path="res://scripts/enemy_bullet.gd" id="2_mgp66"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gl7bs"]
+
+[node name="enemy_bullet" type="Area2D" unique_id=2104233956 groups=["enemy_bullet"]]
+scale = Vector2(0.1, 0.1)
+collision_layer = 2
+script = ExtResource("2_mgp66")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1388481728]
+texture = ExtResource("2_gl7bs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1007834420 groups=["enemy_bullet"]]
+shape = SubResource("RectangleShape2D_gl7bs")
