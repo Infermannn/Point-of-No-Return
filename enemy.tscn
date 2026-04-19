@@ -5,7 +5,8 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
 
-[node name="Enemy" type="Area2D" unique_id=1919326434]
+[node name="Enemy" type="Area2D" unique_id=1919326434 groups=["enemy"]]
+collision_layer = 4
 script = ExtResource("1_4gyqm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1868867608]

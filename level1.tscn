@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://ctjn0nbgn4wkp"]
+
+[ext_resource type="Script" uid="uid://cktanxix855r2" path="res://scripts/world.gd" id="1_v38iq"]
+[ext_resource type="Texture2D" uid="uid://rp7fgxat4jbd" path="res://space2.jpg" id="2_v8kj3"]
+[ext_resource type="Script" uid="uid://d3orxh3y5biky" path="res://scripts/background.gd" id="3_crycw"]
+[ext_resource type="PackedScene" uid="uid://df73ww2y0343v" path="res://player.tscn" id="4_i2041"]
+[ext_resource type="Script" uid="uid://dfbyyofu1o2m3" path="res://scripts/tutorial.gd" id="5_v8kj3"]
+[ext_resource type="Texture2D" uid="uid://c5q4fo438v8ov" path="res://dialogwindowv2.png" id="6_crycw"]
+
+[node name="level1" type="Node2D" unique_id=1221982499 groups=["world"]]
+script = ExtResource("1_v38iq")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1582539085]
+texture = ExtResource("2_v8kj3")
+script = ExtResource("3_crycw")
+
+[node name="Player" parent="." unique_id=1975230303 instance=ExtResource("4_i2041")]
+
+[node name="HUDPanel" type="ColorRect" parent="." unique_id=1778131552]
+offset_left = 1152.0
+offset_right = 1452.0
+offset_bottom = 648.0
+color = Color(0.0002861313, 0.021553757, 0.2125366, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDPanel" unique_id=1744388983]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="LivesLabel" type="Label" parent="HUDPanel/VBoxContainer" unique_id=31265183 groups=["lives_label"]]
+layout_mode = 2
+text = "Lives: 3"
+
+[node name="KillsLabel" type="Label" parent="HUDPanel/VBoxContainer" unique_id=661665204 groups=["kills_label"]]
+layout_mode = 2
+text = "Kills: 0/5"
+
+[node name="TextureRect" type="TextureRect" parent="HUDPanel" unique_id=1932503739]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -305.0
+offset_right = 324.0
+grow_vertical = 0
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("6_crycw")
+
+[node name="Panel" type="Panel" parent="HUDPanel" unique_id=1541664211]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 390.0
+offset_right = 287.0
+offset_bottom = 614.0
+
+[node name="Label" type="Label" parent="HUDPanel/Panel" unique_id=2053368737]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 2
+script = ExtResource("5_v8kj3")

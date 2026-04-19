@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 
 [node name="Player" type="Area2D" unique_id=1102285899]
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("1_4flbx")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2130151358 groups=["player"]]

@@ -6,6 +6,8 @@ var bullet_scene = preload("res://bullet.tscn")
 
 var speed = 300
 
+var invincible = false
+
 func _ready():
 	var screen = get_viewport_rect().size
 	position = screen / 2
@@ -15,12 +17,10 @@ func _ready():
 func _on_area_entered(area):
 	if area.is_in_group("enemy_bullet"):
 		area.queue_free()
-		lives -= 1
-		var label = get_tree().get_first_node_in_group("lives_label")
-		if label:
-			label.text = "Lives: " + str(lives)
-		if lives <= 0:
-			get_tree().change_scene_to_file("res://game_over.tscn")
+		take_damage()
+	if area.is_in_group("enemy"):
+		area.queue_free()
+		take_damage()
 
 func _process(delta):
 	var direction = Vector2.ZERO
@@ -44,8 +44,24 @@ func _process(delta):
 	
 	position += direction * speed * delta
 	var screen = get_viewport_rect().size
-	position.x = clamp(position.x, 80, screen.x - 75)
+	position.x = clamp(position.x, 80, 1152 - 75)
 	position.y = clamp(position.y, 55, screen.y - 85)
+	
+func take_damage():
+	if invincible:
+		return
+	invincible = true
+	lives -= 1
+	if lives <= 0:
+		get_tree().change_scene_to_file("res://game_over.tscn")
+		return
+	var label = get_tree().get_first_node_in_group("lives_label")
+	if label != null:
+		label.text = "Lives: " + str(lives)
+	await get_tree().create_timer(1.0).timeout
+	invincible = false
+
+
 	
 	
 	

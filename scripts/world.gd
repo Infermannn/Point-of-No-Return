@@ -1,5 +1,7 @@
 extends Node2D
 
+var game_started = false
+
 var enemy_scene = preload("res://enemy.tscn")
 var spawn_timer = 0
 var spawn_interval = 2.0
@@ -7,8 +9,10 @@ var enemies_killed = 0
 var enemies_to_win = 5
 
 func _process(delta):
-	spawn_timer += delta
+	if not game_started:
+		return
 	
+	spawn_timer += delta
 	if spawn_timer >= spawn_interval:
 		spawn_timer = 0
 		spawn_enemy()
@@ -16,9 +20,12 @@ func _process(delta):
 func spawn_enemy():
 	var enemy = enemy_scene.instantiate()
 	var screen = get_viewport_rect().size
-	enemy.position.x = randf_range(50, screen.x - 50)
+	enemy.position.x = randf_range(50, 1152 - 50)
 	enemy.position.y = -50
 	add_child(enemy)
+	
+func start_game():
+	game_started = true
 
 func enemy_killed():
 	enemies_killed += 1
