@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://delkyqf3sqbft"]
+
+[ext_resource type="Texture2D" uid="uid://0jubvmordjsu" path="res://All_Fire_Bullet_Pixel_16x16_00.png" id="1_klo4u"]
+[ext_resource type="Script" uid="uid://bh7ldvg3wwd6q" path="res://scripts/big_bullet.gd" id="1_pshhb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pshhb"]
+atlas = ExtResource("1_klo4u")
+region = Rect2(370, 319.5, 30, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2wwv"]
+
+[node name="big_bullet" type="Area2D" unique_id=691611430 groups=["enemy_bullet"]]
+collision_layer = 2
+script = ExtResource("1_pshhb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1308701341 groups=["enemy_bullet"]]
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_pshhb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1604656805]
+shape = SubResource("RectangleShape2D_a2wwv")

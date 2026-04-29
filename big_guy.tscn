@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://df7fhw1wjlw6k"]
+
+[ext_resource type="Script" uid="uid://cogo82flhnp73" path="res://scripts/big_guy.gd" id="1_go1tm"]
+[ext_resource type="Texture2D" uid="uid://cojl0apwaiytr" path="res://big_guyscaled.png" id="1_wqcaj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gj2yq"]
+
+[node name="big_guy" type="Area2D" unique_id=233166304 groups=["enemy"]]
+collision_layer = 4
+script = ExtResource("1_go1tm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1837883614]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_wqcaj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1048040155]
+shape = SubResource("RectangleShape2D_gj2yq")

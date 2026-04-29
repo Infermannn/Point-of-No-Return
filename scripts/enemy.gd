@@ -1,9 +1,10 @@
 extends Area2D
 
-var speed = 100
+var speed = 200
 var reached_position = false
 var move_direction = 1
 var move_range = 100
+var hp = 100
 var start_x = 0
 
 var bullet_scene = preload("res://enemy_bullet.tscn")
@@ -42,6 +43,8 @@ func shoot():
 
 func _on_area_entered(area):
 	if area.is_in_group("player_bullet"):
-		queue_free()
+		hp -= 100
 		area.queue_free()
-		get_tree().get_first_node_in_group("world").enemy_killed()
+		if hp <= 0:
+			queue_free()
+			get_tree().get_first_node_in_group("world").enemy_killed()

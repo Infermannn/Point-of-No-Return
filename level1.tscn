@@ -1,66 +1,541 @@
 [gd_scene format=3 uid="uid://ctjn0nbgn4wkp"]
 
 [ext_resource type="Script" uid="uid://cktanxix855r2" path="res://scripts/world.gd" id="1_v38iq"]
-[ext_resource type="Texture2D" uid="uid://rp7fgxat4jbd" path="res://space2.jpg" id="2_v8kj3"]
+[ext_resource type="Texture2D" uid="uid://nsmhhdvs6duv" path="res://space1.jpg" id="2_xy4tn"]
 [ext_resource type="Script" uid="uid://d3orxh3y5biky" path="res://scripts/background.gd" id="3_crycw"]
 [ext_resource type="PackedScene" uid="uid://df73ww2y0343v" path="res://player.tscn" id="4_i2041"]
 [ext_resource type="Script" uid="uid://dfbyyofu1o2m3" path="res://scripts/tutorial.gd" id="5_v8kj3"]
-[ext_resource type="Texture2D" uid="uid://c5q4fo438v8ov" path="res://dialogwindowv2.png" id="6_crycw"]
+[ext_resource type="Script" uid="uid://do0piehmd8aq4" path="res://scripts/upgrade_screen.gd" id="6_crycw"]
+[ext_resource type="Texture2D" uid="uid://kewacknf2otn" path="res://Transparent Yellow Triangle Png - Yellow Triangle No Background, Png Download - vhv.jpg" id="7_i2041"]
+[ext_resource type="Texture2D" uid="uid://beudx1x468vb6" path="res://icon.svg" id="8_xy4tn"]
 
 [node name="level1" type="Node2D" unique_id=1221982499 groups=["world"]]
 script = ExtResource("1_v38iq")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1582539085]
-texture = ExtResource("2_v8kj3")
+[node name="BackgroundContainer" type="Node2D" parent="." unique_id=732171366]
 script = ExtResource("3_crycw")
 
+[node name="Background" type="Sprite2D" parent="BackgroundContainer" unique_id=1582539085]
+position = Vector2(960, 544.00006)
+scale = Vector2(2.6666665, 3.0222225)
+texture = ExtResource("2_xy4tn")
+
+[node name="Background2" type="Sprite2D" parent="BackgroundContainer" unique_id=179597810]
+position = Vector2(960, -538)
+scale = Vector2(2.6666667, 2.9888887)
+texture = ExtResource("2_xy4tn")
+
 [node name="Player" parent="." unique_id=1975230303 instance=ExtResource("4_i2041")]
+position = Vector2(242, 881)
 
-[node name="HUDPanel" type="ColorRect" parent="." unique_id=1778131552]
-offset_left = 1152.0
-offset_right = 1452.0
-offset_bottom = 648.0
-color = Color(0.0002861313, 0.021553757, 0.2125366, 1)
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1744388983]
+offset_left = 19.0
+offset_top = 15.0
+offset_right = 146.0
+offset_bottom = 101.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUDPanel" unique_id=1744388983]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 50.0
-offset_bottom = 50.0
-
-[node name="LivesLabel" type="Label" parent="HUDPanel/VBoxContainer" unique_id=31265183 groups=["lives_label"]]
+[node name="LivesLabel" type="Label" parent="VBoxContainer" unique_id=31265183 groups=["lives_label"]]
 layout_mode = 2
-text = "Lives: 3"
+text = "HP: 300"
 
-[node name="KillsLabel" type="Label" parent="HUDPanel/VBoxContainer" unique_id=661665204 groups=["kills_label"]]
+[node name="KillsLabel" type="Label" parent="VBoxContainer" unique_id=661665204 groups=["kills_label"]]
 layout_mode = 2
 text = "Kills: 0/5"
 
-[node name="TextureRect" type="TextureRect" parent="HUDPanel" unique_id=1932503739]
-layout_mode = 1
-anchors_preset = 2
+[node name="TutorialUI" type="Control" parent="." unique_id=1357229702]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -305.0
-offset_right = 324.0
+offset_left = 1670.0
+offset_top = 908.0
+offset_right = 1670.0
+offset_bottom = 908.0
+grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("6_crycw")
+script = ExtResource("5_v8kj3")
 
-[node name="Panel" type="Panel" parent="HUDPanel" unique_id=1541664211]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 390.0
-offset_right = 287.0
-offset_bottom = 614.0
+[node name="Panel" type="Panel" parent="TutorialUI" unique_id=169061766]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
 
-[node name="Label" type="Label" parent="HUDPanel/Panel" unique_id=2053368737]
+[node name="Label" type="Label" parent="TutorialUI/Panel" unique_id=1812281411 groups=["tutorial_text"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -99.0
+offset_top = -101.0
+offset_right = 247.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 2
+
+[node name="UpgradeScreen" type="Control" parent="." unique_id=1882677251]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1744.0
+offset_top = 80.0
+offset_right = 1744.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_crycw")
+
+[node name="Dimmer" type="ColorRect" parent="UpgradeScreen" unique_id=1450577110]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-autowrap_mode = 2
-script = ExtResource("5_v8kj3")
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeScreen" unique_id=892531888]
+layout_mode = 1
+offset_left = -1744.0
+offset_top = -80.0
+offset_right = 176.0
+offset_bottom = 1000.0
+
+[node name="HBoxContainer3big" type="HBoxContainer" parent="UpgradeScreen/VBoxContainer" unique_id=1604555885]
+layout_mode = 2
+
+[node name="BigCard1" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big" unique_id=1299613995]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard1" unique_id=960797673]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 512.3648
+offset_bottom = 512.0
+scale = Vector2(0.9990509, 1)
+
+[node name="RandomUpgrade1Texture" type="TextureRect" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard1" unique_id=1900081139]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 3407.9995
+offset_bottom = 1983.9998
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("7_i2041")
+
+[node name="RandomUpgrade1" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard1" unique_id=425146018]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 68.0
+offset_right = 512.0
+offset_bottom = 91.0
+
+[node name="RandomUpgrade1Description" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard1" unique_id=279697001]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 95.0
+offset_right = 512.0
+offset_bottom = 118.0
+
+[node name="BigCard2" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big" unique_id=1405905941]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard2" unique_id=916115787]
+layout_mode = 0
+offset_left = 764.0
+offset_top = 64.0
+offset_right = 945.69855
+offset_bottom = 184.14445
+scale = Vector2(2.1133904, 3.7288446)
+
+[node name="RandomUpgrade2Texture" type="TextureRect" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard2" unique_id=1474356057]
+layout_mode = 0
+offset_left = 764.0
+offset_top = 64.0
+offset_right = 3804.0
+offset_bottom = 2063.9998
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("7_i2041")
+
+[node name="RandomUpgrade2" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard2" unique_id=219734914]
+layout_mode = 0
+offset_left = 764.0
+offset_top = 64.0
+offset_right = 945.0
+offset_bottom = 87.0
+
+[node name="RandomUpgrade2Description" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard2" unique_id=1334537246]
+layout_mode = 0
+offset_left = 764.0
+offset_top = 64.0
+offset_right = 945.0
+offset_bottom = 87.0
+
+[node name="BigCard3" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big" unique_id=1344533919]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard3" unique_id=2042142129]
+layout_mode = 0
+offset_left = 1400.0
+offset_top = 64.0
+offset_right = 1782.3667
+offset_bottom = 512.0
+
+[node name="RandomUpgrade3Texture" type="TextureRect" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard3" unique_id=48373315]
+layout_mode = 0
+offset_left = 1400.0
+offset_top = 64.0
+offset_right = 4839.999
+offset_bottom = 1983.9998
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("7_i2041")
+
+[node name="RandomUpgrade3" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard3" unique_id=161038903]
+layout_mode = 0
+offset_left = 1400.0
+offset_top = 64.0
+offset_right = 1782.0
+offset_bottom = 87.0
+
+[node name="RandomUpgrade3Description" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard3" unique_id=238081667]
+layout_mode = 0
+offset_left = 1400.0
+offset_top = 64.0
+offset_right = 1782.0
+offset_bottom = 87.0
+
+[node name="HBoxContainer6stat" type="HBoxContainer" parent="UpgradeScreen/VBoxContainer" unique_id=238678049]
+layout_mode = 2
+
+[node name="StatCard1" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=1613208118]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=757486850]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 572.0
+offset_right = 512.0
+offset_bottom = 700.0
+
+[node name="AttackSpeed" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=1977473707]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 644.0
+offset_right = 201.0
+offset_bottom = 667.0
+text = "Attack speed"
+
+[node name="ASValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=743276944]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 652.0
+offset_right = 337.0
+offset_bottom = 675.0
+
+[node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=445509471]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 620.0
+offset_right = 1120.0
+offset_bottom = 1190.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("7_i2041")
+
+[node name="PointsSpentAS" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=2128580084]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 652.0
+offset_right = 520.0
+offset_bottom = 684.0
+text = "0"
+
+[node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=1809046042]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 580.0
+offset_right = 664.0
+offset_bottom = 718.0
+icon = ExtResource("8_xy4tn")
+
+[node name="StatCard2" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=2070113188]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=1143636278]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 764.0
+offset_right = 508.0
+offset_bottom = 892.0
+
+[node name="AttackDamage" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=1292091700]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 788.0
+offset_right = 310.0
+offset_bottom = 811.0
+text = "AttackDamage"
+
+[node name="ADValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=699214292]
+layout_mode = 0
+offset_left = 332.0
+offset_top = 796.0
+offset_right = 333.0
+offset_bottom = 819.0
+
+[node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=892212412]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 772.0
+offset_right = 380.0
+offset_bottom = 900.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("7_i2041")
+
+[node name="PointsSpentAD" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=1604550523]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 788.0
+offset_right = 494.0
+offset_bottom = 811.0
+text = "0"
+
+[node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=1836597498]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 740.0
+offset_right = 652.0
+offset_bottom = 876.0
+icon = ExtResource("8_xy4tn")
+
+[node name="StatCard3" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=1567084998]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=416461915]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 572.0
+offset_right = 1144.0
+offset_bottom = 700.0
+
+[node name="BSValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1602211490]
+layout_mode = 0
+offset_left = 776.0
+offset_top = 644.0
+offset_right = 777.0
+offset_bottom = 667.0
+
+[node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1441554515]
+layout_mode = 0
+offset_left = 808.0
+offset_top = 620.0
+offset_right = 1552.0
+offset_bottom = 1190.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("7_i2041")
+
+[node name="PointsSpentBS" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1082526396]
+layout_mode = 0
+offset_left = 928.0
+offset_top = 652.0
+offset_right = 938.0
+offset_bottom = 675.0
+text = "0"
+
+[node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1337515325]
+layout_mode = 0
+offset_left = 976.0
+offset_top = 588.0
+offset_right = 1112.0
+offset_bottom = 724.0
+icon = ExtResource("8_xy4tn")
+
+[node name="BulletSpeed" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1054637022]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 636.0
+offset_right = 757.0
+offset_bottom = 659.0
+text = "BulletSpeed"
+
+[node name="StatCard4" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=670973505]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=1483265996]
+layout_mode = 0
+offset_left = 756.0
+offset_top = 764.0
+offset_right = 1140.0
+offset_bottom = 892.0
+
+[node name="HP" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=2072013476]
+layout_mode = 0
+offset_left = 724.0
+offset_top = 812.0
+offset_right = 745.0
+offset_bottom = 835.0
+text = "hp"
+
+[node name="HPValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=231232056]
+layout_mode = 0
+offset_left = 756.0
+offset_top = 816.0
+offset_right = 757.0
+offset_bottom = 839.0
+
+[node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=795504308]
+layout_mode = 0
+offset_left = 804.0
+offset_top = 788.0
+offset_right = 1548.0
+offset_bottom = 1358.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("7_i2041")
+
+[node name="PointsSpentHP" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=470161828]
+layout_mode = 0
+offset_left = 908.0
+offset_top = 812.0
+offset_right = 918.0
+offset_bottom = 835.0
+text = "0"
+
+[node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=574710823]
+layout_mode = 0
+offset_left = 980.0
+offset_top = 756.0
+offset_right = 1116.0
+offset_bottom = 892.0
+icon = ExtResource("8_xy4tn")
+
+[node name="StatCard5" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=1257112943]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=827963489]
+layout_mode = 0
+offset_left = 1392.0
+offset_top = 572.0
+offset_right = 1776.0
+offset_bottom = 700.0
+
+[node name="ShipSpeed" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1745751921]
+layout_mode = 0
+offset_left = 1344.0
+offset_top = 652.0
+offset_right = 1427.0
+offset_bottom = 675.0
+text = "ship speed"
+
+[node name="SSValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1581570632]
+layout_mode = 0
+offset_left = 1496.0
+offset_top = 652.0
+offset_right = 1497.0
+offset_bottom = 675.0
+
+[node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1105599585]
+layout_mode = 0
+offset_left = 1544.0
+offset_top = 628.0
+offset_right = 2288.0
+offset_bottom = 1198.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("7_i2041")
+
+[node name="PointsSpentSS" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1217177703]
+layout_mode = 0
+offset_left = 1664.0
+offset_top = 652.0
+offset_right = 1674.0
+offset_bottom = 675.0
+text = "0"
+
+[node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1221661841]
+layout_mode = 0
+offset_left = 1720.0
+offset_top = 596.0
+offset_right = 1856.0
+offset_bottom = 732.0
+icon = ExtResource("8_xy4tn")
+
+[node name="StatCard6" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=744356434]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=858731506]
+layout_mode = 0
+offset_left = 1388.0
+offset_top = 764.0
+offset_right = 1772.0
+offset_bottom = 892.0
+
+[node name="StatusResist" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=888015989]
+layout_mode = 0
+offset_left = 1340.0
+offset_top = 780.0
+offset_right = 1435.0
+offset_bottom = 803.0
+text = "status resist"
+
+[node name="SRValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=1998743976]
+layout_mode = 0
+offset_left = 1484.0
+offset_top = 788.0
+offset_right = 1485.0
+offset_bottom = 811.0
+
+[node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=1935770541]
+layout_mode = 0
+offset_left = 1540.0
+offset_top = 764.0
+offset_right = 2284.0
+offset_bottom = 1334.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("7_i2041")
+
+[node name="PointsSpentSR" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=148734533]
+layout_mode = 0
+offset_left = 1692.0
+offset_top = 788.0
+offset_right = 1702.0
+offset_bottom = 811.0
+text = "0"
+
+[node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=2137701001]
+layout_mode = 0
+offset_left = 1724.0
+offset_top = 740.0
+offset_right = 1860.0
+offset_bottom = 876.0
+icon = ExtResource("8_xy4tn")
+
+[node name="Ready" type="Button" parent="UpgradeScreen" unique_id=1542582053]
+layout_mode = 0
+offset_left = -824.00006
+offset_top = 864.0
+offset_right = -80.00006
+offset_bottom = 1434.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("7_i2041")
+
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1/-" to="UpgradeScreen" method="_on_StatCard1_minus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1/+" to="UpgradeScreen" method="_on_StatCard1_plus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2/-" to="UpgradeScreen" method="_on_StatCard2_minus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2/+" to="UpgradeScreen" method="_on_StatCard2_plus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3/-" to="UpgradeScreen" method="_on_StatCard3_minus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3/+" to="UpgradeScreen" method="_on_StatCard3_plus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4/-" to="UpgradeScreen" method="_on_StatCard4_minus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4/+" to="UpgradeScreen" method="_on_StatCard4_plus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5/-" to="UpgradeScreen" method="_on_StatCard5_minus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5/+" to="UpgradeScreen" method="_on_StatCard5_plus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6/-" to="UpgradeScreen" method="_on_StatCard6_minus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6/+" to="UpgradeScreen" method="_on_StatCard6_plus_pressed"]
+[connection signal="pressed" from="UpgradeScreen/Ready" to="UpgradeScreen" method="on_ready_pressed"]

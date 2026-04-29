@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bmk6q170ubp0h"]
+
+[ext_resource type="Script" uid="uid://6p0tfeys54rd" path="res://scripts/drone_mk1.gd" id="1_uegwq"]
+[ext_resource type="Texture2D" uid="uid://78sxict3vvum" path="res://dronemk1first_scaled.png" id="2_6rivj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rivj"]
+
+[node name="DroneMK1" type="Area2D" unique_id=9129607 groups=["enemy"]]
+collision_layer = 4
+script = ExtResource("1_uegwq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=670309731]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_6rivj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=422517752]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_6rivj")

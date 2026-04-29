@@ -16,7 +16,7 @@ func _ready():
 var finished = false
 
 func show_message():
-	get_tree().get_first_node_in_group("world").get_node("HUDPanel/Panel/Label").text = messages[current]["text"]
+	get_tree().get_first_node_in_group("tutorial_text").text = messages[current]["text"]
 	pressed_keys = {}
 
 func _process(_delta):

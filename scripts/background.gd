@@ -1,7 +1,8 @@
-extends Sprite2D
+extends Node2D
 
-func _ready():
-	var screen = get_viewport_rect().size
-	var texture_size = texture.get_size()
-	scale = screen / texture_size
-	position = screen / 2
+var scroll_speed = 200
+
+func _process(delta):
+	position.y += scroll_speed * delta
+	if position.y >= 1080:
+		position.y = 0

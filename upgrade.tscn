@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c1222botlimiq"]
+
+[ext_resource type="Script" uid="uid://cfjil6v8fhce" path="res://scripts/upgrade.gd" id="1_w52ek"]
+
+[node name="Upgrade" type="Control" unique_id=212355402]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w52ek")
+
+[node name="Label" type="Label" parent="." unique_id=301188518]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Choose Upgrade"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Label" unique_id=853289693]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Label/HBoxContainer" unique_id=587848349]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="Label/HBoxContainer" unique_id=190622485]
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="Label/HBoxContainer" unique_id=1949964390]
+layout_mode = 2
+
+[node name="Button4" type="Button" parent="." unique_id=346762375]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Next Level"
+
+[connection signal="pressed" from="Label/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Label/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Label/HBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
