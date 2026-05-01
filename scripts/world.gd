@@ -15,17 +15,28 @@ var total_kills = 0
 
 var waves = [
 	#1: 10 basic
-	{"enemies": [{"scene": "basic", "count": 10}], "spawn_interval": 0.5},
+	{"enemies": [{"scene": "basic", "count": 5}], "spawn_interval": 0.5},
 	#2: 15 basic + 10 drone
-	{"enemies": [{"scene": "basic", "count": 20}, {"scene": "drone", "count": 5}], "spawn_interval": 0.45},
+	{"enemies": [{"scene": "basic", "count": 10}, {"scene": "drone", "count": 5}], "spawn_interval": 0.45},
 	#3: 10 basic + 30 drone
-	{"enemies": [{"scene": "basic", "count": 25}, {"scene": "drone", "count": 15}], "spawn_interval": 0.4},
+	{"enemies": [{"scene": "basic", "count": 25}, {"scene": "drone", "count": 10}], "spawn_interval": 0.4},
 	#4: 1 big guy
-	{"enemies": [{"scene": "drone", "count": 50}], "spawn_interval": 0.1},
+	{"enemies": [{"scene": "drone", "count": 40}], "spawn_interval": 0.5},
 	#5: 1 big guy + 25 drone
 	{"enemies": [{"scene": "big", "count": 1}, {"scene": "drone", "count": 5}], "spawn_interval": 0.1},
 	#6: good luck
-	{"enemies": [{"scene": "big", "count": 5}], "spawn_interval": 0.1},
+	{"enemies": [{"scene": "drone", "count": 100}, {"scene": "big", "count": 1}], "spawn_interval": 3},
+	{"enemies": [{"scene": "basic", "count": 50}, {"scene": "drone", "count": 10}], "spawn_interval": 1},
+	{"enemies": [{"scene": "basic", "count": 30}, {"scene": "drone", "count": 25}], "spawn_interval": 1},
+	{"enemies": [{"scene": "drone", "count": 50}], "spawn_interval": 0.5},#8
+	{"enemies": [{"scene": "basic", "count": 100}], "spawn_interval": 0.5},#9
+	{"enemies": [{"scene": "big", "count": 3}], "spawn_interval": 1},#10
+	{"enemies": [{"scene": "big", "count": 1}, {"scene": "basic", "count": 10}, {"scene": "drone", "count": 10}], "spawn_interval": 2},#11
+	{"enemies": [{"scene": "big", "count": 1}, {"scene": "basic", "count": 20}, {"scene": "drone", "count": 15}], "spawn_interval": 0.5},#12
+	{"enemies": [{"scene": "big", "count": 1}, {"scene": "basic", "count": 30}, {"scene": "drone", "count": 20}], "spawn_interval": 0.5},#13
+	{"enemies": [{"scene": "big", "count": 1}, {"scene": "basic", "count": 40}, {"scene": "drone", "count": 25}], "spawn_interval": 0.5},#14
+	{"enemies": [{"scene": "big", "count": 5}], "spawn_interval": 1},#15
+	
 ]
 
 var spawn_queue = []
@@ -115,6 +126,9 @@ func start_wave(index):
 	enemies_spawned = 0
 	build_queue(wave_data)
 	wave_active = true
+	var wave_label = get_tree().get_first_node_in_group("wave_label")
+	if wave_label:
+		wave_label.text = "Wave: " + str(current_wave + 1) + "/" + str(waves.size())
 	var label = get_tree().get_first_node_in_group("kills_label")
 	if label:
 		label.text = "Enemies left: " + str(total_enemies_in_wave) + "  Total kills: " + str(total_kills)

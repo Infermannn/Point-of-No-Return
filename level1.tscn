@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bvmuaetmrshvc" path="res://minusicon1.png" id="9_5j5gb"]
 [ext_resource type="Texture2D" uid="uid://dom1jfhqc6gkb" path="res://plusicon2.png" id="10_mx85b"]
 [ext_resource type="Texture2D" uid="uid://d2yuilmxvvqp" path="res://play button.png" id="11_mx85b"]
+[ext_resource type="AudioStream" uid="uid://d03lngvkuxirk" path="res://67.mp3" id="13_n8vhr"]
 
 [node name="level1" type="Node2D" unique_id=1221982499 groups=["world"]]
 script = ExtResource("1_v38iq")
@@ -665,6 +666,17 @@ offset_right = 816.0
 offset_bottom = 488.0
 scale = Vector2(4, 4)
 text = "GAME PAUSED"
+
+[node name="WaveLabel" type="Label" parent="." unique_id=1525263867 groups=["wave_label"]]
+offset_left = 1640.0
+offset_top = 16.0
+offset_right = 1680.0
+offset_bottom = 39.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=396720566]
+stream = ExtResource("13_n8vhr")
+volume_db = -36.521
+autoplay = true
 
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1/-" to="UpgradeScreen" method="_on_StatCard1_minus_pressed"]
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1/+" to="UpgradeScreen" method="_on_StatCard1_plus_pressed"]

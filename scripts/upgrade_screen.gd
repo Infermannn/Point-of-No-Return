@@ -8,10 +8,10 @@ func _ready():
 	$Ready.disabled = true
 	
 var upgrades = {
-	"AttackSpeed": 0.03,
-	"AttackDamage": 10,
-	"BulletSpeed": 50,
-	"HP": 20,
+	"AttackSpeed": 0.04,
+	"AttackDamage": 15,
+	"BulletSpeed": 75,
+	"HP": 50,
 	"ShipSpeed": 15,
 	"StatusResist": 5
 }
@@ -42,7 +42,7 @@ func update_all_labels():
 func on_plus_pressed(stat_name):
 	if upgrade_points <= 0:
 		return
-	if stat_points[stat_name] >= 2:  # максимум 2 очка на один стат за апгрейд
+	if stat_points[stat_name] >= 3:  # максимум 2 очка на один стат за апгрейд
 		return
 	stat_points[stat_name] += 1
 	upgrade_points -= 1
@@ -96,9 +96,11 @@ func apply_upgrades():
 	player.max_hp += stat_points["HP"] * upgrades["HP"]
 	player.speed += stat_points["ShipSpeed"] * upgrades["ShipSpeed"]
 	player.attack_speed -= stat_points["AttackSpeed"] * upgrades["AttackSpeed"]
+	player.attack_speed = max(player.attack_speed, 0.2)  # минимум 0.2
 	player.attack_damage += stat_points["AttackDamage"] * upgrades["AttackDamage"]
 	player.bullet_speed += stat_points["BulletSpeed"] * upgrades["BulletSpeed"]
 	player.armor += stat_points["StatusResist"] * upgrades["StatusResist"]
+	player.armor = min(player.armor, 35)  # максимум 35
 	for stat in stat_points:
 		total_spent[stat] += stat_points[stat]
 	stat_points = {"AttackSpeed": 0, "AttackDamage": 0, "BulletSpeed": 0, "HP": 0, "ShipSpeed": 0, "StatusResist": 0}
