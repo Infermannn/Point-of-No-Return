@@ -18,6 +18,13 @@ var bullet_scene = preload("res://bullet.tscn")
 var invincible = false
 
 func _ready():
+	hp = Global.player_hp
+	max_hp = Global.player_max_hp
+	speed = Global.player_speed
+	attack_speed = Global.player_attack_speed
+	attack_damage = Global.player_attack_damage
+	bullet_speed = Global.player_bullet_speed
+	armor = Global.player_armor
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	var timer = Timer.new()
 	timer.wait_time = 0.5

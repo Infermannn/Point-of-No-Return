@@ -101,6 +101,13 @@ func apply_upgrades():
 	player.bullet_speed += stat_points["BulletSpeed"] * upgrades["BulletSpeed"]
 	player.armor += stat_points["StatusResist"] * upgrades["StatusResist"]
 	player.armor = min(player.armor, 35)  # максимум 35
+	Global.player_hp = player.hp
+	Global.player_max_hp = player.max_hp
+	Global.player_speed = player.speed
+	Global.player_attack_speed = player.attack_speed
+	Global.player_attack_damage = player.attack_damage
+	Global.player_bullet_speed = player.bullet_speed
+	Global.player_armor = player.armor
 	for stat in stat_points:
 		total_spent[stat] += stat_points[stat]
 	stat_points = {"AttackSpeed": 0, "AttackDamage": 0, "BulletSpeed": 0, "HP": 0, "ShipSpeed": 0, "StatusResist": 0}

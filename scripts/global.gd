@@ -1,11 +1,20 @@
 extends Node
 
-var player_speed = 300
+
 var bullet_damage = 1
 var bullet_speed = 600
 var max_lives = 3
 var current_level = 1
 var current_wave = 0
+
+
+var player_hp = 300
+var player_max_hp = 300
+var player_speed = 350
+var player_attack_speed = 1.0
+var player_attack_damage = 100
+var player_bullet_speed = 600
+var player_armor = 0
 
 func save():
 	var save_data = {

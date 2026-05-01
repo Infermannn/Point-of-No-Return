@@ -22,7 +22,7 @@ var shoot_interval = 1.33  # 1.5x basic
 
 func _ready():
 	connect("area_entered", _on_area_entered)
-	stop_y = randf_range(50, get_viewport_rect().size.y * 0.5)
+	stop_y = randf_range(50, get_viewport_rect().size.y * 0.3)
 	
 func spawn_drone():
 	var drone = drone_scene.instantiate()

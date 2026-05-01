@@ -9,9 +9,10 @@ var enemies_killed = 0
 var enemies_spawned = 0
 var game_started = false
 var wave_active = false
-var current_wave = 0
+var current_wave = Global.current_wave
 var total_enemies_in_wave = 0
 var total_kills = 0
+
 
 var waves = [
 	#1: 10 basic
@@ -98,10 +99,12 @@ func build_queue(wave_data):
 
 func start_game():
 	game_started = true
-	start_wave(Global.current_wave)
+	current_wave = Global.current_wave
+	start_wave(current_wave)
 
 func start_next_wave():
 	current_wave += 1
+	Global.current_wave = current_wave
 	if current_wave >= waves.size():
 		get_tree().change_scene_to_file("res://victory.tscn")
 		return
