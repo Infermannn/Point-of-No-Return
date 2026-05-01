@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://du18ujeilpgyu" path="res://scripts/enemy_bullet.gd" id="2_mgp66"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gl7bs"]
-size = Vector2(300.0001, 60.00001)
+size = Vector2(300.0001, 60.00004)
 
 [node name="enemy_bullet" type="Area2D" unique_id=2104233956 groups=["enemy_bullet"]]
 scale = Vector2(0.1, 0.1)
@@ -15,6 +15,6 @@ script = ExtResource("2_mgp66")
 texture = ExtResource("2_gl7bs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1007834420 groups=["enemy_bullet"]]
-position = Vector2(-3.2782548e-06, 5.960461e-07)
-scale = Vector2(0.9999995, 0.9999995)
+position = Vector2(-3.2782525e-06, -1.4901159e-06)
+scale = Vector2(0.9999992, 0.9999992)
 shape = SubResource("RectangleShape2D_gl7bs")

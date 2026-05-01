@@ -20,15 +20,17 @@ func show_message():
 	pressed_keys = {}
 
 func _process(_delta):
+	if finished:
+		return
+		
 	if Input.is_key_pressed(KEY_X):
-		var tutorial = get_tree().get_first_node_in_group("tutorial")
-		if tutorial and tutorial.visible:
-			tutorial.finish_tutorial()
+		finish_tutorial()
+		return
 	
 	var msg = messages[current]
 	
 	if msg["type"] == "enter":
-		if Input.is_key_pressed(KEY_Z):
+		if Input.is_action_just_pressed("ui_select") or Input.is_key_pressed(KEY_Z):
 			next_message()
 	
 	elif msg["type"] == "wasd":
