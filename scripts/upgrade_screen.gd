@@ -1,6 +1,6 @@
 extends Control
 
-var upgrade_points = 3
+var upgrade_points = 5
 var stat_points = {"AttackSpeed": 0, "AttackDamage": 0, "BulletSpeed": 0, "HP": 0, "ShipSpeed": 0, "StatusResist": 0}
 var total_spent = {"AttackSpeed": 0, "AttackDamage": 0, "BulletSpeed": 0, "HP": 0, "ShipSpeed": 0, "StatusResist": 0}
 
@@ -8,16 +8,18 @@ func _ready():
 	$Ready.disabled = true
 	
 var upgrades = {
-	"AttackSpeed": 0.015,
+	"AttackSpeed": 0.02,
 	"AttackDamage": 10,
 	"BulletSpeed": 40,
 	"HP": 25,
-	"ShipSpeed": 25,
+	"ShipSpeed": 15,
 	"StatusResist": 5
 }
 	
 func showw():
+	var player = get_tree().get_first_node_in_group("player")
 	update_all_labels()
+	update_points_label()
 	visible = true
 
 func update_all_labels():
@@ -52,6 +54,11 @@ func on_minus_pressed(stat_name):
 	upgrade_points += 1
 	update_buttons()
 	check_ready()
+	
+func update_points_label():
+	var label = get_tree().get_first_node_in_group("points_left_label")
+	if label:
+		label.text = "Points left: " + str(upgrade_points)
 
 func update_buttons():
 	var player = get_tree().get_first_node_in_group("player")
@@ -69,6 +76,7 @@ func update_buttons():
 
 func check_ready():
 	$Ready.disabled = upgrade_points > 0
+	update_points_label()
 
 func on_ready_pressed():
 	apply_upgrades()
@@ -92,7 +100,7 @@ func apply_upgrades():
 	for stat in stat_points:
 		total_spent[stat] += stat_points[stat]
 	stat_points = {"AttackSpeed": 0, "AttackDamage": 0, "BulletSpeed": 0, "HP": 0, "ShipSpeed": 0, "StatusResist": 0}
-	upgrade_points = 3
+	upgrade_points = 5
 	update_buttons()
 	
 func _on_StatCard1_plus_pressed():

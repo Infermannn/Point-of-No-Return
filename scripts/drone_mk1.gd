@@ -1,6 +1,6 @@
 extends Area2D
 
-var hp = 60
+var hp = 50
 var speed = 350  # 2.5x basic
 var reached_position = false
 var stop_y = 0
@@ -35,7 +35,7 @@ func shoot():
 		var bullet = bullet_scene.instantiate()
 		bullet.position = global_position
 		bullet.direction = dir
-		bullet.speed = 520
+		bullet.speed = 500
 		bullet.damage = 50
 		get_parent().add_child(bullet)
 		

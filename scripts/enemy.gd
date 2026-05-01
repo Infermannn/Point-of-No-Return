@@ -4,13 +4,13 @@ var speed = 250
 var reached_position = false
 var move_direction = 1
 var move_range = 100
-var hp = 125
+var hp = 110
 var start_x = 0
 var normal_enemy = true
 
 var bullet_scene = preload("res://enemy_bullet.tscn")
 var shoot_timer = 0
-var shoot_interval = 1.5
+var shoot_interval = 2
 
 func _ready():
 	connect("area_entered", _on_area_entered)
@@ -40,8 +40,8 @@ func shoot():
 	var bullet = bullet_scene.instantiate()
 	bullet.position = global_position
 	bullet.direction = (player.global_position - global_position).normalized()
-	bullet.damage = 100
-	bullet.speed = 400
+	bullet.damage = 90
+	bullet.speed = 300
 	get_parent().add_child(bullet)
 	
 func die():

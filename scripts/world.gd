@@ -44,6 +44,17 @@ func _process(delta):
 		spawn_timer = 0
 		spawn_next()
 		
+func force_end_wave():
+	spawn_queue = []
+	wave_active = false
+	var player = get_tree().get_first_node_in_group("player")
+	player.hp = player.max_hp
+	for bullet in get_tree().get_nodes_in_group("enemy_bullet"):
+		bullet.queue_free()
+	get_node("UpgradeScreen").showw()
+	get_tree().paused = true
+	get_node("UpgradeScreen").process_mode = Node.PROCESS_MODE_ALWAYS
+		
 func show_upgrades():
 	get_node("UpgradeScreen/Dimmer").visible = true
 	get_node("UpgradeScreen").showw()

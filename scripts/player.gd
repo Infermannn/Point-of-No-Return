@@ -69,6 +69,11 @@ func _process(delta):
 			label.visible = godmode
 		print("Godmode: ", godmode)
 		
+	if Input.is_key_pressed(KEY_SHIFT) and Input.is_key_pressed(KEY_Z) and Input.is_key_pressed(KEY_X) and Input.is_key_pressed(KEY_C):
+		for enemy in get_tree().get_nodes_in_group("enemy"):
+			enemy.queue_free()
+		get_tree().get_first_node_in_group("world").force_end_wave()
+		
 	if Input.is_action_just_pressed("pause"):
 		paused = not paused
 		get_tree().paused = paused
