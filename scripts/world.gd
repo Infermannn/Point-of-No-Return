@@ -21,11 +21,11 @@ var waves = [
 	#3: 10 basic + 30 drone
 	{"enemies": [{"scene": "basic", "count": 25}, {"scene": "drone", "count": 10}], "spawn_interval": 0.4},
 	#4: 1 big guy
-	{"enemies": [{"scene": "drone", "count": 40}], "spawn_interval": 0.5},
+	{"enemies": [{"scene": "drone", "count": 40}], "spawn_interval": 1},
 	#5: 1 big guy + 25 drone
-	{"enemies": [{"scene": "big", "count": 1}, {"scene": "drone", "count": 5}], "spawn_interval": 0.1},
+	{"enemies": [{"scene": "big", "count": 1}], "spawn_interval": 0.1},
 	#6: good luck
-	{"enemies": [{"scene": "drone", "count": 100}, {"scene": "big", "count": 1}], "spawn_interval": 3},
+	{"enemies": [{"scene": "drone", "count": 100}, {"scene": "big", "count": 1}], "spawn_interval": 2.5},
 	{"enemies": [{"scene": "basic", "count": 50}, {"scene": "drone", "count": 10}], "spawn_interval": 1},
 	{"enemies": [{"scene": "basic", "count": 30}, {"scene": "drone", "count": 25}], "spawn_interval": 1},
 	{"enemies": [{"scene": "drone", "count": 50}], "spawn_interval": 0.5},#8
@@ -98,7 +98,7 @@ func build_queue(wave_data):
 
 func start_game():
 	game_started = true
-	start_wave(0)
+	start_wave(Global.current_wave)
 
 func start_next_wave():
 	current_wave += 1
@@ -120,6 +120,7 @@ func add_enemy():
 	total_enemies_in_wave += 1
 
 func start_wave(index):
+	Global.current_wave = index
 	var wave_data = waves[index]
 	spawn_interval = wave_data["spawn_interval"]
 	enemies_killed = 0

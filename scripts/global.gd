@@ -5,6 +5,7 @@ var bullet_damage = 1
 var bullet_speed = 600
 var max_lives = 3
 var current_level = 1
+var current_wave = 0
 
 func save():
 	var save_data = {

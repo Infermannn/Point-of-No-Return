@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b68vacop2vn6v" path="res://spaceship256.png" id="2_onrkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(60, 44)
+size = Vector2(44, 40)
 
 [node name="Player" type="Area2D" unique_id=1102285899 groups=["player"]]
 collision_mask = 6
@@ -16,5 +16,5 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_onrkg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=438039192]
-position = Vector2(0, 4)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_onrkg")
