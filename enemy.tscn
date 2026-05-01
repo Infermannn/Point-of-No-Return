@@ -4,15 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://dn5bpm7bki5re" path="res://Postava 3_scaled_10x_pngcrushed.png" id="2_4gyqm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
+size = Vector2(27.5, 28)
 
 [node name="Enemy" type="Area2D" unique_id=1919326434 groups=["enemy"]]
 collision_layer = 4
 script = ExtResource("1_4gyqm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1868867608]
+position = Vector2(8, 1)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_4gyqm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=114330256]
+position = Vector2(1, -2)
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_4gyqm")

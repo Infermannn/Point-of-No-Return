@@ -1,7 +1,7 @@
 extends Control
 
 var messages = [
-	{"text": "Welcome, pilot! \n\nEarth is under threat.\n\nPress Z to continue.", "type": "enter"},
+	{"text": "Welcome, pilot! \n\nEarth is under threat.\n\nPress Z to continue. \n\nPress X to skip titorial.", "type": "enter"},
 	{"text": "Use WASD to move your ship.\n\nPress each key at least once.", "type": "wasd"},
 	{"text": "Press SPACE to shoot.\n\nTry firing your weapons!", "type": "shoot"},
 	{"text": "Well done! \n\nDestroy all enemies to protect the planet!\n\nPress Z to begin.", "type": "enter"}
@@ -20,6 +20,8 @@ func show_message():
 	pressed_keys = {}
 
 func _process(_delta):
+	if Input.is_key_pressed(KEY_X):
+		finish_tutorial()
 	if finished:
 		return
 	

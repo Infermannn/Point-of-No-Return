@@ -8,13 +8,14 @@ atlas = ExtResource("1_klo4u")
 region = Rect2(370, 319.5, 30, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2wwv"]
+size = Vector2(64, 32)
 
 [node name="big_bullet" type="Area2D" unique_id=691611430 groups=["enemy_bullet"]]
 collision_layer = 2
 script = ExtResource("1_pshhb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1308701341 groups=["enemy_bullet"]]
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 texture = SubResource("AtlasTexture_pshhb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1604656805]

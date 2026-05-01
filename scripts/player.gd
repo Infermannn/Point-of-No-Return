@@ -1,13 +1,15 @@
 extends Area2D
 
-var speed = 300
-var hp = 300
-var max_hp = 300
-var attack_speed = 0.3 
+var speed = 350
+var hp = 400
+var max_hp = 400
+var attack_speed = 1
 var shoot_timer = 0.0
-var bullet_damage = 100
+var attack_damage = 100
 var bullet_speed = 600
 var godmode = false
+var armor = 0
+var paused = false
 
 var bullet_scene = preload("res://bullet.tscn")
 
@@ -17,24 +19,62 @@ var invincible = false
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	var timer = Timer.new()
+	timer.wait_time = 0.5
+	timer.autostart = true
+	timer.timeout.connect(update_hud)
+	add_child(timer)
 	var screen = get_viewport_rect().size
 	position = screen / 2
 	connect("area_entered", _on_area_entered)
 	set_process(true)
+	var label = get_tree().get_first_node_in_group("godmode_label")
+	if label:
+		label.visible = false
+	
+func update_hud():
+	var hp_label = get_tree().get_first_node_in_group("hp_label")
+	var speed_label = get_tree().get_first_node_in_group("speed_label")
+	var as_label = get_tree().get_first_node_in_group("attack_speed_label")
+	var ad_label = get_tree().get_first_node_in_group("attack_damage_label")
+	var armor_label = get_tree().get_first_node_in_group("armor_label")
+	var bs_label = get_tree().get_first_node_in_group("bullet_speed_label")
+	
+	if hp_label:
+		hp_label.text = "HP: " + str(hp) + "/" + str(max_hp)
+	if speed_label:
+		speed_label.text = "Speed: " + str(speed)
+	if as_label:
+		as_label.text = "Attack Speed: " + str(attack_speed)
+	if ad_label:
+		ad_label.text = "Damage: " + str(attack_damage)
+	if armor_label:
+		armor_label.text = "Armor: " + str(armor)
+	if bs_label:
+		bs_label.text = "Bullet Speed: " + str(bullet_speed)
 
 func _on_area_entered(area):
 	if area.is_in_group("enemy_bullet"):
+		take_damage(area.damage)
 		area.queue_free()
-		take_damage(100)
 	if area.is_in_group("enemy"):
-		area.queue_free()
 		take_damage(100)
 
 func _process(delta):
 	
 	if Input.is_key_pressed(KEY_CTRL) and Input.is_key_pressed(KEY_SHIFT) and Input.is_action_just_pressed("toggle_godmode"):
 		godmode = not godmode
+		var label = get_tree().get_first_node_in_group("godmode_label")
+		if label:
+			label.visible = godmode
 		print("Godmode: ", godmode)
+		
+	if Input.is_action_just_pressed("pause"):
+		paused = not paused
+		get_tree().paused = paused
+		var label = get_tree().get_first_node_in_group("pause_label")
+		if label:
+			label.visible = paused
 	
 	var direction = Vector2.ZERO
 	shoot_timer -= delta
@@ -43,7 +83,7 @@ func _process(delta):
 		shoot_timer = attack_speed
 		var bullet = bullet_scene.instantiate()
 		bullet.position = position
-		bullet.damage = bullet_damage 
+		bullet.damage = attack_damage 
 		get_parent().add_child(bullet)
 		
 	if Input.is_key_pressed(KEY_ESCAPE):
@@ -79,7 +119,7 @@ func take_damage(amount):
 	var label = get_tree().get_first_node_in_group("lives_label")
 	if label != null:
 		label.text = "HP: " + str(hp) + "/" + str(max_hp)
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	invincible = false
 
 

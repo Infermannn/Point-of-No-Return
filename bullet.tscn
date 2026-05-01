@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://gt7jqm8yt73g" path="res://ricochet_bullet_scaled_26x_pngcrushed.png" id="2_v8qja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8qja"]
+size = Vector2(8, 32)
 
-[node name="Bullet" type="Area2D" unique_id=2081625795 groups=["player_bullet"]]
+[node name="Bullet" type="Area2D" unique_id=2081625795 groups=["player_bullet", "player_bullet_node"]]
 script = ExtResource("1_v8qja")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=584505778]

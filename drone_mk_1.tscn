@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://78sxict3vvum" path="res://dronemk1first_scaled.png" id="2_6rivj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rivj"]
+size = Vector2(32, 32)
 
 [node name="DroneMK1" type="Area2D" unique_id=9129607 groups=["enemy"]]
 collision_layer = 4
@@ -14,5 +15,6 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_6rivj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=422517752]
+position = Vector2(-16, 0)
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_6rivj")

@@ -10,18 +10,22 @@ var enemies_spawned = 0
 var game_started = false
 var wave_active = false
 var current_wave = 0
+var total_enemies_in_wave = 0
+var total_kills = 0
 
 var waves = [
 	#1: 10 basic
-	{"enemies": [{"scene": "basic", "count": 10}], "spawn_interval": 0.5, "total": 10},
+	{"enemies": [{"scene": "basic", "count": 10}], "spawn_interval": 0.5},
 	#2: 15 basic + 10 drone
-	{"enemies": [{"scene": "basic", "count": 15}, {"scene": "drone", "count": 10}], "spawn_interval": 0.3, "total": 25},
+	{"enemies": [{"scene": "basic", "count": 20}, {"scene": "drone", "count": 5}], "spawn_interval": 0.45},
 	#3: 10 basic + 30 drone
-	{"enemies": [{"scene": "basic", "count": 10}, {"scene": "drone", "count": 30}], "spawn_interval": 0.3, "total": 40},
+	{"enemies": [{"scene": "basic", "count": 25}, {"scene": "drone", "count": 15}], "spawn_interval": 0.4},
 	#4: 1 big guy
-	{"enemies": [{"scene": "big", "count": 1}], "spawn_interval": 0.2, "total": 1},
+	{"enemies": [{"scene": "drone", "count": 50}], "spawn_interval": 0.1},
 	#5: 1 big guy + 25 drone
-	{"enemies": [{"scene": "drone", "count": 5}, {"scene": "big", "count": 1}, {"scene": "drone", "count": 20}], "spawn_interval": 0.3, "total": 26},
+	{"enemies": [{"scene": "big", "count": 1}, {"scene": "drone", "count": 5}], "spawn_interval": 0.1},
+	#6: good luck
+	{"enemies": [{"scene": "big", "count": 5}], "spawn_interval": 0.1},
 ]
 
 var spawn_queue = []
@@ -39,6 +43,12 @@ func _process(delta):
 	if spawn_timer >= spawn_interval:
 		spawn_timer = 0
 		spawn_next()
+		
+func show_upgrades():
+	get_node("UpgradeScreen/Dimmer").visible = true
+	get_node("UpgradeScreen").showw()
+	get_tree().paused = true
+	get_node("UpgradeScreen").process_mode = Node.PROCESS_MODE_ALWAYS
 
 func spawn_next():
 	if spawn_queue.is_empty():
@@ -58,7 +68,9 @@ func spawn_next():
 
 func build_queue(wave_data):
 	spawn_queue = []
+	total_enemies_in_wave = 0
 	for entry in wave_data["enemies"]:
+		total_enemies_in_wave += entry["count"]
 		for i in entry["count"]:
 			spawn_queue.append(entry["scene"])
 
@@ -73,6 +85,18 @@ func start_next_wave():
 		return
 	start_wave(current_wave)
 
+func enemy_killed():
+	enemies_killed += 1
+	total_kills += 1
+	var label = get_tree().get_first_node_in_group("kills_label")
+	if label:
+		var left = total_enemies_in_wave - enemies_killed
+		label.text = "Enemies left: " + str(left) + "  Total kills: " + str(total_kills)
+	check_wave_complete.call_deferred()
+	
+func add_enemy():
+	total_enemies_in_wave += 1
+
 func start_wave(index):
 	var wave_data = waves[index]
 	spawn_interval = wave_data["spawn_interval"]
@@ -82,24 +106,18 @@ func start_wave(index):
 	wave_active = true
 	var label = get_tree().get_first_node_in_group("kills_label")
 	if label:
-		label.text = "Kills: 0/" + str(wave_data["total"])
+		label.text = "Enemies left: " + str(total_enemies_in_wave) + "  Total kills: " + str(total_kills)
 
-func enemy_killed():
-	enemies_killed += 1
-	var wave_data = waves[current_wave]
-	var label = get_tree().get_first_node_in_group("kills_label")
-	if label:
-		label.text = "Kills: " + str(enemies_killed) + "/" + str(wave_data["total"])
-	if enemies_killed >= wave_data["total"]:
+func check_wave_complete():
+	await get_tree().process_frame  # ждём один кадр
+	var alive = get_tree().get_nodes_in_group("enemy").size()
+	print("check - alive: ", alive, " queue: ", spawn_queue.size())
+	if alive <= 0 and spawn_queue.is_empty():
 		wave_active = false
 		var player = get_tree().get_first_node_in_group("player")
 		player.hp = player.max_hp
-		for bullet in get_tree().get_nodes_in_group("player_bullet_node"):
-			bullet.queue_free()
 		for bullet in get_tree().get_nodes_in_group("enemy_bullet"):
 			bullet.queue_free()
-		for enemy in get_tree().get_nodes_in_group("enemy"):
-			enemy.queue_free()
 		get_node("UpgradeScreen").showw()
 		get_tree().paused = true
 		get_node("UpgradeScreen").process_mode = Node.PROCESS_MODE_ALWAYS
