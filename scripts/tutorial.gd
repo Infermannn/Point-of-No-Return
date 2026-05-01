@@ -21,9 +21,9 @@ func show_message():
 
 func _process(_delta):
 	if Input.is_key_pressed(KEY_X):
-		finish_tutorial()
-	if finished:
-		return
+		var tutorial = get_tree().get_first_node_in_group("tutorial")
+		if tutorial and tutorial.visible:
+			tutorial.finish_tutorial()
 	
 	var msg = messages[current]
 	

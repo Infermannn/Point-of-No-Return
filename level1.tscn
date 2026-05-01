@@ -46,7 +46,7 @@ text = "HP: 400/400"
 layout_mode = 2
 text = "Kills: 0/5"
 
-[node name="TutorialUI" type="Control" parent="." unique_id=1357229702]
+[node name="TutorialUI" type="Control" parent="." unique_id=1357229702 groups=["tutorial"]]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0

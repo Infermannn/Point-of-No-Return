@@ -8,10 +8,10 @@ func _ready():
 	$Ready.disabled = true
 	
 var upgrades = {
-	"AttackSpeed": 0.02,
+	"AttackSpeed": 0.03,
 	"AttackDamage": 10,
-	"BulletSpeed": 40,
-	"HP": 25,
+	"BulletSpeed": 50,
+	"HP": 20,
 	"ShipSpeed": 15,
 	"StatusResist": 5
 }
@@ -41,6 +41,8 @@ func update_all_labels():
 
 func on_plus_pressed(stat_name):
 	if upgrade_points <= 0:
+		return
+	if stat_points[stat_name] >= 2:  # максимум 2 очка на один стат за апгрейд
 		return
 	stat_points[stat_name] += 1
 	upgrade_points -= 1
