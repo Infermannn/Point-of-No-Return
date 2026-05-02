@@ -7,6 +7,8 @@ var max_lives = 3
 var current_level = 1
 var current_wave = 0
 
+var godmode = false
+
 var tutorial_done = false
 
 var player_hp = 300
@@ -28,9 +30,9 @@ func _ready():
 	add_child(music_player)
 	music_player.finished.connect(_on_track_finished)
 	tracks = [
-		preload("res://music/Pixel Comet Run.mp3"),
-		preload("res://music/Pixel Starfire(1).mp3"),
-		preload("res://music/Pixel Starfire.mp3")
+		preload("res://Music/Pixel_Comet_Run.mp3"),
+		preload("res://Music/Pixel_Starfire2.mp3"),
+		preload("res://Music/Pixel_Starfire.mp3")
 	]
 	play_next_track()
 	

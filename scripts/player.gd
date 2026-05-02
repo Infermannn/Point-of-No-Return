@@ -35,6 +35,7 @@ func _ready():
 	position = screen / 2
 	connect("area_entered", _on_area_entered)
 	set_process(true)
+	godmode = false
 	var label = get_tree().get_first_node_in_group("godmode_label")
 	if label:
 		label.visible = false

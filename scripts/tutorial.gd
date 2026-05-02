@@ -12,7 +12,8 @@ var pressed_keys = {}
 
 func _ready():
 	if Global.tutorial_done:
-		finish_tutorial()
+		hide()
+		get_tree().get_first_node_in_group("world").start_game.call_deferred()
 	else:
 		show_message()
 

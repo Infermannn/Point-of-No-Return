@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Point of No Return"
+config/name="PointofNoReturn"
 run/main_scene="uid://g1kfj7b1c5qd"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://b68vacop2vn6v"
 
 [autoload]
 
