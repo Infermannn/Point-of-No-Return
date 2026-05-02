@@ -9,11 +9,11 @@ func _ready():
 	check_ready()
 	
 var upgrades = {
-	"AttackSpeed": 0.02,
+	"AttackSpeed": 0.03,
 	"AttackDamage": 10,
 	"BulletSpeed": 50,
-	"HP": 25,
-	"ShipSpeed": 10,
+	"HP": 50,
+	"ShipSpeed": 15,
 	"StatusResist": 4
 }
 	
@@ -60,7 +60,7 @@ func on_plus_pressed(stat_name):
 		return
 	if stat_name == "ShipSpeed" and player.speed + (stat_points["ShipSpeed"] + 1) * upgrades["ShipSpeed"] > 500:
 		return
-	if stat_name == "StatusResist" and player.armor + (stat_points["StatusResist"] + 1) * upgrades["StatusResist"] > 25:
+	if stat_name == "StatusResist" and player.armor + (stat_points["StatusResist"] + 1) * upgrades["StatusResist"] > 32:
 		return
 	
 	stat_points[stat_name] += 1
@@ -109,7 +109,7 @@ func update_buttons():
 		
 		var can_plus = upgrade_points > 0 and stat_points[stats[i]] < 2
 		
-		if stats[i] == "AttackSpeed" and player.attack_speed - (stat_points[stats[i]] + 1) * upgrades[stats[i]] <= 0.4:
+		if stats[i] == "AttackSpeed" and player.attack_speed - (stat_points[stats[i]] + 1) * upgrades[stats[i]] <= 0.3:
 			can_plus = false
 		if stats[i] == "AttackDamage" and player.attack_damage + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > 250:
 			can_plus = false
@@ -119,7 +119,7 @@ func update_buttons():
 			can_plus = false
 		if stats[i] == "ShipSpeed" and player.speed + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > 500:
 			can_plus = false
-		if stats[i] == "StatusResist" and player.armor + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > 25:
+		if stats[i] == "StatusResist" and player.armor + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > 32:
 			can_plus = false
 	
 		plus.modulate = Color(1, 1, 1, 1) if can_plus else Color(1, 1, 1, 0.3)

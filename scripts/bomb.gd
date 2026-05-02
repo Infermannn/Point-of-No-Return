@@ -8,7 +8,8 @@ var bullet_scene = preload("res://enemy_bullet.tscn")
 
 func _ready():
 	connect("area_entered", _on_area_entered)
-	explode_y = get_viewport_rect().size.y * 0.7  
+	var screen = get_viewport_rect().size
+	explode_y = screen.y * randf_range(0.6, 0.8)  
 
 func _process(delta):
 	if exploded:

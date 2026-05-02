@@ -17,36 +17,36 @@ var total_kills = 0
 
 var waves = [
 	{"enemies": [{"scene": "basic", "count": 5}], "spawn_interval": 0.5}, 
-	#1: 10 basic
+	#1
 	{"enemies": [{"scene": "basic", "count": 10}, {"scene": "drone", "count": 10}], "spawn_interval": 0.3},
-	#2: 15 basic + 10 drone
-	{"enemies": [{"scene": "basic", "count": 25}, {"scene": "drone", "count": 15}], "spawn_interval": 0.3},
-	#3: 10 basic + 30 drone
-	{"enemies": [{"scene": "drone", "count": 40}], "spawn_interval": 1},
-	#4: 1 big guy
-	{"enemies": [{"scene": "big", "count": 1}], "spawn_interval": 0.1},
-	#5: 1 big guy + 25 drone
-	{"enemies": [{"scene": "drone", "count": 100}, {"scene": "big", "count": 1}], "spawn_interval": 0.1},
+	#2
+	{"enemies": [{"scene": "basic", "count": 15}, {"scene": "drone", "count": 15}], "spawn_interval": 0.5},
+	#3
+	{"enemies": [{"scene": "drone", "count": 35}], "spawn_interval": 1.5},
+	#4
+	{"enemies": [{"scene": "big", "count": 1}], "spawn_interval": 0.5},
+	#5
+	{"enemies": [{"scene": "drone", "count": 50}], "spawn_interval": 0.8},
 	#6: good luck
 	{"enemies": [{"scene": "bomber", "count": 1}, {"scene": "drone", "count": 5}], "spawn_interval": 0.2},
 	#7
-	{"enemies": [{"scene": "basic", "count": 30}, {"scene": "drone", "count": 25}, {"scene": "bomber", "count": 1}], "spawn_interval": 0.2},
+	{"enemies": [{"scene": "basic", "count": 25}, {"scene": "drone", "count": 15}, {"scene": "bomber", "count": 1}], "spawn_interval": 0.4},
 	#8
-	{"enemies": [{"scene": "drone", "count": 50}, {"scene": "bomber", "count": 1}], "spawn_interval": 0.01},
+	{"enemies": [{"scene": "drone", "count": 40}, {"scene": "bomber", "count": 1}], "spawn_interval": 0.3},
 	#9
-	{"enemies": [{"scene": "basic", "count": 100}], "spawn_interval": 0.1},
+	{"enemies": [{"scene": "basic", "count": 80}], "spawn_interval": 0.1},
 	#10
-	{"enemies": [{"scene": "big", "count": 2}, {"scene": "bomber", "count": 1}], "spawn_interval": 1},
+	{"enemies": [{"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}], "spawn_interval": 1},
 	#11
 	{"enemies": [{"scene": "bomber", "count": 3}], "spawn_interval": 0.1},
 	#12
-	{"enemies": [{"scene": "big", "count": 1}, {"scene": "basic", "count": 20}, {"scene": "drone", "count": 15}], "spawn_interval": 0.1},
+	{"enemies": [{"scene": "big", "count": 1}, {"scene": "basic", "count": 10}, {"scene": "drone", "count": 10}], "spawn_interval": 0.3},
 	#13
-	{"enemies": [{"scene": "big", "count": 1}, {"scene": "bomber", "count": 2}, {"scene": "drone", "count": 20}], "spawn_interval": 0.3},
+	{"enemies": [{"scene": "big", "count": 1}, {"scene": "bomber", "count": 2}, {"scene": "drone", "count": 10}], "spawn_interval": 0.4},
 	#14
-	{"enemies": [{"scene": "big", "count": 2}, {"scene": "basic", "count": 40}, {"scene": "drone", "count": 25}, {"scene": "bomber", "count": 1}], "spawn_interval": 0.2},
+	{"enemies": [{"scene": "big", "count": 2}, {"scene": "basic", "count": 15}, {"scene": "drone", "count": 10}, {"scene": "bomber", "count": 1}], "spawn_interval": 0.5},
 	#15
-	{"enemies": [{"scene": "big", "count": 4}, {"scene": "bomber", "count": 2}], "spawn_interval": 1},
+	{"enemies": [{"scene": "big", "count": 3}, {"scene": "bomber", "count": 2}], "spawn_interval": 5},
 	#16
 	
 ]

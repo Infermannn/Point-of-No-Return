@@ -1,6 +1,6 @@
 extends Area2D
 
-var hp = 800
+var hp = 2000
 var speed = 600
 var normal_enemy = true
 var reached_position = false

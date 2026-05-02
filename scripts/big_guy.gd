@@ -30,7 +30,6 @@ func spawn_drone():
 	drone.position.x = clamp(global_position.x, 150, screen.x - 150)
 	drone.position.y = clamp(global_position.y, 150, screen.y * 0.5)
 	get_parent().add_child(drone)
-	get_tree().get_first_node_in_group("world").add_enemy()
 
 func _process(delta):
 	drone_timer += delta
@@ -71,8 +70,8 @@ func shoot():
 	var big_bullet = big_bullet_scene.instantiate() 
 	big_bullet.position = global_position
 	big_bullet.direction = base_dir
-	big_bullet.damage = 200
-	big_bullet.speed = 900
+	big_bullet.damage = 175
+	big_bullet.speed = 850
 	get_parent().add_child(big_bullet)
 	
 	var angle = deg_to_rad(15)
