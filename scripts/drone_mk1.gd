@@ -1,14 +1,14 @@
 extends Area2D
 
 var hp = 50
-var speed = 350  # 2.5x basic
+var speed = 350 
 var reached_position = false
 var stop_y = 0
 var normal_enemy = true
 
 var bullet_scene = preload("res://enemy_bullet.tscn")
 var shoot_timer = 0
-var shoot_interval = 1.8  #30% basic
+var shoot_interval = 1.8  
 
 func _ready():
 	connect("area_entered", _on_area_entered)

@@ -27,7 +27,7 @@ grow_vertical = 2
 
 [node name="GameLabel" type="Label" parent="VBoxContainer" unique_id=355288140]
 layout_mode = 2
-text = "Project 1"
+text = "Point of No Return"
 
 [node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=599924919]
 layout_mode = 2
@@ -36,6 +36,13 @@ text = "Play"
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=15097116]
 layout_mode = 2
 text = "Quit"
+
+[node name="InfoLabel" type="Label" parent="." unique_id=1852904033]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Press M to Mute Music!
+Press P to Pause!"
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -6,7 +6,7 @@ var max_hp = 400
 var attack_speed = 0.75
 var shoot_timer = 0.0
 var attack_damage = 100
-var bullet_speed = 750
+var bullet_speed = 500
 var godmode = false
 var armor = 0
 var paused = false
@@ -76,14 +76,21 @@ func _process(delta):
 			label.visible = godmode
 		print("Godmode: ", godmode)
 		
+	if Input.is_action_just_pressed("mute"):
+		Global.toggle_mute()
+		
 	if Input.is_key_pressed(KEY_SHIFT) and Input.is_key_pressed(KEY_C):
 		for enemy in get_tree().get_nodes_in_group("enemy"):
 			enemy.queue_free()
 		get_tree().get_first_node_in_group("world").force_end_wave()
 		
 	if Input.is_action_just_pressed("pause"):
+		var upgrade_screen = get_tree().get_first_node_in_group("upgrade_screen")
+		if upgrade_screen and upgrade_screen.visible:
+			return 
 		paused = not paused
 		get_tree().paused = paused
+		Global.music_player.stream_paused = paused
 		var label = get_tree().get_first_node_in_group("pause_label")
 		if label:
 			label.visible = paused
@@ -96,6 +103,7 @@ func _process(delta):
 		var bullet = bullet_scene.instantiate()
 		bullet.position = position
 		bullet.damage = attack_damage
+		bullet.speed = bullet_speed
 		get_parent().add_child(bullet)
 		
 	if Input.is_key_pressed(KEY_ESCAPE):
@@ -124,7 +132,7 @@ func take_damage(amount):
 	if invincible or godmode:
 		return
 	invincible = true
-	var actual_damage = max(amount - armor, 1)  # минимум 1 урон
+	var actual_damage = max(amount - armor, 1)
 	hp -= actual_damage
 	if hp <= 0:
 		get_tree().change_scene_to_file("res://game_over.tscn")

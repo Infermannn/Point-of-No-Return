@@ -3,6 +3,7 @@ extends Node2D
 var enemy_scene = preload("res://enemy.tscn")
 var drone_scene = preload("res://drone_mk_1.tscn")
 var big_guy_scene = preload("res://big_guy.tscn")
+var bomber_scene = preload("res://bomber.tscn")
 
 var spawn_timer = 0
 var enemies_killed = 0
@@ -15,28 +16,38 @@ var total_kills = 0
 
 
 var waves = [
+	{"enemies": [{"scene": "basic", "count": 5}], "spawn_interval": 0.5}, 
 	#1: 10 basic
-	{"enemies": [{"scene": "basic", "count": 5}], "spawn_interval": 0.5},
+	{"enemies": [{"scene": "basic", "count": 10}, {"scene": "drone", "count": 10}], "spawn_interval": 0.3},
 	#2: 15 basic + 10 drone
-	{"enemies": [{"scene": "basic", "count": 10}, {"scene": "drone", "count": 5}], "spawn_interval": 0.45},
+	{"enemies": [{"scene": "basic", "count": 25}, {"scene": "drone", "count": 15}], "spawn_interval": 0.3},
 	#3: 10 basic + 30 drone
-	{"enemies": [{"scene": "basic", "count": 25}, {"scene": "drone", "count": 10}], "spawn_interval": 0.4},
-	#4: 1 big guy
 	{"enemies": [{"scene": "drone", "count": 40}], "spawn_interval": 1},
-	#5: 1 big guy + 25 drone
+	#4: 1 big guy
 	{"enemies": [{"scene": "big", "count": 1}], "spawn_interval": 0.1},
+	#5: 1 big guy + 25 drone
+	{"enemies": [{"scene": "drone", "count": 100}, {"scene": "big", "count": 1}], "spawn_interval": 0.1},
 	#6: good luck
-	{"enemies": [{"scene": "drone", "count": 100}, {"scene": "big", "count": 1}], "spawn_interval": 2.5},
-	{"enemies": [{"scene": "basic", "count": 50}, {"scene": "drone", "count": 10}], "spawn_interval": 1},
-	{"enemies": [{"scene": "basic", "count": 30}, {"scene": "drone", "count": 25}], "spawn_interval": 1},
-	{"enemies": [{"scene": "drone", "count": 50}], "spawn_interval": 0.5},#8
-	{"enemies": [{"scene": "basic", "count": 100}], "spawn_interval": 0.5},#9
-	{"enemies": [{"scene": "big", "count": 3}], "spawn_interval": 1},#10
-	{"enemies": [{"scene": "big", "count": 1}, {"scene": "basic", "count": 10}, {"scene": "drone", "count": 10}], "spawn_interval": 2},#11
-	{"enemies": [{"scene": "big", "count": 1}, {"scene": "basic", "count": 20}, {"scene": "drone", "count": 15}], "spawn_interval": 0.5},#12
-	{"enemies": [{"scene": "big", "count": 1}, {"scene": "basic", "count": 30}, {"scene": "drone", "count": 20}], "spawn_interval": 0.5},#13
-	{"enemies": [{"scene": "big", "count": 1}, {"scene": "basic", "count": 40}, {"scene": "drone", "count": 25}], "spawn_interval": 0.5},#14
-	{"enemies": [{"scene": "big", "count": 5}], "spawn_interval": 1},#15
+	{"enemies": [{"scene": "bomber", "count": 1}, {"scene": "drone", "count": 5}], "spawn_interval": 0.2},
+	#7
+	{"enemies": [{"scene": "basic", "count": 30}, {"scene": "drone", "count": 25}, {"scene": "bomber", "count": 1}], "spawn_interval": 0.2},
+	#8
+	{"enemies": [{"scene": "drone", "count": 50}, {"scene": "bomber", "count": 1}], "spawn_interval": 0.01},
+	#9
+	{"enemies": [{"scene": "basic", "count": 100}], "spawn_interval": 0.1},
+	#10
+	{"enemies": [{"scene": "big", "count": 2}, {"scene": "bomber", "count": 1}], "spawn_interval": 1},
+	#11
+	{"enemies": [{"scene": "bomber", "count": 3}], "spawn_interval": 0.1},
+	#12
+	{"enemies": [{"scene": "big", "count": 1}, {"scene": "basic", "count": 20}, {"scene": "drone", "count": 15}], "spawn_interval": 0.1},
+	#13
+	{"enemies": [{"scene": "big", "count": 1}, {"scene": "bomber", "count": 2}, {"scene": "drone", "count": 20}], "spawn_interval": 0.3},
+	#14
+	{"enemies": [{"scene": "big", "count": 2}, {"scene": "basic", "count": 40}, {"scene": "drone", "count": 25}, {"scene": "bomber", "count": 1}], "spawn_interval": 0.2},
+	#15
+	{"enemies": [{"scene": "big", "count": 4}, {"scene": "bomber", "count": 2}], "spawn_interval": 1},
+	#16
 	
 ]
 
@@ -65,6 +76,7 @@ func force_end_wave():
 		bullet.queue_free()
 	get_node("UpgradeScreen").showw()
 	get_tree().paused = true
+	Global.music_player.stream_paused = Global.muted
 	get_node("UpgradeScreen").process_mode = Node.PROCESS_MODE_ALWAYS
 		
 func show_upgrades():
@@ -84,6 +96,8 @@ func spawn_next():
 		enemy = drone_scene.instantiate()
 	elif type == "big":
 		enemy = big_guy_scene.instantiate()
+	elif type == "bomber":
+		enemy = bomber_scene.instantiate()
 	enemy.position.x = randf_range(100, 1820)
 	enemy.position.y = -50
 	add_child(enemy)
@@ -98,6 +112,7 @@ func build_queue(wave_data):
 			spawn_queue.append(entry["scene"])
 
 func start_game():
+	Global.start_music()
 	game_started = true
 	current_wave = Global.current_wave
 	start_wave(current_wave)
@@ -138,9 +153,8 @@ func start_wave(index):
 		label.text = "Enemies left: " + str(total_enemies_in_wave) + "  Total kills: " + str(total_kills)
 
 func check_wave_complete():
-	await get_tree().process_frame  # ждём один кадр
+	await get_tree().process_frame
 	var alive = get_tree().get_nodes_in_group("enemy").size()
-	print("check - alive: ", alive, " queue: ", spawn_queue.size())
 	if alive <= 0 and spawn_queue.is_empty():
 		wave_active = false
 		var player = get_tree().get_first_node_in_group("player")
@@ -149,4 +163,5 @@ func check_wave_complete():
 			bullet.queue_free()
 		get_node("UpgradeScreen").showw()
 		get_tree().paused = true
+		Global.music_player.stream_paused = Global.muted
 		get_node("UpgradeScreen").process_mode = Node.PROCESS_MODE_ALWAYS

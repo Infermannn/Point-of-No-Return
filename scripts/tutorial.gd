@@ -11,7 +11,10 @@ var current = 0
 var pressed_keys = {}
 
 func _ready():
-	show_message()
+	if Global.tutorial_done:
+		finish_tutorial()
+	else:
+		show_message()
 
 var finished = false
 
@@ -56,5 +59,6 @@ func next_message():
 
 func finish_tutorial():
 	finished = true
+	Global.tutorial_done = true
 	hide()
 	get_tree().get_first_node_in_group("world").start_game()

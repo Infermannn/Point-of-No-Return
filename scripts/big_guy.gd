@@ -16,9 +16,9 @@ var drone_timer = 0
 var drone_interval = 5.0
 
 var bullet_scene = preload("res://enemy_bullet.tscn")
-var big_bullet_scene = preload("res://big_bullet.tscn")  # новая
+var big_bullet_scene = preload("res://big_bullet.tscn")
 var shoot_timer = 0
-var shoot_interval = 1.33  # 1.5x basic
+var shoot_interval = 1.33  
 
 func _ready():
 	connect("area_entered", _on_area_entered)
@@ -26,7 +26,9 @@ func _ready():
 	
 func spawn_drone():
 	var drone = drone_scene.instantiate()
-	drone.position = global_position
+	var screen = get_viewport_rect().size
+	drone.position.x = clamp(global_position.x, 150, screen.x - 150)
+	drone.position.y = clamp(global_position.y, 150, screen.y * 0.5)
 	get_parent().add_child(drone)
 	get_tree().get_first_node_in_group("world").add_enemy()
 
@@ -69,8 +71,8 @@ func shoot():
 	var big_bullet = big_bullet_scene.instantiate() 
 	big_bullet.position = global_position
 	big_bullet.direction = base_dir
-	big_bullet.damage = 250
-	big_bullet.speed = 1000
+	big_bullet.damage = 200
+	big_bullet.speed = 900
 	get_parent().add_child(big_bullet)
 	
 	var angle = deg_to_rad(15)
@@ -79,8 +81,8 @@ func shoot():
 		var bullet = bullet_scene.instantiate()
 		bullet.position = global_position
 		bullet.direction = rotated_dir
-		bullet.speed = 800
-		bullet.damage = 150
+		bullet.speed = 600
+		bullet.damage = 125
 		get_parent().add_child(bullet)
 		
 func die():
@@ -96,5 +98,4 @@ func _on_area_entered(area):
 	if area.is_in_group("player"):
 		var player = get_tree().get_first_node_in_group("player")
 		if player:
-			player.take_damage(100)  # игрок получает урон
-		# big guy не получает урона и не умирает
+			player.take_damage(100)  

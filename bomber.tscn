@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://g12qcr50veax"]
+
+[ext_resource type="Script" uid="uid://cisfbnk0es4h3" path="res://scripts/bomber.gd" id="1_al2qj"]
+[ext_resource type="Texture2D" uid="uid://dckpry0n64o30" path="res://bomber.png" id="2_ypy8i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xn8ec"]
+size = Vector2(114.25, 72.75)
+
+[node name="bomber" type="Area2D" unique_id=867650878 groups=["enemy"]]
+collision_layer = 4
+script = ExtResource("1_al2qj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=277377852]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("2_ypy8i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2006932971]
+position = Vector2(-25.125, -4.375)
+shape = SubResource("RectangleShape2D_xn8ec")

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dly5avb1jg2v2"]
+
+[ext_resource type="Script" uid="uid://bdslr2d0yxr1" path="res://scripts/bomb.gd" id="1_4fn8o"]
+[ext_resource type="Texture2D" uid="uid://0jubvmordjsu" path="res://All_Fire_Bullet_Pixel_16x16_00.png" id="2_nfxiy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6w74q"]
+atlas = ExtResource("2_nfxiy")
+region = Rect2(432.98608, 328.34518, 24.569183, 16.217468)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j810f"]
+size = Vector2(48, 64)
+
+[node name="bomb" type="Area2D" unique_id=1380476609]
+collision_layer = 2
+script = ExtResource("1_4fn8o")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=294837766]
+rotation = 1.5707964
+scale = Vector2(2.5, 2.5)
+texture = SubResource("AtlasTexture_6w74q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1789407963]
+shape = SubResource("RectangleShape2D_j810f")

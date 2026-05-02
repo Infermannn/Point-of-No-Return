@@ -1,6 +1,6 @@
-extends Node2D
+extends Area2D
 
-var speed = 600
+var speed = 500
 var damage = 100
 
 func _process(delta):

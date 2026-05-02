@@ -9,10 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://ci50q4sfvknf0" path="res://epstein.jpg" id="7_hx44q"]
 [ext_resource type="Texture2D" uid="uid://kewacknf2otn" path="res://Transparent Yellow Triangle Png - Yellow Triangle No Background, Png Download - vhv.jpg" id="7_i2041"]
 [ext_resource type="Texture2D" uid="uid://lpjfvhujgpgp" path="res://Ramecek.png" id="8_mx85b"]
-[ext_resource type="Texture2D" uid="uid://bvmuaetmrshvc" path="res://minusicon1.png" id="9_5j5gb"]
-[ext_resource type="Texture2D" uid="uid://dom1jfhqc6gkb" path="res://plusicon2.png" id="10_mx85b"]
-[ext_resource type="Texture2D" uid="uid://d2yuilmxvvqp" path="res://play button.png" id="11_mx85b"]
-[ext_resource type="AudioStream" uid="uid://d03lngvkuxirk" path="res://67.mp3" id="13_n8vhr"]
+[ext_resource type="Texture2D" uid="uid://dy2cfxdv5lxch" path="res://minus.png" id="10_n8vhr"]
+[ext_resource type="Texture2D" uid="uid://djoi11yn056u2" path="res://plus (1).png" id="11_eqrsh"]
+[ext_resource type="Texture2D" uid="uid://bbpf3xw5shk81" path="res://sci_fi_buttons.png" id="12_3l65w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjtee"]
+atlas = ExtResource("12_3l65w")
+region = Rect2(74.46367, 77.65195, 73.36888, 33.81408)
 
 [node name="level1" type="Node2D" unique_id=1221982499 groups=["world"]]
 script = ExtResource("1_v38iq")
@@ -40,12 +43,13 @@ offset_right = 146.0
 offset_bottom = 101.0
 
 [node name="LivesLabel" type="Label" parent="VBoxContainer" unique_id=31265183 groups=["lives_label"]]
+visible = false
 layout_mode = 2
 text = "HP: 400/400"
 
 [node name="KillsLabel" type="Label" parent="VBoxContainer" unique_id=661665204 groups=["kills_label"]]
 layout_mode = 2
-text = "Kills: 0/5"
+text = "Hi"
 
 [node name="TutorialUI" type="Control" parent="." unique_id=1357229702 groups=["tutorial"]]
 layout_mode = 3
@@ -85,7 +89,7 @@ grow_horizontal = 2
 grow_vertical = 2
 autowrap_mode = 2
 
-[node name="UpgradeScreen" type="Control" parent="." unique_id=1882677251]
+[node name="UpgradeScreen" type="Control" parent="." unique_id=1882677251 groups=["upgrade_screen"]]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -130,6 +134,7 @@ offset_bottom = 512.0
 scale = Vector2(0.9990509, 1)
 
 [node name="RandomUpgrade1Texture" type="TextureRect" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/BigCard1" unique_id=1900081139]
+visible = false
 layout_mode = 0
 offset_left = 128.0
 offset_top = 64.0
@@ -246,18 +251,20 @@ expand_mode = 1
 
 [node name="AttackSpeed" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=1977473707]
 layout_mode = 0
-offset_left = 144.0
+offset_left = 168.0
 offset_top = 628.0
-offset_right = 244.0
+offset_right = 273.0
 offset_bottom = 651.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Attack speed:"
 
 [node name="ASValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=743276944]
 layout_mode = 0
-offset_left = 264.0
+offset_left = 280.0
 offset_top = 628.0
-offset_right = 304.0
+offset_right = 320.0
 offset_bottom = 651.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "1.00"
 
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=445509471]
@@ -267,7 +274,7 @@ offset_top = 604.0
 offset_right = 976.0
 offset_bottom = 1252.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("9_5j5gb")
+icon = ExtResource("10_n8vhr")
 
 [node name="PointsSpentAS" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=2128580084]
 layout_mode = 0
@@ -275,6 +282,7 @@ offset_left = 400.0
 offset_top = 628.0
 offset_right = 424.0
 offset_bottom = 652.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=1809046042]
@@ -284,7 +292,7 @@ offset_top = 604.0
 offset_right = 1080.0
 offset_bottom = 1252.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_mx85b")
+icon = ExtResource("11_eqrsh")
 
 [node name="StatCard2" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=2070113188]
 layout_mode = 2
@@ -308,18 +316,20 @@ expand_mode = 1
 
 [node name="AttackDamage" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=1292091700]
 layout_mode = 0
-offset_left = 140.0
+offset_left = 164.0
 offset_top = 820.0
-offset_right = 254.0
+offset_right = 282.0
 offset_bottom = 843.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "AttackDamage:"
 
 [node name="ADValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=699214292]
 layout_mode = 0
-offset_left = 260.0
+offset_left = 284.0
 offset_top = 820.0
-offset_right = 300.0
+offset_right = 324.0
 offset_bottom = 843.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "100"
 
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=892212412]
@@ -329,7 +339,7 @@ offset_top = 796.0
 offset_right = 972.0
 offset_bottom = 1444.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("9_5j5gb")
+icon = ExtResource("10_n8vhr")
 
 [node name="PointsSpentAD" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=1604550523]
 layout_mode = 0
@@ -337,6 +347,7 @@ offset_left = 396.0
 offset_top = 820.0
 offset_right = 420.0
 offset_bottom = 843.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=1836597498]
@@ -346,7 +357,7 @@ offset_top = 796.0
 offset_right = 1076.0
 offset_bottom = 1444.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_mx85b")
+icon = ExtResource("11_eqrsh")
 
 [node name="StatCard3" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=1567084998]
 layout_mode = 2
@@ -370,10 +381,11 @@ expand_mode = 1
 
 [node name="BSValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1602211490]
 layout_mode = 0
-offset_left = 880.0
+offset_left = 920.0
 offset_top = 628.0
-offset_right = 881.0
+offset_right = 948.0
 offset_bottom = 651.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "600"
 
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1441554515]
@@ -383,7 +395,7 @@ offset_top = 604.0
 offset_right = 1608.0
 offset_bottom = 1252.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("9_5j5gb")
+icon = ExtResource("10_n8vhr")
 
 [node name="PointsSpentBS" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1082526396]
 layout_mode = 0
@@ -391,6 +403,7 @@ offset_left = 1032.0
 offset_top = 628.0
 offset_right = 1058.0
 offset_bottom = 651.0
+theme_override_colors/font_color = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)
 text = "0"
 
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1337515325]
@@ -400,14 +413,15 @@ offset_top = 604.0
 offset_right = 1712.0
 offset_bottom = 1252.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_mx85b")
+icon = ExtResource("11_eqrsh")
 
 [node name="BulletSpeed" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1054637022]
 layout_mode = 0
-offset_left = 776.0
+offset_left = 808.0
 offset_top = 628.0
-offset_right = 869.0
+offset_right = 905.0
 offset_bottom = 651.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "BulletSpeed:"
 
 [node name="StatCard4" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=670973505]
@@ -432,18 +446,20 @@ expand_mode = 1
 
 [node name="HP" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=2072013476]
 layout_mode = 0
-offset_left = 772.0
+offset_left = 812.0
 offset_top = 820.0
-offset_right = 799.0
+offset_right = 839.0
 offset_bottom = 843.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "HP:"
 
 [node name="HPValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=231232056]
 layout_mode = 0
-offset_left = 820.0
+offset_left = 876.0
 offset_top = 820.0
-offset_right = 821.0
+offset_right = 904.0
 offset_bottom = 843.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "400"
 
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=795504308]
@@ -453,7 +469,7 @@ offset_top = 796.0
 offset_right = 1604.0
 offset_bottom = 1444.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("9_5j5gb")
+icon = ExtResource("10_n8vhr")
 
 [node name="PointsSpentHP" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=470161828]
 layout_mode = 0
@@ -461,6 +477,7 @@ offset_left = 1028.0
 offset_top = 820.0
 offset_right = 1052.0
 offset_bottom = 843.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=574710823]
@@ -470,7 +487,7 @@ offset_top = 796.0
 offset_right = 1708.0
 offset_bottom = 1444.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_mx85b")
+icon = ExtResource("11_eqrsh")
 
 [node name="StatCard5" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=1257112943]
 layout_mode = 2
@@ -494,18 +511,20 @@ expand_mode = 1
 
 [node name="ShipSpeed" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1745751921]
 layout_mode = 0
-offset_left = 1408.0
+offset_left = 1440.0
 offset_top = 628.0
-offset_right = 1491.0
+offset_right = 1529.0
 offset_bottom = 651.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Ship speed:"
 
 [node name="SSValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1581570632]
 layout_mode = 0
-offset_left = 1504.0
+offset_left = 1544.0
 offset_top = 628.0
-offset_right = 1532.0
+offset_right = 1572.0
 offset_bottom = 651.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "350"
 
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1105599585]
@@ -515,7 +534,7 @@ offset_top = 604.0
 offset_right = 2240.0
 offset_bottom = 1252.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("9_5j5gb")
+icon = ExtResource("10_n8vhr")
 
 [node name="PointsSpentSS" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1217177703]
 layout_mode = 0
@@ -523,6 +542,7 @@ offset_left = 1664.0
 offset_top = 628.0
 offset_right = 1688.0
 offset_bottom = 651.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1221661841]
@@ -532,7 +552,7 @@ offset_top = 604.0
 offset_right = 2344.0
 offset_bottom = 1252.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_mx85b")
+icon = ExtResource("11_eqrsh")
 
 [node name="StatCard6" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=744356434]
 layout_mode = 2
@@ -556,18 +576,20 @@ expand_mode = 1
 
 [node name="StatusResist" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=888015989]
 layout_mode = 0
-offset_left = 1404.0
+offset_left = 1436.0
 offset_top = 820.0
-offset_right = 1499.0
+offset_right = 1531.0
 offset_bottom = 843.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Armour:"
 
 [node name="SRValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=1998743976]
 layout_mode = 0
-offset_left = 1476.0
+offset_left = 1532.0
 offset_top = 820.0
 offset_right = 1572.0
 offset_bottom = 843.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=1935770541]
@@ -577,7 +599,7 @@ offset_top = 796.0
 offset_right = 2236.0
 offset_bottom = 1444.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("9_5j5gb")
+icon = ExtResource("10_n8vhr")
 
 [node name="PointsSpentSR" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=148734533]
 layout_mode = 0
@@ -585,6 +607,7 @@ offset_left = 1660.0
 offset_top = 820.0
 offset_right = 1684.0
 offset_bottom = 843.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=2137701001]
@@ -594,24 +617,24 @@ offset_top = 796.0
 offset_right = 2340.0
 offset_bottom = 1444.0
 scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_mx85b")
+icon = ExtResource("11_eqrsh")
 
 [node name="Ready" type="Button" parent="UpgradeScreen" unique_id=1542582053]
 layout_mode = 0
-offset_left = -888.0
-offset_top = 856.0
-offset_right = -160.0
-offset_bottom = 1272.0
-scale = Vector2(0.3, 0.3)
-icon = ExtResource("11_mx85b")
+offset_left = -896.0
+offset_top = 856.00006
+offset_right = -815.0
+offset_bottom = 897.00006
+scale = Vector2(3, 3)
+icon = SubResource("AtlasTexture_rjtee")
 
 [node name="PointsLeftLabel" type="Label" parent="UpgradeScreen" unique_id=399425063 groups=["points_left_label"]]
 layout_mode = 0
-offset_left = -240.0
-offset_top = -64.0
-offset_right = -200.0
-offset_bottom = -41.0
-scale = Vector2(2, 2)
+offset_left = -944.0
+offset_top = 232.0
+offset_right = -560.0
+offset_bottom = 304.0
+theme_override_font_sizes/font_size = 50
 text = "0"
 
 [node name="HPLabel" type="Label" parent="." unique_id=1091996565 groups=["hp_label"]]
@@ -642,29 +665,30 @@ text = "Damage: 100"
 offset_top = 384.0
 offset_right = 117.0
 offset_bottom = 407.0
-text = "Not Now Diddy"
+text = "Armour: 0"
 
 [node name="BulletSpeedLabel" type="Label" parent="." unique_id=1159783581 groups=["bullet_speed_label"]]
 offset_top = 408.0
 offset_right = 68.0
 offset_bottom = 431.0
-text = "idk smth"
+text = "Bullet Speed: 750"
 
 [node name="GodmodeLabel" type="Label" parent="." unique_id=1781407105 groups=["godmode_label"]]
 offset_left = 856.0
 offset_top = 8.0
 offset_right = 966.0
 offset_bottom = 31.0
+theme_override_colors/font_color = Color(0.7262233, 3.4172833e-06, 5.7756904e-07, 1)
 text = "Godmode: ON"
 
 [node name="GamePauseLabel" type="Label" parent="." unique_id=311774852 groups=["pause_label"]]
 process_mode = 3
 visible = false
-offset_left = 704.0
-offset_top = 464.0
-offset_right = 816.0
-offset_bottom = 488.0
-scale = Vector2(4, 4)
+offset_left = 728.0
+offset_top = 384.0
+offset_right = 1196.0
+offset_bottom = 520.0
+theme_override_font_sizes/font_size = 67
 text = "GAME PAUSED"
 
 [node name="WaveLabel" type="Label" parent="." unique_id=1525263867 groups=["wave_label"]]
@@ -673,9 +697,8 @@ offset_top = 16.0
 offset_right = 1680.0
 offset_bottom = 39.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=396720566]
-stream = ExtResource("13_n8vhr")
-volume_db = -36.521
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=396720566 groups=["music"]]
+volume_db = -69.881
 autoplay = true
 
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1/-" to="UpgradeScreen" method="_on_StatCard1_minus_pressed"]
