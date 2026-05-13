@@ -26,7 +26,6 @@ func show_message():
 func _process(_delta):
 	if finished:
 		return
-		
 	if Input.is_key_pressed(KEY_X):
 		finish_tutorial()
 		return
@@ -34,7 +33,7 @@ func _process(_delta):
 	var msg = messages[current]
 	
 	if msg["type"] == "enter":
-		if Input.is_action_just_pressed("ui_select") or Input.is_key_pressed(KEY_Z):
+		if Input.is_key_pressed(KEY_Z):
 			next_message()
 	
 	elif msg["type"] == "wasd":
@@ -48,7 +47,7 @@ func _process(_delta):
 	elif msg["type"] == "shoot":
 		if Input.is_key_pressed(KEY_SPACE):
 			pressed_keys["shoot"] = true
-		if pressed_keys.has("shoot"):
+		if pressed_keys.has("shoot") and not Input.is_key_pressed(KEY_SPACE):
 			next_message()
 
 func next_message():

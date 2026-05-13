@@ -6,10 +6,11 @@ var max_hp = 400
 var attack_speed = 0.75
 var shoot_timer = 0.0
 var attack_damage = 100
-var bullet_speed = 500
+var bullet_speed = 750
 var godmode = false
 var armor = 0
 var paused = false
+var evasion = 0
 
 var bullet_scene = preload("res://bullet.tscn")
 
@@ -23,8 +24,8 @@ func _ready():
 	speed = Global.player_speed
 	attack_speed = Global.player_attack_speed
 	attack_damage = Global.player_attack_damage
-	bullet_speed = Global.player_bullet_speed
 	armor = Global.player_armor
+	evasion = Global.player_evasion
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	var timer = Timer.new()
 	timer.wait_time = 0.5
@@ -59,7 +60,7 @@ func update_hud():
 	if armor_label:
 		armor_label.text = "Armor: " + str(armor)
 	if bs_label:
-		bs_label.text = "Bullet Speed: " + str(bullet_speed)
+		bs_label.text = "Evasion: " + str(evasion) + "%"
 
 func _on_area_entered(area):
 	if area.is_in_group("enemy_bullet"):
@@ -131,6 +132,8 @@ func _process(delta):
 	
 func take_damage(amount):
 	if invincible or godmode:
+		return
+	if evasion > 0 and randi() % 100 < evasion:
 		return
 	invincible = true
 	var actual_damage = max(amount - armor, 1)

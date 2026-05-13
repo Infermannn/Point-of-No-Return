@@ -2,7 +2,7 @@ extends Node
 
 
 var bullet_damage = 1
-var bullet_speed = 500
+var evasion = 0
 var max_lives = 3
 var current_level = 1
 var current_wave = 0
@@ -16,13 +16,14 @@ var player_max_hp = 300
 var player_speed = 350
 var player_attack_speed = 1.0
 var player_attack_damage = 100
-var player_bullet_speed = 500
+var player_evasion = 0
 var player_armor = 0
 
 var music_player: AudioStreamPlayer
 var tracks = []
 var current_track = 0
 var muted = false
+var difficulty = 1.0  # 0.5 = easy, 1.0 = normal, 1.5 = hard
 
 func _ready():
 	music_player = AudioStreamPlayer.new()
@@ -66,9 +67,9 @@ func save():
 	var save_data = {
 		"player_speed": player_speed,
 		"bullet_damage": bullet_damage,
-		"bullet_speed": bullet_speed,
 		"max_lives": max_lives,
-		"current_level": current_level
+		"current_level": current_level,
+		"evasion": evasion
 	}
 	var file = FileAccess.open("user://save.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(save_data))
@@ -80,6 +81,14 @@ func load_save():
 	var data = JSON.parse_string(file.get_as_text())
 	player_speed = data["player_speed"]
 	bullet_damage = data["bullet_damage"]
-	bullet_speed = data["bullet_speed"]
+	evasion = data["evasion"]
 	max_lives = data["max_lives"]
 	current_level = data["current_level"]
+
+var base_volume_db = -40.0
+
+func set_music_volume(percent):
+	if percent <= 0 or Global.muted:
+		music_player.volume_db = -80
+	else:
+		music_player.volume_db = base_volume_db + linear_to_db(percent)

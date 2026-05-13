@@ -14,6 +14,7 @@ var shoot_interval = 2
 
 func _ready():
 	connect("area_entered", _on_area_entered)
+	hp *= Global.difficulty
 
 func _process(delta):
 	if not reached_position:
@@ -42,6 +43,7 @@ func shoot():
 	bullet.direction = (player.global_position - global_position).normalized()
 	bullet.damage = 90
 	bullet.speed = 300
+	bullet.damage *= Global.difficulty
 	get_parent().add_child(bullet)
 	
 func die():

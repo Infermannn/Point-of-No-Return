@@ -23,12 +23,14 @@ var shoot_interval = 1.33
 func _ready():
 	connect("area_entered", _on_area_entered)
 	stop_y = randf_range(50, get_viewport_rect().size.y * 0.3)
+	hp *= Global.difficulty
 	
 func spawn_drone():
 	var drone = drone_scene.instantiate()
 	var screen = get_viewport_rect().size
 	drone.position.x = clamp(global_position.x, 150, screen.x - 150)
 	drone.position.y = clamp(global_position.y, 150, screen.y * 0.5)
+	drone.counts_as_kill = false
 	get_parent().add_child(drone)
 
 func _process(delta):
@@ -72,6 +74,7 @@ func shoot():
 	big_bullet.direction = base_dir
 	big_bullet.damage = 175
 	big_bullet.speed = 850
+	big_bullet.damage *= Global.difficulty
 	get_parent().add_child(big_bullet)
 	
 	var angle = deg_to_rad(15)
@@ -82,6 +85,7 @@ func shoot():
 		bullet.direction = rotated_dir
 		bullet.speed = 600
 		bullet.damage = 125
+		bullet.damage *= Global.difficulty
 		get_parent().add_child(bullet)
 		
 func die():

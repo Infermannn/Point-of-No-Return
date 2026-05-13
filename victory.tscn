@@ -25,6 +25,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7bnjr")
 
+[node name="Victory" type="Label" parent="VBoxContainer" unique_id=728986553]
+layout_mode = 2
+text = "Victory"
+
 [node name="TryAgainButton" type="Button" parent="VBoxContainer" unique_id=58848185]
 layout_mode = 2
 text = "TryAgainButton"
@@ -32,10 +36,6 @@ text = "TryAgainButton"
 [node name="MainMenuButton" type="Button" parent="VBoxContainer" unique_id=1302219659]
 layout_mode = 2
 text = "MainMenuButton"
-
-[node name="Victory" type="Label" parent="VBoxContainer" unique_id=728986553]
-layout_mode = 2
-text = "Victory"
 
 [connection signal="pressed" from="VBoxContainer/TryAgainButton" to="VBoxContainer" method="_on_try_again_pressed"]
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer" method="_on_main_menu_pressed"]

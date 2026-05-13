@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cktanxix855r2" path="res://scripts/world.gd" id="1_v38iq"]
 [ext_resource type="Script" uid="uid://d3orxh3y5biky" path="res://scripts/background.gd" id="3_crycw"]
-[ext_resource type="Texture2D" uid="uid://dkgrukbqw4obd" path="res://pozadi2.jpg" id="3_xy4tn"]
+[ext_resource type="Texture2D" uid="uid://7fcgeabe27x3" path="res://govno(1).png" id="3_hx44q"]
 [ext_resource type="PackedScene" uid="uid://df73ww2y0343v" path="res://player.tscn" id="4_i2041"]
 [ext_resource type="Script" uid="uid://dfbyyofu1o2m3" path="res://scripts/tutorial.gd" id="5_v8kj3"]
 [ext_resource type="Script" uid="uid://do0piehmd8aq4" path="res://scripts/upgrade_screen.gd" id="6_crycw"]
@@ -24,17 +24,16 @@ script = ExtResource("1_v38iq")
 script = ExtResource("3_crycw")
 
 [node name="Background" type="Sprite2D" parent="BackgroundContainer" unique_id=1582539085]
-position = Vector2(960, 544)
-scale = Vector2(3.75, 3.7762241)
-texture = ExtResource("3_xy4tn")
+position = Vector2(968, 576)
+texture = ExtResource("3_hx44q")
 
 [node name="Background2" type="Sprite2D" parent="BackgroundContainer" unique_id=179597810]
-position = Vector2(960, -536.00006)
-scale = Vector2(3.7499998, 3.776224)
-texture = ExtResource("3_xy4tn")
+position = Vector2(960.0001, -624)
+scale = Vector2(1.0083333, 1.0125927)
+texture = ExtResource("3_hx44q")
 
 [node name="Player" parent="." unique_id=1975230303 instance=ExtResource("4_i2041")]
-position = Vector2(242, 881)
+position = Vector2(968, 576)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1744388983]
 offset_left = 19.0
@@ -422,7 +421,7 @@ offset_top = 628.0
 offset_right = 905.0
 offset_bottom = 651.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "BulletSpeed:"
+text = "Evasion:"
 
 [node name="StatCard4" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=670973505]
 layout_mode = 2
@@ -638,38 +637,44 @@ theme_override_font_sizes/font_size = 50
 text = "0"
 
 [node name="HPLabel" type="Label" parent="." unique_id=1091996565 groups=["hp_label"]]
+offset_left = 8.0
 offset_top = 288.0
-offset_right = 92.0
+offset_right = 100.0
 offset_bottom = 311.0
 text = "HP: 400/400"
 
 [node name="ShipSpeedLabel" type="Label" parent="." unique_id=993362755 groups=["speed_label"]]
+offset_left = 8.0
 offset_top = 312.0
-offset_right = 84.0
+offset_right = 92.0
 offset_bottom = 335.0
 text = "Speed: 300"
 
 [node name="AttackSpeedLabel" type="Label" parent="." unique_id=1232139004 groups=["attack_speed_label"]]
+offset_left = 8.0
 offset_top = 336.0
-offset_right = 133.0
+offset_right = 141.0
 offset_bottom = 359.0
 text = "Attack Speed: 0.3"
 
 [node name="AttackDamageLabel" type="Label" parent="." unique_id=1176527465 groups=["attack_damage_label"]]
+offset_left = 8.0
 offset_top = 360.0
-offset_right = 100.0
+offset_right = 108.0
 offset_bottom = 383.0
 text = "Damage: 100"
 
 [node name="ArmorLabel" type="Label" parent="." unique_id=1516415584 groups=["armor_label"]]
+offset_left = 8.0
 offset_top = 384.0
-offset_right = 117.0
+offset_right = 125.0
 offset_bottom = 407.0
 text = "Armour: 0"
 
 [node name="BulletSpeedLabel" type="Label" parent="." unique_id=1159783581 groups=["bullet_speed_label"]]
+offset_left = 8.0
 offset_top = 408.0
-offset_right = 68.0
+offset_right = 141.0
 offset_bottom = 431.0
 text = "Bullet Speed: 750"
 
@@ -700,6 +705,13 @@ offset_bottom = 39.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=396720566 groups=["music"]]
 volume_db = -69.881
 autoplay = true
+
+[node name="DifficultyLabel" type="Label" parent="." unique_id=1948705225 groups=["difficulty_label"]]
+offset_left = 8.0
+offset_top = 432.0
+offset_right = 78.0
+offset_bottom = 455.0
+text = "Difficulty"
 
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1/-" to="UpgradeScreen" method="_on_StatCard1_minus_pressed"]
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1/+" to="UpgradeScreen" method="_on_StatCard1_plus_pressed"]

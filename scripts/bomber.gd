@@ -19,6 +19,7 @@ var bomb_interval = 1.5
 func _ready():
 	connect("area_entered", _on_area_entered)
 	stop_y = randf_range(50, get_viewport_rect().size.y * 0.3)
+	hp *= Global.difficulty
 
 func _process(delta):
 	if not reached_position:

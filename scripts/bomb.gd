@@ -21,13 +21,13 @@ func _process(delta):
 func explode():
 	exploded = true
 	for i in 8:
-		var angle = i * PI / 4 
+		var angle = i * PI / 4
 		var dir = Vector2(cos(angle), sin(angle))
 		var bullet = bullet_scene.instantiate()
 		bullet.position = global_position
 		bullet.direction = dir
 		bullet.speed = 600
-		bullet.damage = 125
+		bullet.damage = 125 * Global.difficulty
 		get_parent().add_child(bullet)
 	queue_free()
 
@@ -36,5 +36,5 @@ func _on_area_entered(area):
 		exploded = true
 		var player = get_tree().get_first_node_in_group("player")
 		if player:
-			player.take_damage(300)
+			player.take_damage(300 * Global.difficulty)
 		queue_free()
