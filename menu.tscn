@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://g1kfj7b1c5qd"]
 
 [ext_resource type="Script" uid="uid://dpwnxn7aw3sfn" path="res://scripts/menu.gd" id="1_lti8b"]
+[ext_resource type="Texture2D" uid="uid://dpthh2eyla65c" path="res://music-note-icon-29.png" id="2_ouk20"]
 
 [node name="MainMenu" type="Control" unique_id=1234224793]
 layout_mode = 3
@@ -26,16 +27,18 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="GameLabel" type="Label" parent="VBoxContainer" unique_id=355288140]
+visible = false
 layout_mode = 2
 text = "Point of No Return"
 
 [node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=599924919]
 layout_mode = 2
 text = "Play"
+icon_alignment = 1
 
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=15097116]
 layout_mode = 2
-text = "Quit"
+text = "quit"
 
 [node name="InfoLabel" type="Label" parent="." unique_id=1852904033]
 layout_mode = 0
@@ -44,5 +47,21 @@ offset_bottom = 23.0
 text = "Press M to Mute Music!
 Press P to Pause!"
 
+[node name="MuteButton" type="TextureButton" parent="." unique_id=1276658991]
+layout_mode = 0
+offset_top = 756.0
+offset_right = 320.0
+offset_bottom = 1076.0
+texture_normal = ExtResource("2_ouk20")
+
+[node name="Mute_UnmuteMusicButton" type="Label" parent="." unique_id=99771577]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 720.0
+offset_right = 257.0
+offset_bottom = 743.0
+text = "Mute_UnmuteMusicButton"
+
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MuteButton" to="." method="_on_mute_button_pressed"]

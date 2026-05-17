@@ -9,13 +9,79 @@
 [ext_resource type="Texture2D" uid="uid://ci50q4sfvknf0" path="res://epstein.jpg" id="7_hx44q"]
 [ext_resource type="Texture2D" uid="uid://kewacknf2otn" path="res://Transparent Yellow Triangle Png - Yellow Triangle No Background, Png Download - vhv.jpg" id="7_i2041"]
 [ext_resource type="Texture2D" uid="uid://lpjfvhujgpgp" path="res://Ramecek.png" id="8_mx85b"]
-[ext_resource type="Texture2D" uid="uid://dy2cfxdv5lxch" path="res://minus.png" id="10_n8vhr"]
-[ext_resource type="Texture2D" uid="uid://djoi11yn056u2" path="res://plus (1).png" id="11_eqrsh"]
-[ext_resource type="Texture2D" uid="uid://bbpf3xw5shk81" path="res://sci_fi_buttons.png" id="12_3l65w"]
+[ext_resource type="Texture2D" uid="uid://dlri1vsooxkm7" path="res://-BUTTON.png" id="10_eqrsh"]
+[ext_resource type="Texture2D" uid="uid://cs6khgkpumibn" path="res://+BUTTON.png" id="11_3l65w"]
+[ext_resource type="Script" uid="uid://de4k4w3qxh644" path="res://scripts/plusminusbuttons.gd" id="11_rjtee"]
+[ext_resource type="Texture2D" uid="uid://ba7xmtny547jg" path="res://READY-button.png" id="12_hx44q"]
+[ext_resource type="Texture2D" uid="uid://ch66t5xkrgdor" path="res://MENU-buttonFinal.png" id="14_3l65w"]
+[ext_resource type="Texture2D" uid="uid://bdc5o5yckq5ug" path="res://MENU-buttonFinalHovered.png" id="15_rjtee"]
+[ext_resource type="Script" uid="uid://bb52oq0xmy6s0" path="res://scripts/quit_button.gd" id="16_rjtee"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l65w"]
+atlas = ExtResource("10_eqrsh")
+region = Rect2(82.045, 54.964, 88.056, 88.303)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rjtee"]
-atlas = ExtResource("12_3l65w")
-region = Rect2(74.46367, 77.65195, 73.36888, 33.81408)
+atlas = ExtResource("11_3l65w")
+region = Rect2(81.52649, 54.585686, 88.77652, 89.289665)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqrsh"]
+atlas = ExtResource("10_eqrsh")
+region = Rect2(82.045, 54.964, 88.056, 88.303)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1idop"]
+atlas = ExtResource("11_3l65w")
+region = Rect2(82.045, 54.964, 88.056, 88.303)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_beq0j"]
+atlas = ExtResource("10_eqrsh")
+region = Rect2(82.045, 54.964, 88.056, 88.303)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nauge"]
+atlas = ExtResource("11_3l65w")
+region = Rect2(82.045, 54.964, 88.056, 88.303)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycv2e"]
+atlas = ExtResource("10_eqrsh")
+region = Rect2(82.045, 54.964, 88.056, 88.303)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5gc3"]
+atlas = ExtResource("11_3l65w")
+region = Rect2(82.045, 54.964, 88.056, 88.303)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6e4cv"]
+atlas = ExtResource("10_eqrsh")
+region = Rect2(82.045, 54.964, 88.056, 88.303)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uuy0h"]
+atlas = ExtResource("11_3l65w")
+region = Rect2(82.045, 54.964, 88.056, 88.303)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52iny"]
+atlas = ExtResource("10_eqrsh")
+region = Rect2(82.045, 54.964, 88.056, 88.303)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxqqj"]
+atlas = ExtResource("11_3l65w")
+region = Rect2(82.045, 54.964, 88.056, 88.303)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hx44q"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8vhr"]
+bg_color = Color(0.6, 0.6, 0.6, 0.47843137)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8vhr"]
+atlas = ExtResource("12_hx44q")
+region = Rect2(22.982971, 54.7753, 153.69255, 75.386536)
 
 [node name="level1" type="Node2D" unique_id=1221982499 groups=["world"]]
 script = ExtResource("1_v38iq")
@@ -269,11 +335,14 @@ text = "1.00"
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=445509471]
 layout_mode = 0
 offset_left = 328.0
-offset_top = 604.0
-offset_right = 976.0
-offset_bottom = 1252.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_n8vhr")
+offset_top = 612.0
+offset_right = 424.0
+offset_bottom = 708.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_3l65w")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="PointsSpentAS" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=2128580084]
 layout_mode = 0
@@ -287,11 +356,14 @@ text = "0"
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1" unique_id=1809046042]
 layout_mode = 0
 offset_left = 432.0
-offset_top = 604.0
-offset_right = 1080.0
-offset_bottom = 1252.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("11_eqrsh")
+offset_top = 612.0
+offset_right = 520.0
+offset_bottom = 708.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_rjtee")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="StatCard2" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=2070113188]
 layout_mode = 2
@@ -334,11 +406,14 @@ text = "100"
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=892212412]
 layout_mode = 0
 offset_left = 324.0
-offset_top = 796.0
-offset_right = 972.0
-offset_bottom = 1444.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_n8vhr")
+offset_top = 804.0
+offset_right = 420.0
+offset_bottom = 900.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_eqrsh")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="PointsSpentAD" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=1604550523]
 layout_mode = 0
@@ -352,11 +427,14 @@ text = "0"
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2" unique_id=1836597498]
 layout_mode = 0
 offset_left = 428.0
-offset_top = 796.0
-offset_right = 1076.0
-offset_bottom = 1444.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("11_eqrsh")
+offset_top = 804.0
+offset_right = 524.0
+offset_bottom = 900.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_1idop")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="StatCard3" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=1567084998]
 layout_mode = 2
@@ -380,21 +458,24 @@ expand_mode = 1
 
 [node name="BSValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1602211490]
 layout_mode = 0
-offset_left = 920.0
+offset_left = 888.0
 offset_top = 628.0
-offset_right = 948.0
+offset_right = 916.0
 offset_bottom = 651.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "600"
 
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1441554515]
 layout_mode = 0
-offset_left = 960.0
-offset_top = 604.0
-offset_right = 1608.0
-offset_bottom = 1252.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_n8vhr")
+offset_left = 952.0
+offset_top = 612.0
+offset_right = 1048.0
+offset_bottom = 708.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_beq0j")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="PointsSpentBS" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1082526396]
 layout_mode = 0
@@ -408,11 +489,14 @@ text = "0"
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1337515325]
 layout_mode = 0
 offset_left = 1064.0
-offset_top = 604.0
-offset_right = 1712.0
-offset_bottom = 1252.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("11_eqrsh")
+offset_top = 612.0
+offset_right = 1160.0
+offset_bottom = 708.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_nauge")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="BulletSpeed" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3" unique_id=1054637022]
 layout_mode = 0
@@ -454,21 +538,24 @@ text = "HP:"
 
 [node name="HPValue" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=231232056]
 layout_mode = 0
-offset_left = 876.0
+offset_left = 884.0
 offset_top = 820.0
-offset_right = 904.0
+offset_right = 912.0
 offset_bottom = 843.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "400"
 
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=795504308]
 layout_mode = 0
-offset_left = 956.0
-offset_top = 796.0
-offset_right = 1604.0
-offset_bottom = 1444.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_n8vhr")
+offset_left = 948.0
+offset_top = 804.0
+offset_right = 1044.0
+offset_bottom = 900.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_ycv2e")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="PointsSpentHP" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=470161828]
 layout_mode = 0
@@ -482,11 +569,14 @@ text = "0"
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard4" unique_id=574710823]
 layout_mode = 0
 offset_left = 1060.0
-offset_top = 796.0
-offset_right = 1708.0
-offset_bottom = 1444.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("11_eqrsh")
+offset_top = 804.0
+offset_right = 1156.0
+offset_bottom = 900.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_c5gc3")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="StatCard5" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=1257112943]
 layout_mode = 2
@@ -528,12 +618,15 @@ text = "350"
 
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1105599585]
 layout_mode = 0
-offset_left = 1592.0
-offset_top = 604.0
-offset_right = 2240.0
-offset_bottom = 1252.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_n8vhr")
+offset_left = 1584.0
+offset_top = 612.0
+offset_right = 1680.0
+offset_bottom = 708.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_6e4cv")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="PointsSpentSS" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1217177703]
 layout_mode = 0
@@ -547,11 +640,14 @@ text = "0"
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard5" unique_id=1221661841]
 layout_mode = 0
 offset_left = 1696.0
-offset_top = 604.0
-offset_right = 2344.0
-offset_bottom = 1252.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("11_eqrsh")
+offset_top = 612.0
+offset_right = 1792.0
+offset_bottom = 708.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_uuy0h")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="StatCard6" type="Panel" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat" unique_id=744356434]
 layout_mode = 2
@@ -593,12 +689,15 @@ text = "0"
 
 [node name="-" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=1935770541]
 layout_mode = 0
-offset_left = 1588.0
-offset_top = 796.0
-offset_right = 2236.0
-offset_bottom = 1444.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("10_n8vhr")
+offset_left = 1580.0
+offset_top = 804.0
+offset_right = 1676.0
+offset_bottom = 900.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_52iny")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="PointsSpentSR" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=148734533]
 layout_mode = 0
@@ -612,20 +711,14 @@ text = "0"
 [node name="+" type="Button" parent="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6" unique_id=2137701001]
 layout_mode = 0
 offset_left = 1692.0
-offset_top = 796.0
-offset_right = 2340.0
-offset_bottom = 1444.0
-scale = Vector2(0.1, 0.1)
-icon = ExtResource("11_eqrsh")
-
-[node name="Ready" type="Button" parent="UpgradeScreen" unique_id=1542582053]
-layout_mode = 0
-offset_left = -896.0
-offset_top = 856.00006
-offset_right = -815.0
-offset_bottom = 897.00006
-scale = Vector2(3, 3)
-icon = SubResource("AtlasTexture_rjtee")
+offset_top = 804.0
+offset_right = 1788.0
+offset_bottom = 900.0
+scale = Vector2(0.5, 0.5)
+icon = SubResource("AtlasTexture_nxqqj")
+flat = true
+icon_alignment = 1
+script = ExtResource("11_rjtee")
 
 [node name="PointsLeftLabel" type="Label" parent="UpgradeScreen" unique_id=399425063 groups=["points_left_label"]]
 layout_mode = 0
@@ -635,6 +728,19 @@ offset_right = -560.0
 offset_bottom = 304.0
 theme_override_font_sizes/font_size = 50
 text = "0"
+
+[node name="Ready" type="Button" parent="UpgradeScreen" unique_id=1542582053]
+layout_mode = 0
+offset_left = -864.0
+offset_top = 864.0
+offset_right = -703.0
+offset_bottom = 947.0
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_hx44q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n8vhr")
+icon = SubResource("AtlasTexture_n8vhr")
+icon_alignment = 1
 
 [node name="HPLabel" type="Label" parent="." unique_id=1091996565 groups=["hp_label"]]
 offset_left = 8.0
@@ -679,12 +785,13 @@ offset_bottom = 431.0
 text = "Bullet Speed: 750"
 
 [node name="GodmodeLabel" type="Label" parent="." unique_id=1781407105 groups=["godmode_label"]]
-offset_left = 856.0
+offset_left = 8.0
 offset_top = 8.0
-offset_right = 966.0
-offset_bottom = 31.0
+offset_right = 1920.0
+offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.7262233, 3.4172833e-06, 5.7756904e-07, 1)
 text = "Godmode: ON"
+horizontal_alignment = 1
 
 [node name="GamePauseLabel" type="Label" parent="." unique_id=311774852 groups=["pause_label"]]
 process_mode = 3
@@ -713,8 +820,36 @@ offset_right = 78.0
 offset_bottom = 455.0
 text = "Difficulty"
 
+[node name="RedFlash" type="ColorRect" parent="." unique_id=2063582150]
+offset_right = 1928.0
+offset_bottom = 1168.0
+mouse_filter = 2
+color = Color(0.98039216, 0, 0, 0)
+
+[node name="Dimmer2" type="ColorRect" parent="." unique_id=1593592485]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.003921569)
+
+[node name="QuitButton" type="TextureButton" parent="." unique_id=2117386546 groups=["quit_button"]]
+process_mode = 3
+visible = false
+top_level = true
+offset_left = 8.0
+offset_right = 3832.0
+offset_bottom = 2176.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("14_3l65w")
+texture_pressed = ExtResource("14_3l65w")
+texture_hover = ExtResource("15_rjtee")
+texture_disabled = ExtResource("14_3l65w")
+stretch_mode = 3
+script = ExtResource("16_rjtee")
+
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1/-" to="UpgradeScreen" method="_on_StatCard1_minus_pressed"]
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1/+" to="UpgradeScreen" method="_on_StatCard1_plus_pressed"]
+[connection signal="mouse_entered" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2/-" to="UpgradeScreen" method="_on_hover"]
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2/-" to="UpgradeScreen" method="_on_StatCard2_minus_pressed"]
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard2/+" to="UpgradeScreen" method="_on_StatCard2_plus_pressed"]
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard3/-" to="UpgradeScreen" method="_on_StatCard3_minus_pressed"]
@@ -726,3 +861,4 @@ text = "Difficulty"
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6/-" to="UpgradeScreen" method="_on_StatCard6_minus_pressed"]
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard6/+" to="UpgradeScreen" method="_on_StatCard6_plus_pressed"]
 [connection signal="pressed" from="UpgradeScreen/Ready" to="UpgradeScreen" method="on_ready_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

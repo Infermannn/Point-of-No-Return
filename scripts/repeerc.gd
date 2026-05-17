@@ -1,0 +1,104 @@
+extends Area2D
+
+var hp = 370
+var speed = 150
+var chase_speed = 750
+var normal_enemy = true
+var counts_as_kill = true
+
+var state = "falling"
+var fall_timer = 0
+var fall_duration = randf_range(1.0, 2.0)
+var blink_timer = 0
+var blink_count = 0
+var blink_phase = 0
+
+var texture1 = preload("res://Repeerc_scaled_10x_pngcrushed.png")
+var texture2 = preload("res://Repeerc2(1).png")
+var explosion_scene = preload("res://explosion.tscn")
+
+func _ready():
+	connect("area_entered", _on_area_entered)
+	$Sprite2D.texture = texture1
+	if Global.endless_mode:
+		hp *= Global.endless_enemy_mult
+
+func _process(delta):
+	match state:
+		"falling":
+			$Sprite2D.texture = texture1
+			modulate = Color(1, 1, 1, 1)
+			position.y += speed * delta
+			fall_timer += delta
+			if fall_timer >= fall_duration:
+				state = "chasing"
+		
+		"chasing":
+			$Sprite2D.texture = texture2
+			modulate = Color(1, 1, 1, 1)
+			var player = get_tree().get_first_node_in_group("player")
+			if player == null:
+				return
+			var dir = (player.global_position - global_position).normalized()
+			position += dir * chase_speed * delta
+			var dist = global_position.distance_to(player.global_position)
+			
+			if dist < 75:  
+				state = "blinking"
+				blink_timer = 0
+				blink_count = 0
+				blink_phase = 0
+		
+		"blinking":
+			blink_timer += delta
+			var new_phase = int(blink_timer / 0.3)
+			if new_phase != blink_phase and new_phase <= 3:
+				blink_phase = new_phase
+				match blink_phase:
+					1:  
+						$Sprite2D.texture = texture1
+						modulate = Color(1, 0.2, 0.2, 1)
+					2:  
+						$Sprite2D.texture = texture2
+						modulate = Color(1, 1, 1, 1)
+					3:  
+						$Sprite2D.texture = texture1
+						modulate = Color(1, 0.2, 0.2, 1)
+	
+	
+	if blink_timer >= 1.0 and state == "blinking":
+		explode(1.0)
+
+func explode(damage_multiplier):
+	if state == "dead":
+		return
+	state = "dead"
+	modulate = Color(1, 1, 1, 1)
+	
+	var exp = explosion_scene.instantiate()
+	exp.position = global_position
+	exp.damage_multiplier = damage_multiplier
+	get_parent().add_child(exp)
+	
+	queue_free()
+	if counts_as_kill:
+		get_tree().get_first_node_in_group("world").enemy_killed()
+
+func die():
+	explode(0.5)
+
+func hit_flash():
+	if state == "blinking":
+		return
+	modulate = Color(1, 0.2, 0.2, 1)
+	await get_tree().create_timer(0.1).timeout
+	if state != "blinking":
+		modulate = Color(1, 1, 1, 1)
+
+func _on_area_entered(area):
+	if area.is_in_group("player_bullet"):
+		hp -= area.damage
+		area.queue_free()
+		hit_flash()
+		if hp <= 0:
+			die()

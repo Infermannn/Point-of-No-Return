@@ -1,6 +1,6 @@
 extends Area2D
 
-var hp = 5000
+var hp = 4000
 var speed = 250
 var reached_position = false
 var stop_y = 0
@@ -20,10 +20,17 @@ var big_bullet_scene = preload("res://big_bullet.tscn")
 var shoot_timer = 0
 var shoot_interval = 1.33  
 
+var anim_timer = 0
+var anim_frame = 0
+var texture1 = preload("res://big_guyscaled.png")
+var texture2 = preload("res://big_guy2scaled.png")
+
 func _ready():
 	connect("area_entered", _on_area_entered)
 	stop_y = randf_range(50, get_viewport_rect().size.y * 0.3)
 	hp *= Global.difficulty
+	if Global.endless_mode:
+		hp *= Global.endless_enemy_mult
 	
 func spawn_drone():
 	var drone = drone_scene.instantiate()
@@ -34,6 +41,14 @@ func spawn_drone():
 	get_parent().add_child(drone)
 
 func _process(delta):
+	anim_timer += delta
+	if anim_timer >= 1.0:
+		anim_timer = 0
+		anim_frame = 1 - anim_frame
+	if anim_frame == 0:
+		$Sprite2D.texture = texture1
+	else:
+		$Sprite2D.texture = texture2
 	drone_timer += delta
 	if drone_timer >= drone_interval:
 		drone_timer = 0
@@ -75,6 +90,7 @@ func shoot():
 	big_bullet.damage = 175
 	big_bullet.speed = 850
 	big_bullet.damage *= Global.difficulty
+	big_bullet.damage = 175 * Global.difficulty * (Global.endless_enemy_mult if Global.endless_mode else 1.0)
 	get_parent().add_child(big_bullet)
 	
 	var angle = deg_to_rad(15)
@@ -86,6 +102,8 @@ func shoot():
 		bullet.speed = 600
 		bullet.damage = 125
 		bullet.damage *= Global.difficulty
+		bullet.modulate = Color(1, 0.3, 0, 1)
+		bullet.damage = 125 * Global.difficulty * (Global.endless_enemy_mult if Global.endless_mode else 1.0)
 		get_parent().add_child(bullet)
 		
 func die():
@@ -96,9 +114,15 @@ func _on_area_entered(area):
 	if area.is_in_group("player_bullet"):
 		hp -= area.damage
 		area.queue_free()
+		hit_flash()
 		if hp <= 0:
 			die()
 	if area.is_in_group("player"):
 		var player = get_tree().get_first_node_in_group("player")
 		if player:
 			player.take_damage(100)  
+
+func hit_flash():
+	modulate = Color(1, 0.2, 0.2, 1)
+	await get_tree().create_timer(0.1).timeout
+	modulate = Color(1, 1, 1, 1)

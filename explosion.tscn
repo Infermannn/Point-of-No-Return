@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cbpy2msrfmnrj"]
+
+[ext_resource type="Script" uid="uid://bc6y7qd0wr2ad" path="res://scripts/explosion.gd" id="1_vxas0"]
+[ext_resource type="Texture2D" uid="uid://0jubvmordjsu" path="res://All_Fire_Bullet_Pixel_16x16_00.png" id="2_j4sxf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5xho"]
+atlas = ExtResource("2_j4sxf")
+region = Rect2(223.33263, 287.26318, 17.391357, 17.46762)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kmxf7"]
+radius = 80.0
+
+[node name="explosion" type="Area2D" unique_id=1355097204]
+collision_layer = 2
+script = ExtResource("1_vxas0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=899699301]
+scale = Vector2(10, 10)
+texture = SubResource("AtlasTexture_m5xho")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=881699283]
+shape = SubResource("CircleShape2D_kmxf7")

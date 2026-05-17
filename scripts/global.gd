@@ -25,6 +25,13 @@ var current_track = 0
 var muted = false
 var difficulty = 1.0  # 0.5 = easy, 1.0 = normal, 1.5 = hard
 
+var endless_mode = false
+var endless_wave = 0
+var endless_enemy_mult = 1.0
+
+var menu_music_player: AudioStreamPlayer
+var menu_track = preload("res://Music/Starship_Idle.mp3")
+
 func _ready():
 	music_player = AudioStreamPlayer.new()
 	music_player.volume_db = -40
@@ -36,6 +43,11 @@ func _ready():
 		preload("res://Music/Pixel_Starfire.mp3")
 	]
 	play_next_track()
+	
+	menu_music_player = AudioStreamPlayer.new()
+	menu_music_player.volume_db = -40
+	add_child(menu_music_player)
+	menu_music_player.stream = menu_track
 	
 func start_music():
 	if music_player.playing:
@@ -62,6 +74,7 @@ func _on_track_finished():
 func toggle_mute():
 	muted = not muted
 	music_player.stream_paused = muted
+	menu_music_player.stream_paused = muted
 
 func save():
 	var save_data = {
@@ -92,3 +105,18 @@ func set_music_volume(percent):
 		music_player.volume_db = -80
 	else:
 		music_player.volume_db = base_volume_db + linear_to_db(percent)
+		
+func start_menu_music():
+	menu_music_player.stream_paused = muted
+	if not menu_music_player.playing:
+		menu_music_player.play()
+
+func stop_menu_music():
+	menu_music_player.stop()
+	
+func fade_out_menu_music(duration = 1.0):
+	var tween = create_tween()
+	tween.tween_method(func(vol): menu_music_player.volume_db = vol, -40.0, -80.0, duration)
+	await tween.finished
+	menu_music_player.stop()
+	menu_music_player.volume_db = -40  # возвращаем громкость

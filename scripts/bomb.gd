@@ -28,6 +28,7 @@ func explode():
 		bullet.direction = dir
 		bullet.speed = 600
 		bullet.damage = 125 * Global.difficulty
+		bullet.modulate = Color(1, 0.3, 0, 1)
 		get_parent().add_child(bullet)
 	queue_free()
 
@@ -36,5 +37,8 @@ func _on_area_entered(area):
 		exploded = true
 		var player = get_tree().get_first_node_in_group("player")
 		if player:
-			player.take_damage(300 * Global.difficulty)
+			if Global.endless_mode:
+				player.take_damage(300 * Global.difficulty * Global.endless_enemy_mult)
+			else:
+				player.take_damage(300 * Global.difficulty)
 		queue_free()

@@ -9,12 +9,12 @@ func _ready():
 	check_ready()
 	
 var upgrades = {
-	"AttackSpeed": 0.03,
-	"AttackDamage": 10,
-	"Evasion": 1,
+	"AttackSpeed": 0.045,
+	"AttackDamage": 15,
+	"Evasion": 1.5,
 	"HP": 50,
 	"ShipSpeed": 15,
-	"StatusResist": 4
+	"StatusResist": 3
 }
 	
 func showw():
@@ -50,17 +50,19 @@ func on_plus_pressed(stat_name):
 		return
 	
 	var player = get_tree().get_first_node_in_group("player")
-	if stat_name == "AttackSpeed" and player.attack_speed - (stat_points["AttackSpeed"] + 1) * upgrades["AttackSpeed"] <= 0.3:
+	var caps = get_caps()
+	
+	if stat_name == "AttackSpeed" and player.attack_speed - (stat_points["AttackSpeed"] + 1) * upgrades["AttackSpeed"] <= caps["AttackSpeed"]:
 		return
-	if stat_name == "AttackDamage" and player.attack_damage + (stat_points["AttackDamage"] + 1) * upgrades["AttackDamage"] > 250:
+	if stat_name == "AttackDamage" and player.attack_damage + (stat_points["AttackDamage"] + 1) * upgrades["AttackDamage"] > caps["AttackDamage"]:
 		return
-	if stat_name == "Evasion" and player.evasion + (stat_points["Evasion"] + 1) * upgrades["Evasion"] > 10:
+	if stat_name == "Evasion" and player.evasion + (stat_points["Evasion"] + 1) * upgrades["Evasion"] > caps["Evasion"]:
 		return
-	if stat_name == "HP" and player.max_hp + (stat_points["HP"] + 1) * upgrades["HP"] > 1000:
+	if stat_name == "HP" and player.max_hp + (stat_points["HP"] + 1) * upgrades["HP"] > caps["HP"]:
 		return
-	if stat_name == "ShipSpeed" and player.speed + (stat_points["ShipSpeed"] + 1) * upgrades["ShipSpeed"] > 500:
+	if stat_name == "ShipSpeed" and player.speed + (stat_points["ShipSpeed"] + 1) * upgrades["ShipSpeed"] > caps["ShipSpeed"]:
 		return
-	if stat_name == "StatusResist" and player.armor + (stat_points["StatusResist"] + 1) * upgrades["StatusResist"] > 32:
+	if stat_name == "StatusResist" and player.armor + (stat_points["StatusResist"] + 1) * upgrades["StatusResist"] > caps["StatusResist"]:
 		return
 	
 	stat_points[stat_name] += 1
@@ -83,10 +85,11 @@ func update_points_label():
 
 func update_buttons():
 	var player = get_tree().get_first_node_in_group("player")
+	var caps = get_caps()
 	
 	$VBoxContainer/HBoxContainer6stat/StatCard1/ASValue.text = str(snappedf(player.attack_speed - stat_points["AttackSpeed"] * upgrades["AttackSpeed"], 0.01))
 	$VBoxContainer/HBoxContainer6stat/StatCard2/ADValue.text = str(player.attack_damage + stat_points["AttackDamage"] * upgrades["AttackDamage"])
-	$VBoxContainer/HBoxContainer6stat/StatCard3/BSValue.text = str(player.evasion + stat_points["Evasion"] * upgrades["Evasion"])
+	$VBoxContainer/HBoxContainer6stat/StatCard3/BSValue.text = str(player.evasion + stat_points["Evasion"] * upgrades["Evasion"]) + "%"
 	$VBoxContainer/HBoxContainer6stat/StatCard4/HPValue.text = str(player.hp + stat_points["HP"] * upgrades["HP"])
 	$VBoxContainer/HBoxContainer6stat/StatCard5/SSValue.text = str(player.speed + stat_points["ShipSpeed"] * upgrades["ShipSpeed"])
 	$VBoxContainer/HBoxContainer6stat/StatCard6/SRValue.text = str(player.armor + stat_points["StatusResist"] * upgrades["StatusResist"])
@@ -106,43 +109,46 @@ func update_buttons():
 		var minus = card.get_node("-")
 		
 		minus.modulate = Color(1, 1, 1, 0.3) if stat_points[stats[i]] <= 0 else Color(1, 1, 1, 1)
+		minus.disabled = stat_points[stats[i]] <= 0
 		
 		var can_plus = upgrade_points > 0 and stat_points[stats[i]] < 2
 		
-		if stats[i] == "AttackSpeed" and player.attack_speed - (stat_points[stats[i]] + 1) * upgrades[stats[i]] <= 0.3:
+		if stats[i] == "AttackSpeed" and player.attack_speed - (stat_points[stats[i]] + 1) * upgrades[stats[i]] <= caps["AttackSpeed"]:
 			can_plus = false
-		if stats[i] == "AttackDamage" and player.attack_damage + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > 250:
+		if stats[i] == "AttackDamage" and caps["AttackDamage"] != INF and player.attack_damage + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > caps["AttackDamage"]:
 			can_plus = false
-		if stats[i] == "Evasion" and player.evasion + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > 10:
+		if stats[i] == "Evasion" and player.evasion + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > caps["Evasion"]:
 			can_plus = false
-		if stats[i] == "HP" and player.max_hp + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > 1000:
+		if stats[i] == "HP" and caps["HP"] != INF and player.max_hp + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > caps["HP"]:
 			can_plus = false
-		if stats[i] == "ShipSpeed" and player.speed + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > 500:
+		if stats[i] == "ShipSpeed" and player.speed + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > caps["ShipSpeed"]:
 			can_plus = false
-		if stats[i] == "StatusResist" and player.armor + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > 32:
+		if stats[i] == "StatusResist" and caps["StatusResist"] != INF and player.armor + (stat_points[stats[i]] + 1) * upgrades[stats[i]] > caps["StatusResist"]:
 			can_plus = false
-	
+		
 		plus.modulate = Color(1, 1, 1, 1) if can_plus else Color(1, 1, 1, 0.3)
-
+		plus.disabled = not can_plus
+		
 func check_ready():
 	var can_spend = false
 	if upgrade_points > 0:
 		var player = get_tree().get_first_node_in_group("player")
+		var caps = get_caps()
 		var stats = ["AttackSpeed", "AttackDamage", "Evasion", "HP", "ShipSpeed", "StatusResist"]
 		for stat in stats:
 			if stat_points[stat] >= 2:
 				continue
-			if stat == "AttackSpeed" and player.attack_speed - (stat_points[stat] + 1) * upgrades[stat] <= 0.3:
+			if stat == "AttackSpeed" and player.attack_speed - (stat_points[stat] + 1) * upgrades[stat] <= caps["AttackSpeed"]:
 				continue
-			if stat == "AttackDamage" and player.attack_damage + (stat_points[stat] + 1) * upgrades[stat] > 250:
+			if stat == "AttackDamage" and caps["AttackDamage"] != INF and player.attack_damage + (stat_points[stat] + 1) * upgrades[stat] > caps["AttackDamage"]:
 				continue
-			if stat == "Evasion" and player.evasion + (stat_points[stat] + 1) * upgrades[stat] > 10:
+			if stat == "Evasion" and player.evasion + (stat_points[stat] + 1) * upgrades[stat] > caps["Evasion"]:
 				continue
-			if stat == "HP" and player.max_hp + (stat_points[stat] + 1) * upgrades[stat] > 1000:
+			if stat == "HP" and caps["HP"] != INF and player.max_hp + (stat_points[stat] + 1) * upgrades[stat] > caps["HP"]:
 				continue
-			if stat == "ShipSpeed" and player.speed + (stat_points[stat] + 1) * upgrades[stat] > 500:
+			if stat == "ShipSpeed" and player.speed + (stat_points[stat] + 1) * upgrades[stat] > caps["ShipSpeed"]:
 				continue
-			if stat == "StatusResist" and player.armor + (stat_points[stat] + 1) * upgrades[stat] > 32:
+			if stat == "StatusResist" and caps["StatusResist"] != INF and player.armor + (stat_points[stat] + 1) * upgrades[stat] > caps["StatusResist"]:
 				continue
 			can_spend = true
 			break
@@ -159,26 +165,33 @@ func on_ready_pressed():
 		label.text = "HP: " + str(player.hp) + "/" + str(player.max_hp)
 	visible = false
 	Global.set_music_volume(1.0)
-	get_tree().paused = false
-	get_tree().get_first_node_in_group("world").start_next_wave()
 	Global.music_player.stream_paused = Global.muted
+	get_tree().get_first_node_in_group("world").end_upgrade_sequence()
 
 func apply_upgrades():
 	var player = get_tree().get_first_node_in_group("player")
+	var caps = get_caps()
+	
 	player.hp += stat_points["HP"] * upgrades["HP"]
 	player.max_hp += stat_points["HP"] * upgrades["HP"]
-	player.hp = min(player.hp, 1000)
-	player.max_hp = min(player.max_hp, 1000)
+	player.hp = min(player.hp, caps["HP"])
+	player.max_hp = min(player.max_hp, caps["HP"])
+	
 	player.attack_speed -= stat_points["AttackSpeed"] * upgrades["AttackSpeed"]
-	player.attack_speed = max(player.attack_speed, 0.3)  
+	player.attack_speed = max(player.attack_speed, caps["AttackSpeed"])
+	
 	player.attack_damage += stat_points["AttackDamage"] * upgrades["AttackDamage"]
-	player.attack_damage = min(player.attack_damage, 250) 
+	player.attack_damage = min(player.attack_damage, caps["AttackDamage"])
+	
 	player.speed += stat_points["ShipSpeed"] * upgrades["ShipSpeed"]
-	player.speed = min(player.speed, 500) 
+	player.speed = min(player.speed, caps["ShipSpeed"])
+	
 	player.armor += stat_points["StatusResist"] * upgrades["StatusResist"]
-	player.armor = min(player.armor, 32)
+	player.armor = min(player.armor, caps["StatusResist"])
+	
 	player.evasion += stat_points["Evasion"] * upgrades["Evasion"]
-	player.evasion = min(player.evasion, 10)
+	player.evasion = min(player.evasion, caps["Evasion"])
+	
 	Global.player_hp = player.hp
 	Global.player_max_hp = player.max_hp
 	Global.player_speed = player.speed
@@ -186,6 +199,7 @@ func apply_upgrades():
 	Global.player_attack_damage = player.attack_damage
 	Global.player_evasion = player.evasion
 	Global.player_armor = player.armor
+	
 	for stat in stat_points:
 		total_spent[stat] += stat_points[stat]
 	stat_points = {"AttackSpeed": 0, "AttackDamage": 0, "Evasion": 0, "HP": 0, "ShipSpeed": 0, "StatusResist": 0}
@@ -227,3 +241,23 @@ func _on_StatCard6_plus_pressed():
 
 func _on_StatCard6_minus_pressed():
 	on_minus_pressed("StatusResist")
+	
+func get_caps():
+	if Global.endless_mode:
+		return {
+			"AttackSpeed": 0.25,
+			"AttackDamage": INF,
+			"Evasion": 50,
+			"HP": INF,
+			"ShipSpeed": 750,
+			"StatusResist": INF
+		}
+	else:
+		return {
+			"AttackSpeed": 0.3,
+			"AttackDamage": 250,
+			"Evasion": 10,
+			"HP": 900,
+			"ShipSpeed": 500,
+			"StatusResist": 30
+		}

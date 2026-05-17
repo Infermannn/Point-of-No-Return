@@ -14,9 +14,9 @@ var evasion = 0
 
 var bullet_scene = preload("res://bullet.tscn")
 
-
-
 var invincible = false
+
+var controls_enabled = true
 
 func _ready():
 	hp = Global.player_hp
@@ -71,6 +71,9 @@ func _on_area_entered(area):
 
 func _process(delta):
 	
+	if not controls_enabled:
+		return
+	
 	if Input.is_key_pressed(KEY_CTRL) and Input.is_key_pressed(KEY_SHIFT) and Input.is_action_just_pressed("toggle_godmode"):
 		godmode = not godmode
 		var label = get_tree().get_first_node_in_group("godmode_label")
@@ -78,24 +81,24 @@ func _process(delta):
 			label.visible = godmode
 		print("Godmode: ", godmode)
 		
-	if Input.is_action_just_pressed("mute"):
-		Global.toggle_mute()
+	#if Input.is_action_just_pressed("mute"):
+		#Global.toggle_mute()
 		
-	if Input.is_key_pressed(KEY_SHIFT) and Input.is_key_pressed(KEY_C):
+	if Input.is_key_pressed(KEY_SHIFT) and Input.is_key_pressed(KEY_F):
 		for enemy in get_tree().get_nodes_in_group("enemy"):
 			enemy.queue_free()
 		get_tree().get_first_node_in_group("world").force_end_wave()
 		
-	if Input.is_action_just_pressed("pause"):
-		var upgrade_screen = get_tree().get_first_node_in_group("upgrade_screen")
-		if upgrade_screen and upgrade_screen.visible:
-			return 
-		paused = not paused
-		get_tree().paused = paused
-		Global.music_player.stream_paused = paused
-		var label = get_tree().get_first_node_in_group("pause_label")
-		if label:
-			label.visible = paused
+	#if Input.is_action_just_pressed("pause"):
+		#var upgrade_screen = get_tree().get_first_node_in_group("upgrade_screen")
+		#if upgrade_screen and upgrade_screen.visible:
+			#return 
+		#paused = not paused
+		#get_tree().paused = paused
+		#Global.music_player.stream_paused = paused
+		#var label = get_tree().get_first_node_in_group("pause_label")
+		#if label:
+			#label.visible = paused
 	
 	var direction = Vector2.ZERO
 	shoot_timer -= delta
@@ -108,9 +111,24 @@ func _process(delta):
 		bullet.speed = bullet_speed
 		get_parent().add_child(bullet)
 		
-	if Input.is_key_pressed(KEY_ESCAPE):
-		get_tree().paused = false
-		get_tree().change_scene_to_file("res://menu.tscn")
+	if Input.is_action_just_pressed("escape"):
+		if not get_tree().get_first_node_in_group("world").game_started:
+			return
+		var quit_btn = get_tree().get_first_node_in_group("quit_button")
+		var pause_label = get_tree().get_first_node_in_group("pause_label")
+		if quit_btn:
+			if quit_btn.visible:
+				quit_btn.visible = false
+				if pause_label:
+					pause_label.visible = false
+				get_tree().paused = false
+				Global.music_player.stream_paused = Global.muted
+			else:
+				quit_btn.visible = true
+				if pause_label:
+					pause_label.visible = true
+				get_tree().paused = true
+				Global.music_player.stream_paused = true
 		return
 	
 	if get_tree().paused:
@@ -130,6 +148,12 @@ func _process(delta):
 	position.x = clamp(position.x, 80, 1920 - 75)
 	position.y = clamp(position.y, 55, screen.y - 85)
 	
+	if Input.is_key_pressed(KEY_CTRL) and Input.is_key_pressed(KEY_SHIFT) and Input.is_action_just_pressed("cheat_endless"):
+		get_tree().change_scene_to_file("res://victory.tscn")
+
+	if Input.is_key_pressed(KEY_CTRL) and Input.is_key_pressed(KEY_SHIFT) and Input.is_action_just_pressed("cheat_maxstats"):
+		max_stats()
+	
 func take_damage(amount):
 	if invincible or godmode:
 		return
@@ -146,11 +170,23 @@ func take_damage(amount):
 		label.text = "HP: " + str(hp) + "/" + str(max_hp)
 	await get_tree().create_timer(1.0).timeout
 	invincible = false
-
-
 	
-	
-	
-	
-	
+func max_stats():
+	var upgrade_screen = get_tree().get_first_node_in_group("upgrade_screen")
+	var caps = upgrade_screen.get_caps()
+	attack_speed = caps["AttackSpeed"]
+	attack_damage = caps["AttackDamage"] if caps["AttackDamage"] != INF else attack_damage
+	evasion = caps["Evasion"]
+	hp = caps["HP"] if caps["HP"] != INF else hp
+	max_hp = caps["HP"] if caps["HP"] != INF else max_hp
+	speed = caps["ShipSpeed"]
+	armor = caps["StatusResist"] if caps["StatusResist"] != INF else armor
+	Global.player_hp = hp
+	Global.player_max_hp = max_hp
+	Global.player_speed = speed
+	Global.player_attack_speed = attack_speed
+	Global.player_attack_damage = attack_damage
+	Global.player_evasion = evasion
+	Global.player_armor = armor
+	print("Stats maxed!")
 	

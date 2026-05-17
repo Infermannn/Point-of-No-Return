@@ -20,6 +20,8 @@ func _ready():
 	connect("area_entered", _on_area_entered)
 	stop_y = randf_range(50, get_viewport_rect().size.y * 0.3)
 	hp *= Global.difficulty
+	if Global.endless_mode:
+		hp *= Global.endless_enemy_mult
 
 func _process(delta):
 	if not reached_position:
@@ -60,5 +62,11 @@ func _on_area_entered(area):
 	if area.is_in_group("player_bullet"):
 		hp -= area.damage
 		area.queue_free()
+		hit_flash()
 		if hp <= 0:
 			die()
+	
+func hit_flash():
+	modulate = Color(1, 0.2, 0.2, 1)
+	await get_tree().create_timer(0.1).timeout
+	modulate = Color(1, 1, 1, 1)

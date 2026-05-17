@@ -11,6 +11,7 @@ var current = 0
 var pressed_keys = {}
 
 func _ready():
+	visible = false
 	if Global.tutorial_done:
 		hide()
 		get_tree().get_first_node_in_group("world").start_game.call_deferred()
@@ -61,4 +62,9 @@ func finish_tutorial():
 	finished = true
 	Global.tutorial_done = true
 	hide()
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		player.godmode = false
+		player.controls_enabled = true
+	get_tree().get_first_node_in_group("world").get_node("BackgroundContainer").slow_down()
 	get_tree().get_first_node_in_group("world").start_game()

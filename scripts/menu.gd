@@ -18,4 +18,16 @@ func _on_quit_button_pressed():
 	
 func _ready():
 	Global.stop_music()
+	Global.start_menu_music()
 	Global.set_music_volume(1.0)
+	Global.current_wave = 0
+	Global.endless_mode = false
+	Global.endless_wave = 0
+	Global.endless_enemy_mult = 1.0
+	Global.stop_music()
+	#update_mute_button()
+
+func _on_mute_button_pressed():
+	Global.toggle_mute()
+	#update_mute_button()
+	

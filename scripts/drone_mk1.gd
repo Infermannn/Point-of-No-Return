@@ -1,6 +1,6 @@
 extends Area2D
 
-var hp = 50
+var hp = 130
 var speed = 350 
 var reached_position = false
 var stop_y = 0
@@ -15,6 +15,8 @@ func _ready():
 	hp *= Global.difficulty
 	connect("area_entered", _on_area_entered)
 	stop_y = randf_range(50, get_viewport_rect().size.y * 0.5)
+	if Global.endless_mode:
+		hp *= Global.endless_enemy_mult
 
 func _process(delta):
 	if not reached_position:
@@ -37,9 +39,10 @@ func shoot():
 		var bullet = bullet_scene.instantiate()
 		bullet.position = global_position
 		bullet.direction = dir
-		bullet.speed = 500
-		bullet.damage = 50
+		bullet.speed = 450
+		bullet.damage = 60
 		bullet.damage *= Global.difficulty
+		bullet.damage = 50 * Global.difficulty * (Global.endless_enemy_mult if Global.endless_mode else 1.0)
 		get_parent().add_child(bullet)
 		
 		
@@ -52,7 +55,13 @@ func _on_area_entered(area):
 	if area.is_in_group("player_bullet"):
 		hp -= area.damage
 		area.queue_free()
+		hit_flash()
 		if hp <= 0:
 			die()
 	if area.is_in_group("player"):
 		die()
+		
+func hit_flash():
+	modulate = Color(1, 0.2, 0.2, 1)
+	await get_tree().create_timer(0.1).timeout
+	modulate = Color(1, 1, 1, 1)
