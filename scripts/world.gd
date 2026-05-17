@@ -24,64 +24,64 @@ var active_modifiers = []
 
 var waves = [
 	# 1 - tutorial
-	{"enemies": [{"scene": "basic", "count": 6}], 
+	{"enemies": [{"scene": "basic", "count": 5}], 
 	 "spawn_interval": 1.5, "max_on_screen": 4, "modifiers": []},
 	
 	# 2 - drones
-	{"enemies": [{"scene": "basic", "count": 8}, {"scene": "drone", "count": 6}], 
+	{"enemies": [{"scene": "basic", "count": 7}, {"scene": "drone", "count": 5}], 
 	 "spawn_interval": 1.0, "max_on_screen": 6, "modifiers": []},
 	
 	# 3 - more
-	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "basic", "count": 6}, {"scene": "drone", "count": 6}], 
+	{"enemies": [{"scene": "drone", "count": 7}, {"scene": "basic", "count": 6}, {"scene": "drone", "count": 5}], 
 	 "spawn_interval": 0.9, "max_on_screen": 7, "modifiers": []},
 	
 	# 4 - big guy
-	{"enemies": [{"scene": "basic", "count": 6}, {"scene": "big", "count": 1}, {"scene": "drone", "count": 8}, {"scene": "basic", "count": 5}], 
-	 "spawn_interval": 0.9, "max_on_screen": 7, "modifiers": []},
+	{"enemies": [{"scene": "basic", "count": 3}, {"scene": "big", "count": 1}, {"scene": "drone", "count": 3}], 
+	 "spawn_interval": 1, "max_on_screen": 7, "modifiers": []},
 	
 	# 5 - bomber
-	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "bomber", "count": 1}, {"scene": "drone", "count": 6}, {"scene": "basic", "count": 6}], 
+	{"enemies": [{"scene": "drone", "count": 5}, {"scene": "bomber", "count": 1}, {"scene": "drone", "count": 5}, {"scene": "basic", "count": 3}], 
 	 "spawn_interval": 0.8, "max_on_screen": 8, "modifiers": []},
 	
 	# 6 - repeerc
-	{"enemies": [{"scene": "basic", "count": 8}, {"scene": "drone", "count": 8}, {"scene": "repeerc", "count": 3}, {"scene": "basic", "count": 5}, {"scene": "drone", "count": 5}], 
+	{"enemies": [{"scene": "basic", "count": 6}, {"scene": "drone", "count": 6}, {"scene": "repeerc", "count": 3}, {"scene": "basic", "count": 3}, {"scene": "drone", "count": 5}], 
 	 "spawn_interval": 0.8, "max_on_screen": 8, "modifiers": []},
 	
 	# 7 - asteroids
-	{"enemies": [{"scene": "drone", "count": 10}, {"scene": "basic", "count": 8}, {"scene": "repeerc", "count": 4}, {"scene": "drone", "count": 8}], 
+	{"enemies": [{"scene": "drone", "count": 10}, {"scene": "basic", "count": 8}, {"scene": "repeerc", "count": 6}, {"scene": "drone", "count": 8}, {"scene": "repeerc", "count": 6}], 
 	 "spawn_interval": 0.7, "max_on_screen": 9, "modifiers": [{"type": "asteroids", "interval": 3.0}]},
 	
 	# 8 - big guy in chaos
-	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "repeerc", "count": 4}, {"scene": "drone", "count": 8}, {"scene": "basic", "count": 8}], 
+	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "repeerc", "count": 8}, {"scene": "drone", "count": 7}, {"scene": "basic", "count": 7}], 
 	 "spawn_interval": 0.7, "max_on_screen": 9, "modifiers": []},
 	
 	# 9 - bomber later
-	{"enemies": [{"scene": "basic", "count": 8}, {"scene": "drone", "count": 8}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 5}, {"scene": "drone", "count": 8}, {"scene": "bomber", "count": 1}], 
+	{"enemies": [{"scene": "basic", "count": 8}, {"scene": "drone", "count": 8}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 15}, {"scene": "drone", "count": 10}, {"scene": "bomber", "count": 1}], 
 	 "spawn_interval": 0.6, "max_on_screen": 10, "modifiers": []},
 	
 	# 10 - big wave with asteroids
-	{"enemies": [{"scene": "drone", "count": 10}, {"scene": "repeerc", "count": 5}, {"scene": "basic", "count": 10}, {"scene": "repeerc", "count": 5}, {"scene": "drone", "count": 10}], 
+	{"enemies": [{"scene": "drone", "count": 10}, {"scene": "repeerc", "count": 6}, {"scene": "basic", "count": 10}, {"scene": "repeerc", "count": 6}, {"scene": "drone", "count": 10}], 
 	 "spawn_interval": 0.5, "max_on_screen": 11, "modifiers": [{"type": "asteroids", "interval": 2.5}]},
 	
 	# 11 - 2 big guy + support
-	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "repeerc", "count": 4}, {"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "basic", "count": 8}], 
+	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "repeerc", "count": 4}, {"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "basic", "count": 8}, {"scene": "repeerc", "count": 4}], 
 	 "spawn_interval": 0.6, "max_on_screen": 11, "modifiers": []},
 	
 	# 12 - bomber + big guy + asteroids
-	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "bomber", "count": 1}, {"scene": "big", "count": 1}, {"scene": "repeerc", "count": 5}, {"scene": "drone", "count": 8}, {"scene": "bomber", "count": 1}], 
+	{"enemies": [{"scene": "drone", "count": 7}, {"scene": "bomber", "count": 1}, {"scene": "big", "count": 1}, {"scene": "repeerc", "count": 5}, {"scene": "drone", "count": 8}, {"scene": "bomber", "count": 1}], 
 	 "spawn_interval": 0.5, "max_on_screen": 12, "modifiers": [{"type": "asteroids", "interval": 2.0}]},
 	
 	# 13 - chaos1
-	{"enemies": [{"scene": "basic", "count": 10}, {"scene": "drone", "count": 10}, {"scene": "repeerc", "count": 6}, {"scene": "basic", "count": 10}, {"scene": "repeerc", "count": 6}, {"scene": "drone", "count": 10}], 
-	 "spawn_interval": 0.4, "max_on_screen": 13, "modifiers": [{"type": "asteroids", "interval": 2.0}]},
+	{"enemies": [{"scene": "basic", "count": 10}, {"scene": "drone", "count": 8}, {"scene": "repeerc", "count": 15}, {"scene": "basic", "count": 9}, {"scene": "repeerc", "count": 25}, {"scene": "drone", "count": 9}], 
+	 "spawn_interval": 0.4, "max_on_screen": 13, "modifiers": [{"type": "asteroids", "interval": 1.5}]},
 	
 	# 14 - 2 big guy 2 bomber
-	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 6}, {"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}, {"scene": "basic", "count": 8}], 
-	 "spawn_interval": 0.5, "max_on_screen": 14, "modifiers": [{"type": "asteroids", "interval": 2.5}]},
+	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 10}, {"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}, {"scene": "basic", "count": 8}], 
+	 "spawn_interval": 0.8, "max_on_screen": 14, "modifiers": [{"type": "asteroids", "interval": 2.5}]},
 	
 	# 15 - final
 	{"enemies": [{"scene": "drone", "count": 10}, {"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 6}, {"scene": "drone", "count": 10}, {"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 6}, {"scene": "big", "count": 1}, {"scene": "basic", "count": 10}], 
-	 "spawn_interval": 0.4, "max_on_screen": 15, "modifiers": [{"type": "asteroids", "interval": 1.5}]},
+	 "spawn_interval": 0.6, "max_on_screen": 15, "modifiers": [{"type": "asteroids", "interval": 1.5}]},
 ]
 
 var spawn_queue = []
@@ -260,6 +260,7 @@ func start_wave(index):
 	var wave_data = waves[index]
 	active_modifiers = wave_data.get("modifiers", [])
 	max_enemies_on_screen = wave_data.get("max_on_screen", 10)
+	max_enemies_on_screen = int(max_enemies_on_screen * Global.difficulty)
 	asteroid_interval = 0 
 	asteroid_timer = 0
 	for modifier in active_modifiers:
@@ -477,6 +478,7 @@ func start_wave_from_data(wave_data):
 	enemies_killed = 0
 	enemies_spawned = 0
 	max_enemies_on_screen = wave_data.get("max_on_screen", 10)
+	max_enemies_on_screen = int(max_enemies_on_screen * Global.difficulty)
 	active_modifiers = wave_data.get("modifiers", [])
 	asteroid_interval = 0
 	asteroid_timer = 0

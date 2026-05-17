@@ -1,6 +1,6 @@
 extends Area2D
 
-var hp = 4000
+var hp = 3500
 var speed = 250
 var reached_position = false
 var stop_y = 0
@@ -13,12 +13,12 @@ var start_y = 0
 var normal_enemy = false
 var drone_scene = preload("res://drone_mk_1.tscn")
 var drone_timer = 0
-var drone_interval = 5.0
+var drone_interval = 7.5
 
 var bullet_scene = preload("res://enemy_bullet.tscn")
 var big_bullet_scene = preload("res://big_bullet.tscn")
 var shoot_timer = 0
-var shoot_interval = 1.33  
+var shoot_interval = 1.4  
 
 var anim_timer = 0
 var anim_frame = 0
@@ -87,10 +87,10 @@ func shoot():
 	var big_bullet = big_bullet_scene.instantiate() 
 	big_bullet.position = global_position
 	big_bullet.direction = base_dir
-	big_bullet.damage = 175
-	big_bullet.speed = 850
+	big_bullet.damage = 150
+	big_bullet.speed = 750
 	big_bullet.damage *= Global.difficulty
-	big_bullet.damage = 175 * Global.difficulty * (Global.endless_enemy_mult if Global.endless_mode else 1.0)
+	big_bullet.damage = 150 * Global.difficulty * (Global.endless_enemy_mult if Global.endless_mode else 1.0)
 	get_parent().add_child(big_bullet)
 	
 	var angle = deg_to_rad(15)

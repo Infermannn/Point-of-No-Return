@@ -116,6 +116,7 @@ func _process(delta):
 			return
 		var quit_btn = get_tree().get_first_node_in_group("quit_button")
 		var pause_label = get_tree().get_first_node_in_group("pause_label")
+		var bg = get_tree().get_first_node_in_group("world").get_node("BackgroundContainer")
 		if quit_btn:
 			if quit_btn.visible:
 				quit_btn.visible = false
@@ -123,12 +124,14 @@ func _process(delta):
 					pause_label.visible = false
 				get_tree().paused = false
 				Global.music_player.stream_paused = Global.muted
+				bg.process_mode = Node.PROCESS_MODE_INHERIT
 			else:
 				quit_btn.visible = true
 				if pause_label:
 					pause_label.visible = true
 				get_tree().paused = true
 				Global.music_player.stream_paused = true
+				bg.process_mode = Node.PROCESS_MODE_DISABLED
 		return
 	
 	if get_tree().paused:

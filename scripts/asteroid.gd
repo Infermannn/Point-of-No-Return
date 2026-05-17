@@ -34,3 +34,4 @@ func _on_area_entered(area):
 			area.hp -= enemy_damage * Global.difficulty
 			if area.hp <= 0:
 				area.die()
+			queue_free()

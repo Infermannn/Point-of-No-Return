@@ -160,6 +160,7 @@ func check_ready():
 func on_ready_pressed():
 	apply_upgrades()
 	var player = get_tree().get_first_node_in_group("player")
+	player.hp = player.max_hp
 	var label = get_tree().get_first_node_in_group("lives_label")
 	if label:
 		label.text = "HP: " + str(player.hp) + "/" + str(player.max_hp)
