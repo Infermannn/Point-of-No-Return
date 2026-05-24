@@ -158,6 +158,7 @@ func check_ready():
 	
 
 func on_ready_pressed():
+	Global.click_player.play()
 	apply_upgrades()
 	var player = get_tree().get_first_node_in_group("player")
 	player.hp = player.max_hp
@@ -208,39 +209,51 @@ func apply_upgrades():
 	update_buttons()
 	
 func _on_StatCard1_plus_pressed():
+	Global.click_player.play()
 	on_plus_pressed("AttackSpeed")
 
 func _on_StatCard1_minus_pressed():
+	Global.click_player.play()
 	on_minus_pressed("AttackSpeed")
 	
 func _on_StatCard2_plus_pressed():
+	Global.click_player.play()
 	on_plus_pressed("AttackDamage")
 
 func _on_StatCard2_minus_pressed():
+	Global.click_player.play()
 	on_minus_pressed("AttackDamage")
 	
 func _on_StatCard3_plus_pressed():
+	Global.click_player.play()
 	on_plus_pressed("Evasion")
 
 func _on_StatCard3_minus_pressed():
+	Global.click_player.play()
 	on_minus_pressed("Evasion")
 	
 func _on_StatCard4_plus_pressed():
+	Global.click_player.play()
 	on_plus_pressed("HP")
 
 func _on_StatCard4_minus_pressed():
+	Global.click_player.play()
 	on_minus_pressed("HP")
 	
 func _on_StatCard5_plus_pressed():
+	Global.click_player.play()
 	on_plus_pressed("ShipSpeed")
 
 func _on_StatCard5_minus_pressed():
+	Global.click_player.play()
 	on_minus_pressed("ShipSpeed")
 	
 func _on_StatCard6_plus_pressed():
+	Global.click_player.play()
 	on_plus_pressed("StatusResist")
 
 func _on_StatCard6_minus_pressed():
+	Global.click_player.play()
 	on_minus_pressed("StatusResist")
 	
 func get_caps():

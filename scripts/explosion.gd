@@ -5,10 +5,12 @@ var damage_multiplier = 1.0
 
 func _ready():
 	connect("area_entered", _on_area_entered)
-	await get_tree().create_timer(0.3).timeout
-	queue_free()
+	$AnimatedSprite2D.play("default")
+	$AnimatedSprite2D.animation_finished.connect(func(): queue_free())
+	print("frames count: ", $AnimatedSprite2D.sprite_frames.get_frame_count("default"))
 
 func _on_area_entered(area):
+	print("explosion hit: ", area.name, " groups: ", area.get_groups())
 	if area.is_in_group("player"):
 		var player = get_tree().get_first_node_in_group("player")
 		if player:

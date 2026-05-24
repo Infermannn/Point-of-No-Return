@@ -32,7 +32,14 @@ var endless_enemy_mult = 1.0
 var menu_music_player: AudioStreamPlayer
 var menu_track = preload("res://Music/Starship_Idle.mp3")
 
+var click_player: AudioStreamPlayer
+
 func _ready():
+	click_player = AudioStreamPlayer.new()
+	click_player.stream = preload("res://Sounds/button-click.mp3")
+	click_player.volume_db = -40
+	add_child(click_player)
+	
 	music_player = AudioStreamPlayer.new()
 	music_player.volume_db = -40
 	add_child(music_player)
@@ -119,4 +126,16 @@ func fade_out_menu_music(duration = 1.0):
 	tween.tween_method(func(vol): menu_music_player.volume_db = vol, -40.0, -80.0, duration)
 	await tween.finished
 	menu_music_player.stop()
-	menu_music_player.volume_db = -40  # возвращаем громкость
+	menu_music_player.volume_db = -40
+	
+#func _process(_delta):
+	#print("global process running")
+	#if Input.is_action_just_pressed("toggle_fullscreen"):
+		#var mode = DisplayServer.window_get_mode()
+		#if mode == DisplayServer.WINDOW_MODE_FULLSCREEN:
+			#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		#else:
+			#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+			
+func play_click():
+	click_player.play()

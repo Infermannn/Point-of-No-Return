@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bhmk67h1i3u0q"]
 
 [ext_resource type="Script" uid="uid://jr2yvtg6tuki" path="res://scripts/bullet.gd" id="1_v8qja"]
-[ext_resource type="Texture2D" uid="uid://gt7jqm8yt73g" path="res://ricochet_bullet_scaled_26x_pngcrushed.png" id="2_v8qja"]
+[ext_resource type="Texture2D" uid="uid://gt7jqm8yt73g" path="res://Textures/bullets/ricochet_bullet_scaled_26x_pngcrushed.png" id="2_v8qja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8qja"]
 size = Vector2(8, 32)

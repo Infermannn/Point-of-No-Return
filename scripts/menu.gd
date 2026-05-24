@@ -1,5 +1,8 @@
 extends Control
 
+var tex1: Texture2D
+var tex2 = preload("res://Textures/buttons/mute2.png")
+
 func _on_play_pressed():
 	get_tree().change_scene_to_file("res://difficulty.tscn")
 	print("changing scene")
@@ -12,11 +15,14 @@ func _on_play_pressed():
 	Global.player_attack_damage = 100
 	Global.player_armor = 0
 	Global.player_evasion = 0
+	Global.click_player.play()
 
 func _on_quit_button_pressed():
+	Global.click_player.play()
 	get_tree().quit()
 	
 func _ready():
+	tex1 = $MuteButton.texture_normal
 	Global.stop_music()
 	Global.start_menu_music()
 	Global.set_music_volume(1.0)
@@ -28,6 +34,9 @@ func _ready():
 	#update_mute_button()
 
 func _on_mute_button_pressed():
+	Global.play_click()
 	Global.toggle_mute()
+	$MuteButton.texture_normal = tex2 if $MuteButton.texture_normal == tex1 else tex1
 	#update_mute_button()
+	Global.click_player.play()
 	

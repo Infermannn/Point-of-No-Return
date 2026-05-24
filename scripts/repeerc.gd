@@ -13,8 +13,8 @@ var blink_timer = 0
 var blink_count = 0
 var blink_phase = 0
 
-var texture1 = preload("res://Repeerc_scaled_10x_pngcrushed.png")
-var texture2 = preload("res://Repeerc2(1).png")
+var texture1 = preload("res://Textures/enemies/Repeerc_scaled_10x_pngcrushed.png")
+var texture2 = preload("res://Textures/enemies/Repeerc2(1).png")
 var explosion_scene = preload("res://explosion.tscn")
 
 func _ready():
@@ -75,10 +75,15 @@ func explode(damage_multiplier):
 	state = "dead"
 	modulate = Color(1, 1, 1, 1)
 	
+	print("spawning explosion at: ", global_position)
 	var exp = explosion_scene.instantiate()
-	exp.position = global_position
-	exp.damage_multiplier = damage_multiplier
+	get_tree().get_first_node_in_group("world").add_child(exp)
+	exp.global_position = global_position # устанавливаем ПОСЛЕ add_child
+	print("explosion global pos: ", exp.global_position)
+	print("player pos: ", get_tree().get_first_node_in_group("player").global_position)
+	print("exp position: ", exp.position)
 	get_parent().add_child(exp)
+	print("exp added to scene")
 	
 	queue_free()
 	if counts_as_kill:
@@ -96,9 +101,12 @@ func hit_flash():
 		modulate = Color(1, 1, 1, 1)
 
 func _on_area_entered(area):
+	#print("repeerc hit by: ", area.name, " groups: ", area.get_groups())
 	if area.is_in_group("player_bullet"):
 		hp -= area.damage
 		area.queue_free()
 		hit_flash()
 		if hp <= 0:
 			die()
+	if area.is_in_group("asteroid"):
+		die()  # или просто queue_free() если не хочешь взрыва

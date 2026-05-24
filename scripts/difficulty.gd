@@ -27,15 +27,19 @@ func select_difficulty(diff, selected_btn):
 	selected_btn.disabled = true
 
 func _on_easy_pressed():
-	select_difficulty(0.5, $Easy)
+	select_difficulty(0.8, $Easy)
+	Global.click_player.play()
 
 func _on_normal_pressed():
 	select_difficulty(1.0, $Normal)
+	Global.click_player.play()
 
 func _on_hard_pressed():
-	select_difficulty(1.5, $Hard)
+	select_difficulty(1.4, $Hard)
+	Global.click_player.play()
 
 func _on_ready_pressed():
+	Global.click_player.play()
 	if animating:
 		return
 	animating = true

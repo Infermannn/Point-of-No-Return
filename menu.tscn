@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://g1kfj7b1c5qd"]
 
 [ext_resource type="Script" uid="uid://dpwnxn7aw3sfn" path="res://scripts/menu.gd" id="1_lti8b"]
-[ext_resource type="Texture2D" uid="uid://dpthh2eyla65c" path="res://music-note-icon-29.png" id="2_ouk20"]
+[ext_resource type="Texture2D" uid="uid://5gx4ev0ricq2" path="res://Textures/buttons/PLAY-button.png" id="3_l48gv"]
+[ext_resource type="Texture2D" uid="uid://ia56wlndjnb2" path="res://Textures/buttons/PLAYbuttonHovered.png" id="4_ecwwl"]
+[ext_resource type="Texture2D" uid="uid://rli65u0y00oh" path="res://Textures/buttons/QUIT-buttonnormal.png" id="6_kk3ma"]
+[ext_resource type="Texture2D" uid="uid://isdg2gslg3ff" path="res://Textures/backgrounds/ÚVODNÍ-screen.png" id="7_h1wq0"]
+[ext_resource type="Script" uid="uid://cpojyai4je3nr" path="res://scripts/difficulty_button.gd" id="7_kk3ma"]
+[ext_resource type="Texture2D" uid="uid://c6xh23fyhgw47" path="res://Textures/buttons/QUIT-buttonhovered.png" id="7_nrnbx"]
+[ext_resource type="Texture2D" uid="uid://bd555w841qc4w" path="res://Textures/buttons/mute1.png" id="8_nrnbx"]
 
 [node name="MainMenu" type="Control" unique_id=1234224793]
 layout_mode = 3
@@ -12,56 +18,69 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lti8b")
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1671467747]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("7_h1wq0")
+
+[node name="PlayButton" type="TextureButton" parent="." unique_id=291454485]
+layout_mode = 0
+offset_top = 620.0
+offset_right = 3840.0
+offset_bottom = 1220.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_l48gv")
+texture_pressed = ExtResource("4_ecwwl")
+texture_hover = ExtResource("4_ecwwl")
+texture_disabled = ExtResource("3_l48gv")
+stretch_mode = 3
+script = ExtResource("7_kk3ma")
+
+[node name="QuitButton" type="TextureButton" parent="." unique_id=675741842]
+layout_mode = 0
+offset_top = 780.0
+offset_right = 3840.0
+offset_bottom = 1380.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_kk3ma")
+texture_pressed = ExtResource("7_nrnbx")
+texture_hover = ExtResource("7_nrnbx")
+texture_disabled = ExtResource("6_kk3ma")
+stretch_mode = 3
+script = ExtResource("7_kk3ma")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1006120234]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -34.0
-offset_top = -46.5
-offset_right = 34.0
-offset_bottom = 46.5
+anchors_preset = -1
+anchor_left = 0.066
+anchor_top = 0.106000006
+anchor_right = 0.066
+anchor_bottom = 0.106000006
+offset_left = 799.28
+offset_top = 379.02
+offset_right = 867.28
+offset_bottom = 472.02
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="GameLabel" type="Label" parent="VBoxContainer" unique_id=355288140]
-visible = false
-layout_mode = 2
-text = "Point of No Return"
-
-[node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=599924919]
-layout_mode = 2
-text = "Play"
-icon_alignment = 1
-
-[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=15097116]
-layout_mode = 2
-text = "quit"
 
 [node name="InfoLabel" type="Label" parent="." unique_id=1852904033]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Press M to Mute Music!
-Press P to Pause!"
+text = "8.3
+"
 
 [node name="MuteButton" type="TextureButton" parent="." unique_id=1276658991]
 layout_mode = 0
-offset_top = 756.0
-offset_right = 320.0
-offset_bottom = 1076.0
-texture_normal = ExtResource("2_ouk20")
+offset_left = 95.0
+offset_top = 836.0
+offset_right = 545.0
+offset_bottom = 1156.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("8_nrnbx")
+stretch_mode = 3
 
-[node name="Mute_UnmuteMusicButton" type="Label" parent="." unique_id=99771577]
-layout_mode = 0
-offset_left = 48.0
-offset_top = 720.0
-offset_right = 257.0
-offset_bottom = 743.0
-text = "Mute_UnmuteMusicButton"
-
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MuteButton" to="." method="_on_mute_button_pressed"]

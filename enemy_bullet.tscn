@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dx17drvwc5h10"]
 
-[ext_resource type="Texture2D" uid="uid://dwfkapcqeclvc" path="res://pistol_bullet_scaled_26x_pngcrushed.png" id="2_gl7bs"]
+[ext_resource type="Texture2D" uid="uid://dwfkapcqeclvc" path="res://Textures/bullets/pistol_bullet_scaled_26x_pngcrushed.png" id="2_gl7bs"]
 [ext_resource type="Script" uid="uid://du18ujeilpgyu" path="res://scripts/enemy_bullet.gd" id="2_mgp66"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gl7bs"]

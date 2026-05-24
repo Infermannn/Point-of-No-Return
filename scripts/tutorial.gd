@@ -25,7 +25,10 @@ func show_message():
 	pressed_keys = {}
 
 func _process(_delta):
+	print("tutorial process")
 	if finished:
+		return
+	if not visible:
 		return
 	if Input.is_key_pressed(KEY_X):
 		finish_tutorial()

@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://v82yne131dv1"]
 
 [ext_resource type="Script" uid="uid://cypu6mj0n3nqn" path="res://scripts/game_over.gd" id="1_y26ei"]
+[ext_resource type="Texture2D" uid="uid://c45m5tv627h8v" path="res://Textures/backgrounds/GAMEOVER-screen.png" id="1_yxx3c"]
+[ext_resource type="Texture2D" uid="uid://dd0265ixjhau3" path="res://Textures/buttons/TRY AGAIN-buttonscalednormal.png" id="2_ftari"]
+[ext_resource type="Texture2D" uid="uid://ch66t5xkrgdor" path="res://Textures/buttons/MENU-buttonFinal.png" id="3_28vn7"]
+[ext_resource type="Script" uid="uid://cpojyai4je3nr" path="res://scripts/difficulty_button.gd" id="4_28vn7"]
+[ext_resource type="Texture2D" uid="uid://cai1s6rpulegs" path="res://Textures/buttons/TRY AGAIN-buttonscaledhovered.png" id="4_fkf4o"]
+[ext_resource type="Texture2D" uid="uid://bdc5o5yckq5ug" path="res://Textures/buttons/MENU-buttonFinalHovered.png" id="4_k2vha"]
 
 [node name="GameOver" type="Control" unique_id=968040193]
 layout_mode = 3
@@ -9,6 +15,38 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_y26ei")
+
+[node name="GameOverBg" type="TextureRect" parent="." unique_id=1043672732]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_yxx3c")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="TryAgainButton" type="TextureButton" parent="." unique_id=329980871]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 542.0
+offset_right = 3839.0
+offset_bottom = 1142.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("2_ftari")
+texture_hover = ExtResource("4_fkf4o")
+stretch_mode = 3
+script = ExtResource("4_28vn7")
+
+[node name="MainMenuButton" type="TextureButton" parent="." unique_id=938424356]
+layout_mode = 0
+offset_top = 563.0
+offset_right = 3806.0
+offset_bottom = 1597.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_28vn7")
+texture_hover = ExtResource("4_k2vha")
+stretch_mode = 3
+script = ExtResource("4_28vn7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1968146321]
 layout_mode = 1
@@ -23,19 +61,27 @@ offset_right = 72.5
 offset_bottom = 46.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_y26ei")
 
 [node name="GameOver" type="Label" parent="VBoxContainer" unique_id=540544832]
+visible = false
 layout_mode = 2
 text = "GameOver"
 
-[node name="TryAgainButton" type="Button" parent="VBoxContainer" unique_id=1021513448]
+[node name="TryAgainButton1" type="Button" parent="VBoxContainer" unique_id=1021513448]
+visible = false
 layout_mode = 2
-text = "TryAgainButton"
 
-[node name="MainMenuButton" type="Button" parent="VBoxContainer" unique_id=905581430]
+[node name="MainMenuButton1" type="Button" parent="VBoxContainer" unique_id=905581430]
+visible = false
 layout_mode = 2
-text = "MainMenuButton"
 
-[connection signal="pressed" from="VBoxContainer/TryAgainButton" to="VBoxContainer" method="_on_try_again_pressed"]
-[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer" method="_on_main_menu_button_pressed"]
+[node name="BlackScreen" type="ColorRect" parent="." unique_id=752528805]
+z_index = 100
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="TryAgainButton" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]

@@ -22,8 +22,8 @@ var shoot_interval = 1.4
 
 var anim_timer = 0
 var anim_frame = 0
-var texture1 = preload("res://big_guyscaled.png")
-var texture2 = preload("res://big_guy2scaled.png")
+var texture1 = preload("res://Textures/enemies/big_guyscaled.png")
+var texture2 = preload("res://Textures/enemies/big_guy2scaled.png")
 
 func _ready():
 	connect("area_entered", _on_area_entered)

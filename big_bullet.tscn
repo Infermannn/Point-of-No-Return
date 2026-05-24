@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://delkyqf3sqbft"]
 
-[ext_resource type="Texture2D" uid="uid://0jubvmordjsu" path="res://All_Fire_Bullet_Pixel_16x16_00.png" id="1_klo4u"]
+[ext_resource type="Texture2D" uid="uid://0jubvmordjsu" path="res://Textures/bullets/All_Fire_Bullet_Pixel_16x16_00.png" id="1_klo4u"]
 [ext_resource type="Script" uid="uid://bh7ldvg3wwd6q" path="res://scripts/big_bullet.gd" id="1_pshhb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pshhb"]

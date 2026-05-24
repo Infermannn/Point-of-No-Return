@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://df7fhw1wjlw6k"]
 
 [ext_resource type="Script" uid="uid://cogo82flhnp73" path="res://scripts/big_guy.gd" id="1_go1tm"]
-[ext_resource type="Texture2D" uid="uid://cojl0apwaiytr" path="res://big_guyscaled.png" id="1_wqcaj"]
+[ext_resource type="Texture2D" uid="uid://cojl0apwaiytr" path="res://Textures/enemies/big_guyscaled.png" id="1_wqcaj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gj2yq"]
 size = Vector2(96, 100)

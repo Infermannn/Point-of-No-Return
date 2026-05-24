@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2fqn6f57os1n"]
 
 [ext_resource type="Script" uid="uid://d2ekfukowqwyq" path="res://scripts/enemy.gd" id="1_4gyqm"]
-[ext_resource type="Texture2D" uid="uid://dn5bpm7bki5re" path="res://Postava 3_scaled_10x_pngcrushed.png" id="2_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://dn5bpm7bki5re" path="res://Textures/enemies/Postava 3_scaled_10x_pngcrushed.png" id="2_4gyqm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gyqm"]
 size = Vector2(27.5, 28)

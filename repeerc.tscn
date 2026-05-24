@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dr5mspbao1xxs"]
 
 [ext_resource type="Script" uid="uid://lv3mykg7nn43" path="res://scripts/repeerc.gd" id="1_bant0"]
-[ext_resource type="Texture2D" uid="uid://bys7qdcknpjvt" path="res://Repeerc_scaled_10x_pngcrushed.png" id="2_mwy35"]
+[ext_resource type="Texture2D" uid="uid://bys7qdcknpjvt" path="res://Textures/enemies/Repeerc_scaled_10x_pngcrushed.png" id="2_mwy35"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7dar"]
 size = Vector2(48, 48)
