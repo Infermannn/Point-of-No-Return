@@ -3,7 +3,6 @@ extends Control
 func _on_try_again_pressed():
 	Global.play_click()
 	Global.set_music_volume(1.0)
-	# затемнение за 1 секунду
 	var black = ColorRect.new()
 	black.color = Color(0, 0, 0, 0)
 	black.size = Vector2(1920, 1080)
