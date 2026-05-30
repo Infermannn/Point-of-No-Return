@@ -7,6 +7,7 @@ func _ready():
 	$Ready.disabled = true
 	$Ready.modulate = Color(1, 1, 1, 0.4)
 	$BackgroundContainer.scroll_speed = 1500
+	$AnimatedSprite2D.play("default")
 
 func _process(_delta):
 	if Input.is_key_pressed(KEY_ESCAPE) and not animating:

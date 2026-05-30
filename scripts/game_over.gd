@@ -22,6 +22,7 @@ func _on_main_menu_button_pressed():
 	
 func _ready():
 	Global.stop_music()
+	Global.stop_boss_music()
 	var game_over_music = AudioStreamPlayer.new()
 	game_over_music.stream = preload("res://Music/Last_Ship_Save.mp3")
 	game_over_music.volume_db = -40

@@ -17,6 +17,11 @@ var texture1 = preload("res://Textures/enemies/Repeerc_scaled_10x_pngcrushed.png
 var texture2 = preload("res://Textures/enemies/Repeerc2(1).png")
 var explosion_scene = preload("res://explosion.tscn")
 
+var arc_target = Vector2.ZERO
+var arc_timer = 0.0
+var arc_duration = 1.5  # время движения вниз
+var arc_speed = 300.0
+
 func _ready():
 	connect("area_entered", _on_area_entered)
 	$Sprite2D.texture = texture1
@@ -64,6 +69,23 @@ func _process(delta):
 					3:  
 						$Sprite2D.texture = texture1
 						modulate = Color(1, 0.2, 0.2, 1)
+						
+		"arc_move":
+			arc_timer += delta
+			# сначала летим вниз
+			position.y += arc_speed * delta
+			# потом плавно поворачиваем к цели
+			if arc_timer > 0.5:
+				var dir = (arc_target - global_position).normalized()
+				position += dir * arc_speed * delta * (arc_timer - 0.5) * 2
+			
+			# когда близко к цели - начинаем мигать
+			var dist = global_position.distance_to(arc_target)
+			if dist < 75 or arc_timer > arc_duration:
+				state = "blinking"
+				blink_timer = 0
+				blink_count = 0
+				blink_phase = 0
 	
 	
 	if blink_timer >= 1.0 and state == "blinking":

@@ -289,6 +289,9 @@ func add_enemy():
 	total_enemies_in_wave += 1
 
 func start_wave(index):
+	if index >= waves.size():
+		start_boss_fight()
+		return
 	no_enemy_timer = 0
 	print("start_wave called with index: ", index)
 	Global.current_wave = index
@@ -314,6 +317,11 @@ func start_wave(index):
 		label.text = "Enemies left: " + str(total_enemies_in_wave) + "  Total kills: " + str(total_kills)
 
 func check_wave_complete():
+	if get_tree() == null or not is_instance_valid(self):
+		return
+	await get_tree().process_frame
+	if get_tree() == null or not is_instance_valid(self):
+		return
 	await get_tree().process_frame
 	var alive = get_tree().get_nodes_in_group("enemy").size()
 	print("check - alive: ", alive, " queue: ", spawn_queue.size(), " killed: ", enemies_killed, " total: ", total_enemies_in_wave)
@@ -340,6 +348,10 @@ func start_upgrade_sequence():
 	
 	background.speed_up()
 	
+	if player:
+		player.get_node("EngineFlame").visible = true
+		player.get_node("EngineFlame").play("default")
+	
 	await get_tree().create_timer(2.0).timeout
 
 	var upgrade_screen = get_node("UpgradeScreen")
@@ -359,9 +371,14 @@ func end_upgrade_sequence():
 	var background = get_node("BackgroundContainer")
 	background.slow_down()
 	
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		player.get_node("EngineFlame").visible = false
+	
 	await get_tree().create_timer(2.0).timeout
 	
-	var player = get_tree().get_first_node_in_group("player")
+	if current_wave >= waves.size():
+		return
 	player.controls_enabled = true
 	start_next_wave()
 	
@@ -417,7 +434,6 @@ func process_intro(delta):
 				intro_timer = 0
 		
 		"flying_away":
-			
 			var alpha = lerp(0.5, 0.0, min(intro_timer / 1.0, 1.0))
 			$Dimmer2.color = Color(0, 0, 0, alpha)
 			
@@ -433,6 +449,8 @@ func process_intro(delta):
 			
 			
 			var player = get_tree().get_first_node_in_group("player")
+			player.get_node("EngineFlame").visible = true
+			player.get_node("EngineFlame").play("default")
 			if player and original_player_pos != Vector2.ZERO:
 				player.position = original_player_pos  # возвращаем позицию
 				original_player_pos = Vector2.ZERO
@@ -552,6 +570,8 @@ func _on_quit_button_pressed():
 var mothership_scene = preload("res://mothership.tscn")
 
 func start_boss_fight():
+	Global.stop_music()
+	# убираем всех врагов и пули
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		enemy.queue_free()
 	for bullet in get_tree().get_nodes_in_group("enemy_bullet"):
@@ -565,14 +585,23 @@ func start_boss_fight():
 	var tween = create_tween()
 	tween.tween_property(player, "position", Vector2(screen.x / 2, screen.y / 2), 1.5)
 	
-	# сразу начинаем замедлять фон
 	$BackgroundContainer.stop()
 	
 	# спавним босса
 	var boss = mothership_scene.instantiate()
 	add_child(boss)
 	
-	# ждём пока фон остановится и босс займёт позицию
-	await get_tree().create_timer(3.0).timeout
+	# ждём пока фон полностью остановится
+	var bg = get_node("BackgroundContainer")
+	while bg.scroll_speed > 1.0:
+		if not is_instance_valid(self) or get_tree() == null:
+			return
+		await get_tree().process_frame
 	
-	player.controls_enabled = true
+	# ждём пока босс займёт позицию
+	while is_instance_valid(boss) and boss.entering:
+		if not is_instance_valid(self) or get_tree() == null:
+			return
+		await get_tree().process_frame
+	
+	# босс сам вернёт управление в start_boss_sequence

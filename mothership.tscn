@@ -1,64 +1,147 @@
 [gd_scene format=3 uid="uid://bu2khosdchkfc"]
 
 [ext_resource type="Script" uid="uid://5ndiyke0x3lf" path="res://scripts/mothership.gd" id="1_7nco5"]
-[ext_resource type="Texture2D" uid="uid://bin3smrqhuktl" path="res://Textures/Mothership/Mothership4.png" id="3_1bwbg"]
+[ext_resource type="Texture2D" uid="uid://dt6x86xqq43xt" path="res://Textures/Mothership/mothership_2_dim(2).png" id="2_7nco5"]
+[ext_resource type="Texture2D" uid="uid://b6hx1eue8v0a4" path="res://Textures/Mothership/mothership_3_medium(1).png" id="3_40e3c"]
+[ext_resource type="Texture2D" uid="uid://ckq02krihgvq3" path="res://Textures/Mothership/mothership_4_bright(1).png" id="4_1bwbg"]
+[ext_resource type="Texture2D" uid="uid://dew7ej6y23c7k" path="res://Textures/Mothership/LaserCannonIdle.png" id="5_1bwbg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7nco5"]
 animations = [{
 "frames": [{
-"duration": 3.0,
-"texture": ExtResource("3_1bwbg")
+"duration": 10.0,
+"texture": ExtResource("2_7nco5")
 }],
 "loop": true,
-"name": &"default",
+"name": &"phase1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1bwbg")
+}],
+"loop": true,
+"name": &"phase2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_40e3c")
+}],
+"loop": true,
+"name": &"phase3",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksiyl"]
-size = Vector2(468.75, 581)
+size = Vector2(188.46606, 129.49188)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nco5"]
-size = Vector2(399, 685)
+size = Vector2(67, 201)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dpq6t"]
-size = Vector2(317, 772)
+size = Vector2(51, 230)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40e3c"]
-size = Vector2(399, 686)
+size = Vector2(77.5, 188)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bwbg"]
-size = Vector2(417, 583)
+size = Vector2(197.78271, 129.90642)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwbpi"]
+size = Vector2(731.1866, 82.07489)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5wwm"]
+size = Vector2(676.61194, 81.61746)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5m45n"]
+size = Vector2(240.6217, 74.14041)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_giolj"]
+size = Vector2(251.90314, 87.60126)
 
 [node name="Mothership" type="Area2D" unique_id=882772750 groups=["enemy"]]
 collision_layer = 4
 script = ExtResource("1_7nco5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=822933032]
-position = Vector2(31.000002, -94.00002)
-scale = Vector2(2.75, 2.75)
+position = Vector2(-36, -134)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_7nco5")
-frame_progress = 0.39225674
+animation = &"phase1"
 
 [node name="CannonLeft" type="Node2D" parent="." unique_id=58695726]
+position = Vector2(-533, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CannonLeft" unique_id=1827185143]
+rotation = -1.5707964
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_1bwbg")
+
+[node name="MuzzlePoint" type="Marker2D" parent="CannonLeft" unique_id=1526147672]
+position = Vector2(86, 0)
 
 [node name="CannonRight" type="Node2D" parent="." unique_id=677594482]
+position = Vector2(495, 0)
+rotation = 3.1415927
+
+[node name="Sprite2D" type="Sprite2D" parent="CannonRight" unique_id=612640961]
+position = Vector2(-2.3841858e-07, 0)
+rotation = 4.712389
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_1bwbg")
+
+[node name="MuzzlePoint" type="Marker2D" parent="CannonRight" unique_id=298661119]
+position = Vector2(87, -7.748604e-06)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1520745809]
-position = Vector2(782, -208)
+position = Vector2(25.745806, 185.68343)
+rotation = -1.0471976
+scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_ksiyl")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=317707936]
-position = Vector2(352, -172)
+position = Vector2(152.5, 145.5)
 shape = SubResource("RectangleShape2D_7nco5")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=548332785]
-position = Vector2(-9, -147)
+position = Vector2(-1.5, 194)
 shape = SubResource("RectangleShape2D_dpq6t")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=1469401311]
-position = Vector2(-372, -168)
+position = Vector2(-152.25, 151)
 shape = SubResource("RectangleShape2D_40e3c")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="." unique_id=1597691518]
-position = Vector2(-776, -210)
+position = Vector2(-29.797115, 185.47319)
+rotation = 1.0471976
 shape = SubResource("RectangleShape2D_1bwbg")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="." unique_id=1795958141]
+position = Vector2(-545.45526, 66.37958)
+rotation = 0.15607227
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_bwbpi")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="." unique_id=2084320551]
+position = Vector2(512.8738, 71.36446)
+rotation = -0.16933188
+shape = SubResource("RectangleShape2D_u5wwm")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="." unique_id=1019764915]
+position = Vector2(-1007.82654, -29.701096)
+rotation = 0.3674562
+shape = SubResource("RectangleShape2D_5m45n")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="." unique_id=18530779]
+position = Vector2(957.0197, -30.653915)
+rotation = -0.35160866
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_giolj")
+
+[node name="ShootPointLeft" type="Marker2D" parent="." unique_id=1589027941]
+position = Vector2(-154, 211)
+rotation = 1.566654
+
+[node name="ShootPointRight" type="Marker2D" parent="." unique_id=917620598]
+position = Vector2(152, 214)

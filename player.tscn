@@ -2,9 +2,53 @@
 
 [ext_resource type="Script" uid="uid://cyy5shxmk4qst" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://cdd3jahgnhfqh" path="res://Textures/player/playershipstillscaled.png" id="2_onrkg"]
+[ext_resource type="Texture2D" uid="uid://cked5i5jeajd4" path="res://Textures/player/Fire3(1).png" id="3_i3pqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(44, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpgvn"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(40, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6r5b"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(381, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsx0t"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(720, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cj6kn"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(1061, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md34i"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(1405, 250, 316, 500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqtel"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_kpgvn")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_t6r5b")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_wsx0t")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_cj6kn")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_md34i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="Area2D" unique_id=1102285899 groups=["player"]]
 collision_mask = 6
@@ -18,3 +62,10 @@ texture = ExtResource("2_onrkg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=438039192]
 position = Vector2(4, 1)
 shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="EngineFlame" type="AnimatedSprite2D" parent="." unique_id=1402333888]
+visible = false
+position = Vector2(6.0000153, 61)
+rotation = -3.1415927
+scale = Vector2(0.23026869, 0.25110355)
+sprite_frames = SubResource("SpriteFrames_hqtel")

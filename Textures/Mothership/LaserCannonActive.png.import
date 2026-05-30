@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd77xlh5ss7xp"
-path="res://.godot/imported/Mothership2.png-70300559a8ea6d63976fd0a113388c6c.ctex"
+uid="uid://bmn7mtk0gbkx5"
+path="res://.godot/imported/LaserCannonActive.png-a7bf270fb91c3d67d27994123a5b152a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Mothership/Mothership2.png"
-dest_files=["res://.godot/imported/Mothership2.png-70300559a8ea6d63976fd0a113388c6c.ctex"]
+source_file="res://Textures/Mothership/LaserCannonActive.png"
+dest_files=["res://.godot/imported/LaserCannonActive.png-a7bf270fb91c3d67d27994123a5b152a.ctex"]
 
 [params]
 

@@ -34,6 +34,10 @@ var menu_track = preload("res://Music/Starship_Idle.mp3")
 
 var click_player: AudioStreamPlayer
 
+var boss_music_player: AudioStreamPlayer
+var boss_tracks = []
+var boss_current_track = 0
+
 func _ready():
 	click_player = AudioStreamPlayer.new()
 	click_player.stream = preload("res://Sounds/button-click.mp3")
@@ -55,6 +59,15 @@ func _ready():
 	menu_music_player.volume_db = -40
 	add_child(menu_music_player)
 	menu_music_player.stream = menu_track
+	
+	boss_music_player = AudioStreamPlayer.new()
+	boss_music_player.volume_db = -40
+	add_child(boss_music_player)
+	boss_music_player.finished.connect(_on_boss_track_finished)
+	boss_tracks = [
+		preload("res://Music/Nebula_Overlord1.mp3"),
+		preload("res://Music/Nebula_Overlord2.mp3")
+	]
 	
 func start_music():
 	if music_player.playing:
@@ -139,3 +152,16 @@ func fade_out_menu_music(duration = 1.0):
 			
 func play_click():
 	click_player.play()
+	
+func start_boss_music():
+	boss_current_track = 0
+	boss_music_player.stream = boss_tracks[boss_current_track]
+	boss_music_player.play()
+
+func stop_boss_music():
+	boss_music_player.stop()
+
+func _on_boss_track_finished():
+	boss_current_track = (boss_current_track + 1) % boss_tracks.size()
+	boss_music_player.stream = boss_tracks[boss_current_track]
+	boss_music_player.play()

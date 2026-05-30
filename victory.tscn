@@ -34,6 +34,7 @@ layout_mode = 2
 text = "MainMenuButton"
 
 [node name="EndlessModeButton" type="Button" parent="VBoxContainer" unique_id=238689611]
+visible = false
 layout_mode = 2
 text = "EndlessMode"
 

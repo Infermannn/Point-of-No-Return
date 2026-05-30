@@ -25,7 +25,7 @@ func show_message():
 	pressed_keys = {}
 
 func _process(_delta):
-	print("tutorial process")
+	#print("tutorial process")
 	if finished:
 		return
 	if not visible:
@@ -71,3 +71,4 @@ func finish_tutorial():
 		player.controls_enabled = true
 	get_tree().get_first_node_in_group("world").get_node("BackgroundContainer").slow_down()
 	get_tree().get_first_node_in_group("world").start_game()
+	player.get_node("EngineFlame").visible = false

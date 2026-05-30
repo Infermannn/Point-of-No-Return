@@ -14,12 +14,56 @@
 [ext_resource type="Texture2D" uid="uid://7fcgeabe27x3" path="res://Textures/backgrounds/govno(1).png" id="11_ww6rm"]
 [ext_resource type="Texture2D" uid="uid://djcwrysf57wuo" path="res://Textures/player/playershipstill.png" id="12_j1a2u"]
 [ext_resource type="Texture2D" uid="uid://0jubvmordjsu" path="res://Textures/bullets/All_Fire_Bullet_Pixel_16x16_00.png" id="13_qpp4t"]
+[ext_resource type="Texture2D" uid="uid://cked5i5jeajd4" path="res://Textures/player/Fire3(1).png" id="15_qpp4t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2dybb"]
 atlas = ExtResource("13_qpp4t")
 region = Rect2(371.45932, 328.573, 27.366302, 14.442688)
 
 [sub_resource type="BitMap" id="BitMap_0yu28"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpgvn"]
+atlas = ExtResource("15_qpp4t")
+region = Rect2(40, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6r5b"]
+atlas = ExtResource("15_qpp4t")
+region = Rect2(381, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsx0t"]
+atlas = ExtResource("15_qpp4t")
+region = Rect2(720, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cj6kn"]
+atlas = ExtResource("15_qpp4t")
+region = Rect2(1061, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md34i"]
+atlas = ExtResource("15_qpp4t")
+region = Rect2(1405, 250, 316, 500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j1a2u"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_kpgvn")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_t6r5b")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_wsx0t")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_cj6kn")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_md34i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Difficulty" type="Control" unique_id=793965049]
 layout_mode = 3
@@ -113,6 +157,13 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=28999668]
+position = Vector2(963.7027, 554.7294)
+rotation = -3.1415927
+scale = Vector2(0.23026869, 0.25110355)
+sprite_frames = SubResource("SpriteFrames_j1a2u")
+frame_progress = 0.78143185
 
 [connection signal="pressed" from="Easy" to="." method="_on_easy_pressed"]
 [connection signal="pressed" from="Normal" to="." method="_on_normal_pressed"]

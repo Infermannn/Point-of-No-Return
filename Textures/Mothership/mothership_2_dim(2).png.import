@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0r6j8re4pamq"
-path="res://.godot/imported/Mothership1.png-a27b2f403f1b94a426c0de27118f168f.ctex"
+uid="uid://dt6x86xqq43xt"
+path="res://.godot/imported/mothership_2_dim(2).png-e3cd47ab0ce62720dd0ab9f44f20ccf2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Mothership/Mothership1.png"
-dest_files=["res://.godot/imported/Mothership1.png-a27b2f403f1b94a426c0de27118f168f.ctex"]
+source_file="res://Textures/Mothership/mothership_2_dim(2).png"
+dest_files=["res://.godot/imported/mothership_2_dim(2).png-e3cd47ab0ce62720dd0ab9f44f20ccf2.ctex"]
 
 [params]
 

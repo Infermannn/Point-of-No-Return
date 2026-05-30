@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0b5yhxiqiliv"
-path="res://.godot/imported/Mothership5.png-a5d457db3c6879e01b5df4d90750c897.ctex"
+uid="uid://cjq0c4v1lv02x"
+path="res://.godot/imported/Fire3.png-3060942d656709e1828642612b60e86e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Mothership/Mothership5.png"
-dest_files=["res://.godot/imported/Mothership5.png-a5d457db3c6879e01b5df4d90750c897.ctex"]
+source_file="res://Textures/player/Fire3.png"
+dest_files=["res://.godot/imported/Fire3.png-3060942d656709e1828642612b60e86e.ctex"]
 
 [params]
 

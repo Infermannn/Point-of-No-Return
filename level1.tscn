@@ -743,6 +743,7 @@ icon = SubResource("AtlasTexture_n8vhr")
 icon_alignment = 1
 
 [node name="HPLabel" type="Label" parent="." unique_id=1091996565 groups=["hp_label"]]
+top_level = true
 offset_left = 8.0
 offset_top = 288.0
 offset_right = 100.0
@@ -750,6 +751,7 @@ offset_bottom = 311.0
 text = "HP: 400/400"
 
 [node name="ShipSpeedLabel" type="Label" parent="." unique_id=993362755 groups=["speed_label"]]
+top_level = true
 offset_left = 8.0
 offset_top = 312.0
 offset_right = 92.0
@@ -757,6 +759,7 @@ offset_bottom = 335.0
 text = "Speed: 300"
 
 [node name="AttackSpeedLabel" type="Label" parent="." unique_id=1232139004 groups=["attack_speed_label"]]
+top_level = true
 offset_left = 8.0
 offset_top = 336.0
 offset_right = 141.0
@@ -764,6 +767,7 @@ offset_bottom = 359.0
 text = "Attack Speed: 0.3"
 
 [node name="AttackDamageLabel" type="Label" parent="." unique_id=1176527465 groups=["attack_damage_label"]]
+top_level = true
 offset_left = 8.0
 offset_top = 360.0
 offset_right = 108.0
@@ -771,6 +775,7 @@ offset_bottom = 383.0
 text = "Damage: 100"
 
 [node name="ArmorLabel" type="Label" parent="." unique_id=1516415584 groups=["armor_label"]]
+top_level = true
 offset_left = 8.0
 offset_top = 384.0
 offset_right = 125.0
@@ -778,6 +783,7 @@ offset_bottom = 407.0
 text = "Armour: 0"
 
 [node name="BulletSpeedLabel" type="Label" parent="." unique_id=1159783581 groups=["bullet_speed_label"]]
+top_level = true
 offset_left = 8.0
 offset_top = 408.0
 offset_right = 141.0
@@ -785,6 +791,7 @@ offset_bottom = 431.0
 text = "Bullet Speed: 750"
 
 [node name="GodmodeLabel" type="Label" parent="." unique_id=1781407105 groups=["godmode_label"]]
+top_level = true
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 1920.0
@@ -814,6 +821,7 @@ volume_db = -69.881
 autoplay = true
 
 [node name="DifficultyLabel" type="Label" parent="." unique_id=1948705225 groups=["difficulty_label"]]
+top_level = true
 offset_left = 8.0
 offset_top = 432.0
 offset_right = 78.0
@@ -858,6 +866,58 @@ texture_hover = ExtResource("15_rjtee")
 texture_disabled = ExtResource("14_3l65w")
 stretch_mode = 3
 script = ExtResource("16_rjtee")
+
+[node name="BossHPBar" type="Control" parent="." unique_id=2131740511 groups=["boss_hp_bar"]]
+visible = false
+top_level = true
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_left = 704.0
+offset_top = 64.0
+offset_right = 1216.0
+offset_bottom = 128.0
+
+[node name="Background" type="ColorRect" parent="BossHPBar" unique_id=129792351]
+layout_mode = 0
+offset_left = -128.0
+offset_right = 640.0
+offset_bottom = 64.0
+color = Color(0.11119685, 0.11119684, 0.11119684, 1)
+
+[node name="Fill" type="ColorRect" parent="BossHPBar" unique_id=887029877]
+layout_mode = 0
+offset_left = -120.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 56.0
+color = Color(0.80126345, 4.235506e-06, 2.8878452e-07, 1)
+
+[node name="Phase1Line" type="ColorRect" parent="BossHPBar" unique_id=1736468581]
+visible = false
+layout_mode = 0
+offset_left = 112.0
+offset_top = 8.0
+offset_right = 115.0
+offset_bottom = 56.0
+
+[node name="Phase2Line" type="ColorRect" parent="BossHPBar" unique_id=1997560697]
+visible = false
+layout_mode = 0
+offset_left = 360.0
+offset_top = 8.0
+offset_right = 363.0
+offset_bottom = 56.0
+
+[node name="Label" type="Label" parent="BossHPBar" unique_id=543186632]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 192.0
+offset_top = -24.0
+offset_right = 320.0
+offset_bottom = -1.0
+text = "The Overseer"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1/-" to="UpgradeScreen" method="_on_StatCard1_minus_pressed"]
 [connection signal="pressed" from="UpgradeScreen/VBoxContainer/HBoxContainer6stat/StatCard1/+" to="UpgradeScreen" method="_on_StatCard1_plus_pressed"]

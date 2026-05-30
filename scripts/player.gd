@@ -209,6 +209,7 @@ func take_damage(amount):
 	var actual_damage = max(amount - armor, 1)
 	hp -= actual_damage
 	if hp <= 0:
+		Global.stop_boss_music()
 		death_animation()
 		return
 	var label = get_tree().get_first_node_in_group("lives_label")
