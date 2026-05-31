@@ -14,8 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://dlri1vsooxkm7" path="res://Textures/buttons/-BUTTON.png" id="10_eqrsh"]
 [ext_resource type="Texture2D" uid="uid://cs6khgkpumibn" path="res://Textures/buttons/+BUTTON.png" id="11_3l65w"]
 [ext_resource type="Script" uid="uid://de4k4w3qxh644" path="res://scripts/plusminusbuttons.gd" id="11_rjtee"]
-[ext_resource type="Texture2D" uid="uid://cg1nr1hkg4dsn" path="res://Textures/buttons/RerollButtonHover.png" id="11_ycv2e"]
-[ext_resource type="Script" uid="uid://cpojyai4je3nr" path="res://scripts/difficulty_button.gd" id="12_c5gc3"]
 [ext_resource type="Texture2D" uid="uid://ba7xmtny547jg" path="res://Textures/buttons/READY-button.png" id="12_hx44q"]
 [ext_resource type="Texture2D" uid="uid://ch66t5xkrgdor" path="res://Textures/buttons/MENU-buttonFinal.png" id="14_3l65w"]
 [ext_resource type="Texture2D" uid="uid://bdc5o5yckq5ug" path="res://Textures/buttons/MENU-buttonFinalHovered.png" id="15_rjtee"]
@@ -118,6 +116,7 @@ text = "HP: 400/400"
 
 [node name="KillsLabel" type="Label" parent="VBoxContainer" unique_id=661665204 groups=["kills_label"]]
 layout_mode = 2
+text = "Hi"
 
 [node name="TutorialUI" type="Control" parent="." unique_id=1357229702 groups=["tutorial"]]
 layout_mode = 3
@@ -314,10 +313,9 @@ offset_right = 2676.0
 offset_bottom = 1631.9998
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("10_beq0j")
-texture_pressed = ExtResource("11_ycv2e")
-texture_hover = ExtResource("11_ycv2e")
+texture_pressed = ExtResource("10_beq0j")
+texture_hover = ExtResource("10_beq0j")
 stretch_mode = 3
-script = ExtResource("12_c5gc3")
 
 [node name="PerkName" type="Label" parent="UpgradeScreen/VBoxContainer/HBoxContainer3big/Control" unique_id=934121444 groups=["perk_name_label"]]
 layout_mode = 0
@@ -325,7 +323,6 @@ offset_left = 860.0
 offset_top = 408.0
 offset_right = 1036.0
 offset_bottom = 456.0
-theme_override_colors/font_color = Color(0, 0, 1, 1)
 text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -336,7 +333,6 @@ offset_left = 860.0
 offset_top = 480.0
 offset_right = 1036.0
 offset_bottom = 728.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Description"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -347,7 +343,6 @@ offset_left = 916.0
 offset_top = 856.0
 offset_right = 980.0
 offset_bottom = 879.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Free"
 horizontal_alignment = 1
 
@@ -689,7 +684,6 @@ icon = SubResource("AtlasTexture_n8vhr")
 icon_alignment = 1
 
 [node name="HPLabel" type="Label" parent="." unique_id=1091996565 groups=["hp_label"]]
-visible = false
 top_level = true
 offset_left = 8.0
 offset_top = 288.0
@@ -698,7 +692,6 @@ offset_bottom = 311.0
 text = "HP: 400/400"
 
 [node name="ShipSpeedLabel" type="Label" parent="." unique_id=993362755 groups=["speed_label"]]
-visible = false
 top_level = true
 offset_left = 8.0
 offset_top = 312.0
@@ -707,7 +700,6 @@ offset_bottom = 335.0
 text = "Speed: 300"
 
 [node name="AttackSpeedLabel" type="Label" parent="." unique_id=1232139004 groups=["attack_speed_label"]]
-visible = false
 top_level = true
 offset_left = 8.0
 offset_top = 336.0
@@ -716,7 +708,6 @@ offset_bottom = 359.0
 text = "Attack Speed: 0.3"
 
 [node name="AttackDamageLabel" type="Label" parent="." unique_id=1176527465 groups=["attack_damage_label"]]
-visible = false
 top_level = true
 offset_left = 8.0
 offset_top = 360.0
@@ -725,7 +716,6 @@ offset_bottom = 383.0
 text = "Damage: 100"
 
 [node name="ArmorLabel" type="Label" parent="." unique_id=1516415584 groups=["armor_label"]]
-visible = false
 top_level = true
 offset_left = 8.0
 offset_top = 384.0
@@ -734,7 +724,6 @@ offset_bottom = 407.0
 text = "Armour: 0"
 
 [node name="BulletSpeedLabel" type="Label" parent="." unique_id=1159783581 groups=["bullet_speed_label"]]
-visible = false
 top_level = true
 offset_left = 8.0
 offset_top = 408.0
@@ -774,10 +763,11 @@ autoplay = true
 
 [node name="DifficultyLabel" type="Label" parent="." unique_id=1948705225 groups=["difficulty_label"]]
 top_level = true
-offset_left = 64.0
-offset_top = 1000.0
-offset_right = 134.0
-offset_bottom = 1023.0
+offset_left = 8.0
+offset_top = 432.0
+offset_right = 78.0
+offset_bottom = 455.0
+text = "Difficulty"
 
 [node name="RedFlash" type="ColorRect" parent="." unique_id=2063582150]
 offset_right = 1928.0
@@ -1035,7 +1025,6 @@ icon_alignment = 1
 script = ExtResource("11_rjtee")
 
 [node name="HPBarPlayer" type="Control" parent="." unique_id=103950218 groups=["player_hp_bar"]]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -1049,7 +1038,7 @@ offset_right = 1280.0
 offset_bottom = 1024.0
 color = Color(0.20152658, 0.20152658, 0.20152658, 1)
 
-[node name="Fill" type="ColorRect" parent="HPBarPlayer" unique_id=1184772148 groups=["player_hp_fill"]]
+[node name="Fill" type="ColorRect" parent="HPBarPlayer" unique_id=1184772148]
 layout_mode = 0
 offset_left = 648.0
 offset_top = 968.0

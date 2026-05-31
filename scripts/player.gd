@@ -3,7 +3,7 @@ extends Area2D
 var speed = 350
 var hp = 400
 var max_hp = 400
-var attack_speed = 0.75
+var attack_speed = 1.0
 var shoot_timer = 0.0
 var attack_damage = 100
 var bullet_speed = 750
@@ -21,7 +21,27 @@ var controls_enabled = true
 var blocker: ColorRect = null
 #var blocker = get_tree().get_first_node_in_group("input_blocker")
 
+var focus_timer = 0.0
+var focus_active = false
+var last_position = Vector2.ZERO
+
+var shield_cooldown = 0.0
+var shield_active = false
+var shield_node: Area2D = null
+
+var bar_max_width = 0.0
+
 func _ready():
+	var fill = get_tree().get_first_node_in_group("player_hp_fill")
+	if fill:
+		bar_max_width = fill.size.x
+	if Global.bullet_shield:
+		create_bullet_shield()
+	if Global.active_perks.has("Shrinker"):
+		scale = Vector2(0.75, 0.75)
+		$CollisionShape2D.scale = Vector2(0.75, 0.75)
+	else:
+		scale = Vector2(1, 1)
 	hp = Global.player_hp
 	max_hp = Global.player_max_hp
 	speed = Global.player_speed
@@ -64,15 +84,31 @@ func update_hud():
 		armor_label.text = "Armor: " + str(armor)
 	if bs_label:
 		bs_label.text = "Evasion: " + str(evasion) + "%"
+	update_hp_bar()
 
 func _on_area_entered(area):
 	if area.is_in_group("enemy_bullet"):
 		take_damage(area.damage)
 		area.queue_free()
 	if area.is_in_group("enemy"):
-		take_damage(100)
+		if not ("contact_damage" in area) or area.contact_damage:
+			take_damage(100)
 
 func _process(delta):
+	if Global.bullet_shield:
+		if not shield_active:
+			shield_cooldown -= delta
+			if shield_cooldown <= 0:
+				create_bullet_shield()
+	if Global.focus:
+		if position == last_position:
+			focus_timer += delta
+			if focus_timer >= 2.0:
+				focus_active = true
+		else:
+			focus_timer = 0.0
+			focus_active = false
+		last_position = position
 	if Input.is_action_just_pressed("escape"):
 		var quit_btn = get_tree().get_first_node_in_group("quit_button")
 		var pause_label = get_tree().get_first_node_in_group("pause_label")
@@ -139,10 +175,35 @@ func _process(delta):
 	if Input.is_action_pressed("shoot") and shoot_timer <= 0:
 		shoot_timer = attack_speed
 		var bullet = bullet_scene.instantiate()
+		bullet.scale = Vector2(Global.bullet_scale, Global.bullet_scale)
 		bullet.position = position
 		bullet.damage = attack_damage
 		bullet.speed = bullet_speed
+		if focus_active:
+			bullet.damage = attack_damage * 1.25
+		else:
+			bullet.damage = attack_damage
 		get_parent().add_child(bullet)
+		
+		if Global.secondary_turrets:
+			for angle in [-30, 30]:
+				var side_bullet = bullet_scene.instantiate()
+				side_bullet.position = position
+				side_bullet.damage = attack_damage * 0.25
+				side_bullet.speed = bullet_speed
+				var dir = Vector2(0, -1).rotated(deg_to_rad(angle))
+				side_bullet.direction = dir
+				get_parent().add_child(side_bullet)
+			
+		if Global.hydra and randf() < 0.25:
+			await get_tree().create_timer(0.05).timeout
+			if not is_instance_valid(self):
+				return
+			var hydra_bullet = bullet_scene.instantiate()
+			hydra_bullet.position = position
+			hydra_bullet.damage = attack_damage * 0.5
+			hydra_bullet.speed = bullet_speed
+			get_parent().add_child(hydra_bullet)
 		
 	if Input.is_action_just_pressed("escape"):
 		var blocker = get_tree().get_first_node_in_group("input_blocker")
@@ -205,8 +266,35 @@ func take_damage(amount):
 	if evasion > 0 and randi() % 100 < evasion:
 		show_evade_indicator()
 		return
+	if Global.active_camo and randf() < 0.15:
+		show_evade_indicator()
+		return
 	invincible = true
-	var actual_damage = max(amount - armor, 1)
+	var actual_damage = amount
+	if Global.glass_cannon:
+		actual_damage *= 2
+	if Global.bait_them:
+		actual_damage *= 2
+	actual_damage = max(actual_damage - Global.damage_reduction, 1)
+	if Global.last_stand and not Global.last_stand_used and float(hp) / max_hp <= 0.1:
+		Global.last_stand_used = true
+		# уничтожаем все пули
+		for bullet in get_tree().get_nodes_in_group("enemy_bullet"):
+			bullet.queue_free()
+		# взрываем риперков
+		for enemy in get_tree().get_nodes_in_group("enemy"):
+			if enemy.get_script().resource_path.contains("repeerc"):
+				enemy.die()
+		# неуязвимость и скорость
+		invincible = true
+		var old_speed = speed
+		speed = 750
+		await get_tree().create_timer(2.0).timeout
+		if not is_instance_valid(self):
+			return
+		invincible = false
+		speed = old_speed
+		return  # не получаем урон
 	hp -= actual_damage
 	if hp <= 0:
 		Global.stop_boss_music()
@@ -215,8 +303,15 @@ func take_damage(amount):
 	var label = get_tree().get_first_node_in_group("lives_label")
 	if label != null:
 		label.text = "HP: " + str(hp) + "/" + str(max_hp)
+		
+	var blink_tween = create_tween()
+	blink_tween.set_loops(5)
+	blink_tween.tween_property(self, "modulate:a", 0.0, 0.1)
+	blink_tween.tween_property(self, "modulate:a", 1.0, 0.1)
+		
 	await get_tree().create_timer(1.0).timeout
 	invincible = false
+	update_hp_bar()
 	
 func max_stats():
 	var upgrade_screen = get_tree().get_first_node_in_group("upgrade_screen")
@@ -311,4 +406,50 @@ func spawn_pieces(spawn_pos):
 		tween.parallel().tween_property(piece, "modulate:a", 0.0, 0.8)
 		tween.parallel().tween_property(piece, "rotation", piece.rotation + randf_range(4.0, 7.0), 1.0)
 		tween.tween_callback(piece.queue_free)
+		
+func create_bullet_shield():
+	shield_node = Area2D.new()
+	shield_node.collision_layer = 4  # layer 3
+	shield_node.collision_mask = 2
+	var shape = CollisionShape2D.new()
+	var circle = CircleShape2D.new()
+	circle.radius = 80
+	shape.shape = circle
+	shield_node.add_child(shape)
 	
+	# визуальный круг
+	var line = Line2D.new()
+	var points = 32
+	for i in points + 1:
+		var angle = i * TAU / points
+		line.add_point(Vector2(cos(angle), sin(angle)) * 80)
+	line.width = 3
+	line.default_color = Color(0.3, 0.7, 1, 0.6)
+	shield_node.add_child(line)
+	
+	shield_node.connect("area_entered", _on_shield_hit)
+	add_child(shield_node)
+	shield_active = true
+
+func _on_shield_hit(area):
+	if not shield_active:
+		return
+	if area.is_in_group("enemy_bullet"):
+		area.queue_free()
+	# начинаем кулдаун
+	shield_active = false
+	shield_cooldown = 15.0
+	if shield_node:
+		shield_node.queue_free()
+		shield_node = null
+	
+func update_hp_bar():
+	var fill = get_tree().get_first_node_in_group("player_hp_fill")
+	#print("fill: ", fill, " size: ", fill.size.x if fill else "null")
+	#print("bar_max_width: ", bar_max_width)
+	#print("hp percent: ", float(hp) / max_hp)
+	var label = get_tree().get_first_node_in_group("player_hp_text")
+	if fill:
+		fill.size.x = bar_max_width * (float(hp) / max_hp)
+	if label:
+		label.text = str(hp) + "/" + str(max_hp)

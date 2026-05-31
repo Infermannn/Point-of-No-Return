@@ -16,6 +16,8 @@ var bomb_scene = preload("res://bomb.tscn")
 var bomb_timer = 0
 var bomb_interval = 1.5
 
+var explosion_scene = preload("res://explosion.tscn")
+
 func _ready():
 	connect("area_entered", _on_area_entered)
 	stop_y = randf_range(50, get_viewport_rect().size.y * 0.3)
@@ -55,6 +57,12 @@ func drop_bomb():
 	get_tree().get_first_node_in_group("world").add_child(bomb)
 
 func die():
+	if Global.explosive_rounds:
+		var explosion = explosion_scene.instantiate()
+		explosion.damage = 100
+		explosion.damage_multiplier = 1.0
+		get_parent().add_child(explosion)
+		explosion.global_position = global_position
 	queue_free()
 	get_tree().get_first_node_in_group("world").enemy_killed()
 

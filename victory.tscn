@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://qojurj2ppx17"]
 
 [ext_resource type="Script" uid="uid://c8tyicqqnpisl" path="res://scripts/victory.gd" id="1_7bnjr"]
+[ext_resource type="Texture2D" uid="uid://7fcgeabe27x3" path="res://Textures/backgrounds/govno(1).png" id="2_v31sk"]
+[ext_resource type="Texture2D" uid="uid://dt6x86xqq43xt" path="res://Textures/Mothership/mothership_2_dim(2).png" id="3_v3ap6"]
+[ext_resource type="Texture2D" uid="uid://djcwrysf57wuo" path="res://Textures/player/playershipstill.png" id="4_e8xaq"]
 
 [node name="Victory" type="Control" unique_id=1018967611]
 layout_mode = 3
@@ -9,8 +12,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7bnjr")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2076653432]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -23,7 +28,6 @@ offset_right = 72.5
 offset_bottom = 46.5
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7bnjr")
 
 [node name="Victory" type="Label" parent="VBoxContainer" unique_id=728986553]
 layout_mode = 2
@@ -37,6 +41,28 @@ text = "MainMenuButton"
 visible = false
 layout_mode = 2
 text = "EndlessMode"
+
+[node name="BlackScreen" type="ColorRect" parent="." unique_id=201267459]
+z_index = 100
+layout_mode = 0
+offset_right = 1921.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1630573619]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_v31sk")
+
+[node name="BossSprite" type="Sprite2D" parent="." unique_id=343754096]
+position = Vector2(925, -2)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_v3ap6")
+
+[node name="PlayerShip" type="Sprite2D" parent="." unique_id=955190661]
+position = Vector2(963, 528)
+texture = ExtResource("4_e8xaq")
 
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="VBoxContainer/EndlessModeButton" to="VBoxContainer" method="_on_endless_pressed"]

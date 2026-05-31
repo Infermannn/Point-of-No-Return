@@ -36,7 +36,7 @@ func _on_normal_pressed():
 	Global.click_player.play()
 
 func _on_hard_pressed():
-	select_difficulty(1.4, $Hard)
+	select_difficulty(1.35, $Hard)
 	Global.click_player.play()
 
 func _on_ready_pressed():

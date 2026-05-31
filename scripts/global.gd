@@ -38,6 +38,8 @@ var boss_music_player: AudioStreamPlayer
 var boss_tracks = []
 var boss_current_track = 0
 
+var last_reroll_perk = ""
+
 func _ready():
 	click_player = AudioStreamPlayer.new()
 	click_player.stream = preload("res://Sounds/button-click.mp3")
@@ -95,6 +97,7 @@ func toggle_mute():
 	muted = not muted
 	music_player.stream_paused = muted
 	menu_music_player.stream_paused = muted
+	boss_music_player.stream_paused = muted
 
 func save():
 	var save_data = {
@@ -165,3 +168,38 @@ func _on_boss_track_finished():
 	boss_current_track = (boss_current_track + 1) % boss_tracks.size()
 	boss_music_player.stream = boss_tracks[boss_current_track]
 	boss_music_player.play()
+	
+var active_perks = []  # взятые перки
+var available_perks = ["Shrinker", "BiggerGuns", "GlassCannon", "SecondaryTurrets", "ActiveCamo", "BetterMaterials", "BulletShield", "BaitThem", "RepairDrones", "ExplosiveRounds", "HydraMK1", "LastStand", "Focus"]
+
+func get_random_perk(exclude_last = true):
+	var remaining = available_perks.filter(func(p): 
+		return not p in active_perks and (not exclude_last or p != last_reroll_perk)
+	)
+	if remaining.is_empty():
+		return ""
+	var chosen = remaining[randi() % remaining.size()]
+	last_reroll_perk = chosen
+	return chosen
+
+func apply_perk(perk_name):
+	if perk_name in active_perks:
+		return
+	active_perks.append(perk_name)
+	
+var glass_cannon = false
+var bait_them = false
+var damage_reduction = 0
+var active_camo = false
+var secondary_turrets = false
+var pierce = false
+var ricochet = false
+var explosive_rounds = false
+var hydra = false
+var repair_drones = false
+var last_stand = false
+var last_stand_used = false
+var focus = false
+var bullet_shield = false
+var bullet_scale = 1.0
+var extra_upgrade_points = 0

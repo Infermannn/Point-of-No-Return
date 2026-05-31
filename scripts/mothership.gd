@@ -1,6 +1,6 @@
 extends Area2D
 
-var hp = 50000
+var hp = 100000
 var max_hp = 0
 var normal_enemy = false
 var phase = 1
@@ -47,7 +47,16 @@ var current_attack = ""
 
 var repeerc_scene = preload("res://repeerc.tscn")
 
+var five_shot_active = false
+
+var bomber_scene = preload("res://bomb.tscn")
+var bomb_timer = 0.0
+var bomb_interval = 2.0
+
+var is_dying = false
+
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	max_hp = hp
 	connect("area_entered", _on_area_entered)
 	$AnimatedSprite2D.play("idle")
@@ -160,6 +169,11 @@ func _process(delta):
 	
 	if not boss_fight_started:
 		return
+		
+	bomb_timer += delta
+	if bomb_timer >= bomb_interval:
+		bomb_timer = 0
+		spawn_bombs()
 	
 	follow_player(delta)
 	
@@ -320,6 +334,10 @@ func update_phase():
 		attack_interval = 2
 	
 	if phase != old_phase:
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			player.hp = player.max_hp
+			player.update_hp_bar()
 		match phase:
 			1: $AnimatedSprite2D.play("phase1")
 			2: $AnimatedSprite2D.play("phase2")
@@ -359,14 +377,15 @@ func spawn_drones_attack():
 
 func die():
 	Global.stop_boss_music()
-	queue_free()
-	get_tree().get_first_node_in_group("world").enemy_killed()
 	get_tree().change_scene_to_file("res://victory.tscn")
+	
 
 func _on_area_entered(area):
 	if not is_instance_valid(area):
 		return
 	if area.is_in_group("player_bullet"):
+		if is_dying:
+			return
 		hp -= area.damage
 		area.queue_free()
 		update_hp_bar()
@@ -375,10 +394,9 @@ func _on_area_entered(area):
 		if not is_instance_valid(self):
 			return
 		modulate = Color(1, 1, 1, 1)
-		if hp <= 0:
+		if hp <= 0 and not is_dying:
+			is_dying = true
 			die()
-		return
-	if not is_instance_valid(area):
 		return
 	if area.is_in_group("player"):
 		var player = get_tree().get_first_node_in_group("player")
@@ -386,9 +404,9 @@ func _on_area_entered(area):
 			player.take_damage(150 * Global.difficulty)
 			
 func update_hp_bar():
-	print("update_hp_bar called")
+	#print("update_hp_bar called")
 	var bar = get_tree().get_first_node_in_group("boss_hp_bar")
-	print("bar: ", bar)
+	#print("bar: ", bar)
 	if not bar:
 		return
 	
@@ -410,6 +428,9 @@ func update_hp_bar():
 	
 func choose_attack():
 	var attacks = ["spawn_repeercs", "shoot_wave_attack"]
+	
+	if not five_shot_active:
+		attacks.append("five_shot_attack")
 	
 	# дроны только если их меньше 8
 	var drone_count = 0
@@ -436,6 +457,8 @@ func choose_attack():
 			spawn_repeercs()
 		"shoot_wave_attack":
 			shoot_wave_attack()
+		"five_shot_attack":  # добавь это
+			five_shot_attack()
 		#"shoot_bullets_burst":
 			#shoot_bullets_burst()
 			
@@ -463,7 +486,7 @@ func spawn_repeercs():
 		
 func shoot_wave_attack():
 	# 6 волн чередуя точки
-	for wave in 6:
+	for wave in 12:
 		if not is_instance_valid(self):
 			return
 		
@@ -477,10 +500,31 @@ func shoot_wave_attack():
 			var bullet = bullet_scene.instantiate()
 			bullet.position = point
 			bullet.direction = dir
-			bullet.speed = 150
-			bullet.damage = 100 * Global.difficulty
+			bullet.speed = 250
+			bullet.damage = 150 * Global.difficulty
 			bullet.scale = Vector2(0.1, 0.1)
 			bullet.modulate = Color(1, 0, 0, 1)
 			get_parent().add_child(bullet)
 		
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(0.5).timeout
+		
+func five_shot_attack():
+	if five_shot_active:
+		return
+	five_shot_active = true
+	var shot_points = [$ShotPoint1, $ShotPoint2, $ShotPoint3, $ShotPoint4, $ShotPoint5]
+	
+	for point in shot_points:
+		if not is_instance_valid(self):
+			return
+		var bomb = bomber_scene.instantiate()
+		bomb.global_position = point.global_position
+		get_parent().add_child(bomb)
+		await get_tree().create_timer(0.25).timeout
+	five_shot_active = false
+	
+func spawn_bombs():
+	for point in [$BombPointLeft, $BombPointRight]:
+		var bomb = bomber_scene.instantiate()
+		bomb.global_position = point.global_position
+		get_parent().add_child(bomb)

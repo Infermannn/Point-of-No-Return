@@ -1,6 +1,6 @@
 extends Area2D
 
-var hp = 130
+var hp = 110
 var speed = 350 
 var reached_position = false
 var stop_y = 0
@@ -10,6 +10,8 @@ var bullet_scene = preload("res://enemy_bullet.tscn")
 var shoot_timer = 0
 var shoot_interval = 1.8  
 var counts_as_kill = true
+
+var explosion_scene = preload("res://explosion.tscn")
 
 func _ready():
 	hp *= Global.difficulty
@@ -48,6 +50,12 @@ func shoot():
 		
 		
 func die():
+	if Global.explosive_rounds:
+		var explosion = explosion_scene.instantiate()
+		explosion.damage = 100
+		explosion.damage_multiplier = 1.0
+		get_parent().add_child(explosion)
+		explosion.global_position = global_position
 	queue_free()
 	if counts_as_kill:
 		get_tree().get_first_node_in_group("world").enemy_killed()

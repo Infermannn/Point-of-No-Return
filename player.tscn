@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://df73ww2y0343v"]
 
 [ext_resource type="Script" uid="uid://cyy5shxmk4qst" path="res://scripts/player.gd" id="1_4flbx"]
-[ext_resource type="Texture2D" uid="uid://cdd3jahgnhfqh" path="res://Textures/player/playershipstillscaled.png" id="2_onrkg"]
+[ext_resource type="Texture2D" uid="uid://4eotih561cev" path="res://Textures/player/100REALplayership.png" id="2_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://cked5i5jeajd4" path="res://Textures/player/Fire3(1).png" id="3_i3pqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(44, 42)
+size = Vector2(40, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpgvn"]
 atlas = ExtResource("3_i3pqv")
@@ -57,15 +57,15 @@ script = ExtResource("1_4flbx")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2130151358]
 position = Vector2(2, -6)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_onrkg")
+texture = ExtResource("2_i3pqv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=438039192]
-position = Vector2(4, 1)
+position = Vector2(2, -3)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="EngineFlame" type="AnimatedSprite2D" parent="." unique_id=1402333888]
 visible = false
-position = Vector2(6.0000153, 61)
+position = Vector2(4, 57)
 rotation = -3.1415927
 scale = Vector2(0.23026869, 0.25110355)
 sprite_frames = SubResource("SpriteFrames_hqtel")

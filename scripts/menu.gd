@@ -16,6 +16,23 @@ func _on_play_pressed():
 	Global.player_armor = 0
 	Global.player_evasion = 0
 	Global.click_player.play()
+	Global.active_perks = []
+	Global.glass_cannon = false
+	Global.bait_them = false
+	Global.damage_reduction = 0
+	Global.active_camo = false
+	Global.secondary_turrets = false
+	Global.pierce = false
+	Global.ricochet = false
+	Global.explosive_rounds = false
+	Global.hydra = false
+	Global.repair_drones = false
+	Global.last_stand = false
+	Global.last_stand_used = false
+	Global.focus = false
+	Global.bullet_shield = false
+	Global.bullet_scale = 1.0
+	Global.extra_upgrade_points = 0
 
 func _on_quit_button_pressed():
 	Global.click_player.play()
@@ -39,4 +56,6 @@ func _on_mute_button_pressed():
 	$MuteButton.texture_normal = tex2 if $MuteButton.texture_normal == tex1 else tex1
 	#update_mute_button()
 	Global.click_player.play()
+
+
 	

@@ -163,7 +163,7 @@ position = Vector2(963.7027, 554.7294)
 rotation = -3.1415927
 scale = Vector2(0.23026869, 0.25110355)
 sprite_frames = SubResource("SpriteFrames_j1a2u")
-frame_progress = 0.78143185
+frame_progress = 0.7997631
 
 [connection signal="pressed" from="Easy" to="." method="_on_easy_pressed"]
 [connection signal="pressed" from="Normal" to="." method="_on_normal_pressed"]

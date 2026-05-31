@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b6hx1eue8v0a4" path="res://Textures/Mothership/mothership_3_medium(1).png" id="3_40e3c"]
 [ext_resource type="Texture2D" uid="uid://ckq02krihgvq3" path="res://Textures/Mothership/mothership_4_bright(1).png" id="4_1bwbg"]
 [ext_resource type="Texture2D" uid="uid://dew7ej6y23c7k" path="res://Textures/Mothership/LaserCannonIdle.png" id="5_1bwbg"]
+[ext_resource type="Texture2D" uid="uid://16a55syumm01" path="res://Textures/Mothership/Mothership6.png" id="6_fm0m2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7nco5"]
 animations = [{
@@ -145,3 +146,34 @@ rotation = 1.566654
 
 [node name="ShootPointRight" type="Marker2D" parent="." unique_id=917620598]
 position = Vector2(152, 214)
+
+[node name="ShotPoint1" type="Marker2D" parent="." unique_id=1631440909]
+position = Vector2(-632, 212)
+
+[node name="ShotPoint2" type="Marker2D" parent="." unique_id=696186776]
+position = Vector2(-488, 212)
+
+[node name="ShotPoint3" type="Marker2D" parent="." unique_id=781253179]
+position = Vector2(-334, 211)
+
+[node name="ShotPoint4" type="Marker2D" parent="." unique_id=296238601]
+position = Vector2(356, 211)
+
+[node name="ShotPoint5" type="Marker2D" parent="." unique_id=445893230]
+position = Vector2(515, 211)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1361814175]
+position = Vector2(-832, -22)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_fm0m2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1346845366]
+position = Vector2(812.9999, -31)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_fm0m2")
+
+[node name="BombPointLeft" type="Marker2D" parent="." unique_id=548463547]
+position = Vector2(-827, 42)
+
+[node name="BombPointRight" type="Marker2D" parent="." unique_id=2031891006]
+position = Vector2(817, 33)
