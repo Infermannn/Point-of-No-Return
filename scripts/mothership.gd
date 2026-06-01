@@ -1,6 +1,6 @@
 extends Area2D
 
-var hp = 100000
+var hp = 1000
 var max_hp = 0
 var normal_enemy = false
 var phase = 1
@@ -53,6 +53,10 @@ var bomb_timer = 0.0
 var bomb_interval = 2.0
 
 var is_dying = false
+
+var big_bullet_scene = preload("res://big_bullet.tscn")
+var big_bullet_timer = 0.0
+var big_bullet_interval = 7.0
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -167,6 +171,12 @@ func _process(delta):
 	if bomb_timer >= bomb_interval:
 		bomb_timer = 0
 		spawn_bombs()
+		
+	big_bullet_timer += delta
+	if big_bullet_timer >= big_bullet_interval:
+		big_bullet_timer = 0
+		shoot_big_bullet()
+
 	
 	follow_player(delta)
 	
@@ -205,6 +215,13 @@ func follow_player(delta):
 func start_boss_sequence():
 	await get_tree().create_timer(1.0).timeout
 	
+	var player = get_tree().get_first_node_in_group("player")
+	var hp_bar = get_tree().get_first_node_in_group("player_hp_bar")
+	if hp_bar:
+		hp_bar.visible = false
+	if player:
+		player.hp = 1
+	
 	var screen = get_viewport_rect().size
 	var center = Vector2(screen.x / 2, screen.y / 2)
 	var dir_l = center - $CannonLeft.global_position
@@ -215,16 +232,17 @@ func start_boss_sequence():
 	tween.parallel().tween_property($CannonRight, "rotation", atan2(dir_r.y, dir_r.x), 1.0)
 	await tween.finished
 	
-	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.controls_enabled = true
 	
-	await charged_shot()
-	
-	if player and is_instance_valid(player):
-		player.shoot_timer = -99 
+	await charged_shot() 
 		
 	if player and is_instance_valid(player):
+		player.hp = player.max_hp
+		player.invincible = false
+		player.update_hp_bar()
+		if hp_bar:
+			hp_bar.visible = true
 		player.shoot_timer = -99
 		Global.start_boss_music()
 	
@@ -459,3 +477,13 @@ func spawn_bombs():
 		var bomb = bomber_scene.instantiate()
 		bomb.global_position = point.global_position
 		get_parent().add_child(bomb)
+		
+func shoot_big_bullet():
+	var player = get_tree().get_first_node_in_group("player")
+	if player == null:
+		return
+	var big_bullet = big_bullet_scene.instantiate()
+	big_bullet.global_position = global_position
+	big_bullet.direction = (player.global_position - global_position).normalized()
+	big_bullet.damage = 200 * Global.difficulty
+	get_parent().add_child(big_bullet)

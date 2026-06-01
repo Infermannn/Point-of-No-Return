@@ -90,7 +90,8 @@ func shoot():
 	big_bullet.position = global_position
 	big_bullet.direction = base_dir
 	big_bullet.damage = 150
-	big_bullet.speed = 750
+	big_bullet.speed = 575
+	big_bullet.speed *= Global.difficulty
 	big_bullet.damage *= Global.difficulty
 	big_bullet.damage = 150 * Global.difficulty * (Global.endless_enemy_mult if Global.endless_mode else 1.0)
 	get_parent().add_child(big_bullet)
@@ -101,7 +102,8 @@ func shoot():
 		var bullet = bullet_scene.instantiate()
 		bullet.position = global_position
 		bullet.direction = rotated_dir
-		bullet.speed = 600
+		bullet.speed = 500
+		bullet.speed *= Global.difficulty
 		bullet.damage = 125
 		bullet.damage *= Global.difficulty
 		bullet.modulate = Color(1, 0.3, 0, 1)

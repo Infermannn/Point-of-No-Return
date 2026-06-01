@@ -39,6 +39,16 @@ func _on_quit_button_pressed():
 	get_tree().quit()
 	
 func _ready():
+	$BlackScreen.color = Color(0, 0, 0, 1)
+	Global.menu_music_player.volume_db = -80
+	Global.start_menu_music()
+	
+	var tween = create_tween()
+	tween.tween_property($BlackScreen, "color:a", 0.0, 1.5)
+	tween.parallel().tween_method(
+		func(vol): Global.menu_music_player.volume_db = vol,
+		-80.0, -40.0, 1.5
+	)
 	tex1 = $MuteButton.texture_normal
 	Global.stop_music()
 	Global.start_menu_music()

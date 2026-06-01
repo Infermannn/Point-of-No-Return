@@ -1,18 +1,74 @@
 [gd_scene format=3 uid="uid://qojurj2ppx17"]
 
 [ext_resource type="Script" uid="uid://c8tyicqqnpisl" path="res://scripts/victory.gd" id="1_7bnjr"]
+[ext_resource type="Script" uid="uid://d3orxh3y5biky" path="res://scripts/background.gd" id="2_ebtt0"]
 [ext_resource type="Texture2D" uid="uid://7fcgeabe27x3" path="res://Textures/backgrounds/govno(1).png" id="2_v31sk"]
 [ext_resource type="Texture2D" uid="uid://dt6x86xqq43xt" path="res://Textures/Mothership/mothership_2_dim(2).png" id="3_v3ap6"]
 [ext_resource type="Texture2D" uid="uid://djcwrysf57wuo" path="res://Textures/player/playershipstill.png" id="4_e8xaq"]
+[ext_resource type="Texture2D" uid="uid://ch66t5xkrgdor" path="res://Textures/buttons/MENU-buttonFinal.png" id="5_u1yty"]
+[ext_resource type="Texture2D" uid="uid://bdc5o5yckq5ug" path="res://Textures/buttons/MENU-buttonFinalHovered.png" id="6_msd2c"]
+[ext_resource type="Script" uid="uid://cpojyai4je3nr" path="res://scripts/difficulty_button.gd" id="7_ebtt0"]
+[ext_resource type="Texture2D" uid="uid://cked5i5jeajd4" path="res://Textures/player/Fire3(1).png" id="8_msd2c"]
 
-[node name="Victory" type="Control" unique_id=1018967611]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpgvn"]
+atlas = ExtResource("8_msd2c")
+region = Rect2(40, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6r5b"]
+atlas = ExtResource("8_msd2c")
+region = Rect2(381, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsx0t"]
+atlas = ExtResource("8_msd2c")
+region = Rect2(720, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cj6kn"]
+atlas = ExtResource("8_msd2c")
+region = Rect2(1061, 250, 316, 500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md34i"]
+atlas = ExtResource("8_msd2c")
+region = Rect2(1405, 250, 316, 500)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ebtt0"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_kpgvn")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_t6r5b")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_wsx0t")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_cj6kn")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_md34i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Victory" type="Control" unique_id=2129313162]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 script = ExtResource("1_7bnjr")
+
+[node name="BackgroundContainer" type="Node2D" parent="." unique_id=484356331]
+script = ExtResource("2_ebtt0")
+
+[node name="Background" type="Sprite2D" parent="BackgroundContainer" unique_id=34455946]
+position = Vector2(968, 576)
+texture = ExtResource("2_v31sk")
+
+[node name="Background2" type="Sprite2D" parent="BackgroundContainer" unique_id=2045311608]
+position = Vector2(960.0001, -624)
+scale = Vector2(1.0083333, 1.0125927)
+texture = ExtResource("2_v31sk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2076653432]
 visible = false
@@ -43,17 +99,12 @@ layout_mode = 2
 text = "EndlessMode"
 
 [node name="BlackScreen" type="ColorRect" parent="." unique_id=201267459]
+visible = false
 z_index = 100
 layout_mode = 0
 offset_right = 1921.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1630573619]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("2_v31sk")
 
 [node name="BossSprite" type="Sprite2D" parent="." unique_id=343754096]
 position = Vector2(925, -2)
@@ -64,5 +115,39 @@ texture = ExtResource("3_v3ap6")
 position = Vector2(963, 528)
 texture = ExtResource("4_e8xaq")
 
+[node name="EndingText" type="Label" parent="." unique_id=1426264778]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 854.0
+offset_right = 1923.0
+offset_bottom = 1079.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButton" type="TextureButton" parent="." unique_id=1730359474]
+visible = false
+z_index = 90
+layout_mode = 0
+offset_left = 479.0
+offset_top = 570.0
+offset_right = 2401.0
+offset_bottom = 1170.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("5_u1yty")
+texture_pressed = ExtResource("6_msd2c")
+texture_hover = ExtResource("6_msd2c")
+stretch_mode = 3
+script = ExtResource("7_ebtt0")
+
+[node name="EndingMusic" type="AudioStreamPlayer" parent="." unique_id=1237477696]
+
+[node name="EngineFlame" type="AnimatedSprite2D" parent="." unique_id=235052045]
+visible = false
+position = Vector2(967, 594.00006)
+rotation = 3.1415925
+scale = Vector2(0.23026869, 0.25110355)
+sprite_frames = SubResource("SpriteFrames_ebtt0")
+
 [connection signal="pressed" from="VBoxContainer/MainMenuButton" to="VBoxContainer" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="VBoxContainer/EndlessModeButton" to="VBoxContainer" method="_on_endless_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

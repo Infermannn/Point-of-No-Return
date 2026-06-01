@@ -42,7 +42,8 @@ func shoot():
 		var bullet = bullet_scene.instantiate()
 		bullet.position = global_position
 		bullet.direction = dir
-		bullet.speed = 450
+		bullet.speed = 325
+		bullet.speed *= Global.difficulty
 		bullet.damage = 60
 		bullet.damage *= Global.difficulty
 		bullet.damage = 50 * Global.difficulty * (Global.endless_enemy_mult if Global.endless_mode else 1.0)

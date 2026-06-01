@@ -246,7 +246,7 @@ func take_damage(amount):
 	if evasion > 0 and randi() % 100 < evasion:
 		show_evade_indicator()
 		return
-	if Global.active_camo and randf() < 0.15:
+	if Global.active_camo and randf() < 0.20:
 		show_evade_indicator()
 		return
 	invincible = true
@@ -310,6 +310,7 @@ func max_stats():
 	print("Stats maxed!")
 	
 func show_evade_indicator():
+	Global.play_evade()
 	modulate = Color(0.3, 0.5, 1, 1)
 	await get_tree().create_timer(0.15).timeout
 	modulate = Color(1, 1, 1, 1)

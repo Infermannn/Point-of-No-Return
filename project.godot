@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PointofNoReturn"
-run/main_scene="uid://g1kfj7b1c5qd"
+run/main_scene="uid://b84xeudakv5bn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://b68vacop2vn6v"
 

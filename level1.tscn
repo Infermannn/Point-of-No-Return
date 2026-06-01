@@ -1038,8 +1038,10 @@ script = ExtResource("11_rjtee")
 visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 616.0
+offset_top = 40.0
+offset_right = 656.0
+offset_bottom = 80.0
 
 [node name="Background" type="ColorRect" parent="HPBarPlayer" unique_id=1951919114]
 layout_mode = 0

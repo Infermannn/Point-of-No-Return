@@ -59,7 +59,7 @@ func shoot():
 	bullet.position = global_position
 	bullet.direction = (player.global_position - global_position).normalized()
 	bullet.damage = 90
-	bullet.speed = 300
+	bullet.speed = 250
 	bullet.damage = 90 * Global.difficulty * (Global.endless_enemy_mult if Global.endless_mode else 1.0)
 	bullet.modulate = Color(1, 0.5, 0.5, 1)
 	get_parent().add_child(bullet)

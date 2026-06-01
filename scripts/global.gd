@@ -40,7 +40,14 @@ var boss_current_track = 0
 
 var last_reroll_perk = ""
 
+var evade_player: AudioStreamPlayer
+
 func _ready():
+	evade_player = AudioStreamPlayer.new()
+	evade_player.stream = preload("res://Sounds/Evasion.wav")  # замени на свой путь
+	evade_player.volume_db = -20
+	add_child(evade_player)
+	
 	click_player = AudioStreamPlayer.new()
 	click_player.stream = preload("res://Sounds/button-click.mp3")
 	click_player.volume_db = -40
@@ -55,7 +62,7 @@ func _ready():
 		preload("res://Music/Pixel_Starfire2.mp3"),
 		preload("res://Music/Pixel_Starfire.mp3")
 	]
-	play_next_track()
+	#play_next_track()
 	
 	menu_music_player = AudioStreamPlayer.new()
 	menu_music_player.volume_db = -40
@@ -203,3 +210,6 @@ var focus = false
 var bullet_shield = false
 var bullet_scale = 1.0
 var extra_upgrade_points = 0
+
+func play_evade():
+	evade_player.play()

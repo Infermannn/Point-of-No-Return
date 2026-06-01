@@ -26,7 +26,8 @@ func explode():
 		var bullet = bullet_scene.instantiate()
 		bullet.position = global_position
 		bullet.direction = dir
-		bullet.speed = 600
+		bullet.speed = 450
+		bullet.speed *= Global.difficulty
 		bullet.damage = 125 * Global.difficulty
 		bullet.modulate = Color(1, 0.3, 0, 1)
 		get_parent().add_child(bullet)

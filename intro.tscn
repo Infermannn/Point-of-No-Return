@@ -1,0 +1,1240 @@
+[gd_scene format=3 uid="uid://b84xeudakv5bn"]
+
+[ext_resource type="Script" uid="uid://lcvdyin22cnw" path="res://scripts/intro.gd" id="1_dpxxx"]
+[ext_resource type="Texture2D" uid="uid://32s6jsp2ymik" path="res://Textures/Mothership/MotherShipRED.png" id="1_y6ycx"]
+[ext_resource type="Texture2D" uid="uid://b8ryayuco23hc" path="res://Textures/backgrounds/Earth.png" id="2_dpxxx"]
+[ext_resource type="Texture2D" uid="uid://b68vacop2vn6v" path="res://Textures/player/spaceship256.png" id="3_dk2oa"]
+[ext_resource type="Texture2D" uid="uid://w1jt3kk1krq2" path="res://Textures/enemies/BasicEnemyscaled.png" id="4_7ufi4"]
+[ext_resource type="Texture2D" uid="uid://cojl0apwaiytr" path="res://Textures/enemies/big_guyscaled.png" id="5_h0kys"]
+[ext_resource type="Texture2D" uid="uid://78sxict3vvum" path="res://Textures/enemies/dronemk1first_scaled.png" id="6_d0rr7"]
+[ext_resource type="Texture2D" uid="uid://yfrogccq55c7" path="res://Textures/backgrounds/Radar.png" id="7_wby50"]
+
+[node name="Intro" type="Control" unique_id=2079107821]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dpxxx")
+
+[node name="BlackScreen" type="ColorRect" parent="." unique_id=117822067]
+z_index = 100
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Slide1" type="Control" parent="." unique_id=1991461315]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Slide1" unique_id=10410101]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+text = "Colony X-7. Last transmission received: 14 months ago."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slide2" type="Control" parent="." unique_id=283107256]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Slide2" unique_id=1784792754]
+layout_mode = 0
+offset_left = -691.0
+offset_top = -584.0
+offset_right = 1441.0
+offset_bottom = 153.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_y6ycx")
+
+[node name="Label" type="Label" parent="Slide2" unique_id=1063085415]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+text = "Search and rescue found nothing. Something found them instead."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slide3" type="Control" parent="." unique_id=119037376]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Earth" type="TextureRect" parent="Slide3" unique_id=502535132]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 697.9999
+offset_right = 3841.0
+offset_bottom = 1465.9999
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_dpxxx")
+stretch_mode = 3
+
+[node name="FriendlyShip1" type="TextureRect" parent="Slide3" unique_id=66061288]
+layout_mode = 0
+offset_left = 1189.0
+offset_top = 538.0
+offset_right = 1445.0
+offset_bottom = 794.00006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_dk2oa")
+
+[node name="FriendlyShip2" type="TextureRect" parent="Slide3" unique_id=1462885372]
+layout_mode = 0
+offset_left = 656.0
+offset_top = 552.0
+offset_right = 912.0
+offset_bottom = 808.00006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_dk2oa")
+
+[node name="FriendlyShip3" type="TextureRect" parent="Slide3" unique_id=604197828]
+layout_mode = 0
+offset_left = 926.0
+offset_top = 404.0
+offset_right = 1182.0
+offset_bottom = 660.00006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_dk2oa")
+
+[node name="FriendlyShip4" type="TextureRect" parent="Slide3" unique_id=1178631563]
+layout_mode = 0
+offset_left = 863.0
+offset_top = 429.0
+offset_right = 1119.0
+offset_bottom = 685.00006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_dk2oa")
+
+[node name="FriendlyShip5" type="TextureRect" parent="Slide3" unique_id=1255367777]
+layout_mode = 0
+offset_left = 988.0
+offset_top = 424.0
+offset_right = 1244.0
+offset_bottom = 680.00006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_dk2oa")
+
+[node name="FriendlyShip6" type="TextureRect" parent="Slide3" unique_id=437789049]
+layout_mode = 0
+offset_left = 814.0
+offset_top = 458.0
+offset_right = 1070.0
+offset_bottom = 714.00006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_dk2oa")
+
+[node name="FriendlyShip7" type="TextureRect" parent="Slide3" unique_id=486410712]
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 449.0
+offset_right = 1288.0
+offset_bottom = 705.00006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_dk2oa")
+
+[node name="FriendlyShip8" type="TextureRect" parent="Slide3" unique_id=354312911]
+layout_mode = 0
+offset_left = 759.0
+offset_top = 490.0
+offset_right = 1015.0
+offset_bottom = 746.00006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_dk2oa")
+
+[node name="FriendlyShip9" type="TextureRect" parent="Slide3" unique_id=226720588]
+layout_mode = 0
+offset_left = 1086.0
+offset_top = 483.0
+offset_right = 1342.0
+offset_bottom = 739.00006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_dk2oa")
+
+[node name="FriendlyShip10" type="TextureRect" parent="Slide3" unique_id=1078994796]
+layout_mode = 0
+offset_left = 696.0
+offset_top = 522.0
+offset_right = 952.0
+offset_bottom = 778.00006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_dk2oa")
+
+[node name="FriendlyShip11" type="TextureRect" parent="Slide3" unique_id=1380304243]
+layout_mode = 0
+offset_left = 1133.0
+offset_top = 505.0
+offset_right = 1389.0
+offset_bottom = 761.00006
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_dk2oa")
+
+[node name="BasicEnemy1" type="TextureRect" parent="Slide3" unique_id=1605984571]
+layout_mode = 0
+offset_left = 627.0
+offset_top = 145.0
+offset_right = 947.0
+offset_bottom = 465.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy2" type="TextureRect" parent="Slide3" unique_id=563749611]
+layout_mode = 0
+offset_left = 683.0
+offset_top = 122.0
+offset_right = 1003.0
+offset_bottom = 442.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy3" type="TextureRect" parent="Slide3" unique_id=631327067]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 163.0
+offset_right = 1088.0
+offset_bottom = 483.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy4" type="TextureRect" parent="Slide3" unique_id=319954065]
+layout_mode = 0
+offset_left = 811.0
+offset_top = 122.0
+offset_right = 1131.0
+offset_bottom = 442.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy5" type="TextureRect" parent="Slide3" unique_id=2070122279]
+layout_mode = 0
+offset_left = 865.0
+offset_top = 155.0
+offset_right = 1185.0
+offset_bottom = 475.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy6" type="TextureRect" parent="Slide3" unique_id=1180038575]
+layout_mode = 0
+offset_left = 895.0
+offset_top = 133.0
+offset_right = 1215.0
+offset_bottom = 453.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy7" type="TextureRect" parent="Slide3" unique_id=382846435]
+layout_mode = 0
+offset_left = 1037.0
+offset_top = 186.0
+offset_right = 1357.0
+offset_bottom = 506.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy8" type="TextureRect" parent="Slide3" unique_id=490366385]
+layout_mode = 0
+offset_left = 566.0
+offset_top = 199.0
+offset_right = 886.0
+offset_bottom = 519.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy9" type="TextureRect" parent="Slide3" unique_id=1018684405]
+layout_mode = 0
+offset_left = 1094.0
+offset_top = 137.0
+offset_right = 1414.0
+offset_bottom = 457.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy10" type="TextureRect" parent="Slide3" unique_id=373985959]
+layout_mode = 0
+offset_left = 1191.0
+offset_top = 182.0
+offset_right = 1511.0
+offset_bottom = 502.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy11" type="TextureRect" parent="Slide3" unique_id=506345632]
+layout_mode = 0
+offset_left = 650.0
+offset_top = 218.0
+offset_right = 970.0
+offset_bottom = 538.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy12" type="TextureRect" parent="Slide3" unique_id=2130997141]
+layout_mode = 0
+offset_left = 706.0
+offset_top = 195.0
+offset_right = 1026.0
+offset_bottom = 515.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy13" type="TextureRect" parent="Slide3" unique_id=2121658356]
+layout_mode = 0
+offset_left = 791.0
+offset_top = 236.0
+offset_right = 1111.0
+offset_bottom = 556.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy14" type="TextureRect" parent="Slide3" unique_id=172592207]
+layout_mode = 0
+offset_left = 834.0
+offset_top = 195.0
+offset_right = 1154.0
+offset_bottom = 515.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy15" type="TextureRect" parent="Slide3" unique_id=1349601085]
+layout_mode = 0
+offset_left = 888.0
+offset_top = 228.0
+offset_right = 1208.0
+offset_bottom = 548.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy16" type="TextureRect" parent="Slide3" unique_id=971673914]
+layout_mode = 0
+offset_left = 918.0
+offset_top = 206.0
+offset_right = 1238.0
+offset_bottom = 526.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy17" type="TextureRect" parent="Slide3" unique_id=470356891]
+layout_mode = 0
+offset_left = 1060.0
+offset_top = 259.0
+offset_right = 1380.0
+offset_bottom = 579.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy18" type="TextureRect" parent="Slide3" unique_id=1875359935]
+layout_mode = 0
+offset_left = 589.0
+offset_top = 272.0
+offset_right = 909.0
+offset_bottom = 592.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy19" type="TextureRect" parent="Slide3" unique_id=2097484241]
+layout_mode = 0
+offset_left = 1117.0
+offset_top = 210.0
+offset_right = 1437.0
+offset_bottom = 530.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy20" type="TextureRect" parent="Slide3" unique_id=1204316293]
+layout_mode = 0
+offset_left = 1214.0
+offset_top = 255.0
+offset_right = 1534.0
+offset_bottom = 575.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy21" type="TextureRect" parent="Slide3" unique_id=394126040]
+layout_mode = 0
+offset_left = 935.0
+offset_top = 159.0
+offset_right = 1255.0
+offset_bottom = 479.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy22" type="TextureRect" parent="Slide3" unique_id=1805389507]
+layout_mode = 0
+offset_left = 989.0
+offset_top = 192.0
+offset_right = 1309.0
+offset_bottom = 512.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy23" type="TextureRect" parent="Slide3" unique_id=284896598]
+layout_mode = 0
+offset_left = 1019.0
+offset_top = 170.0
+offset_right = 1339.0
+offset_bottom = 490.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy24" type="TextureRect" parent="Slide3" unique_id=1726883686]
+layout_mode = 0
+offset_left = 1161.0
+offset_top = 223.0
+offset_right = 1481.0
+offset_bottom = 543.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy25" type="TextureRect" parent="Slide3" unique_id=851878840]
+layout_mode = 0
+offset_left = 690.0
+offset_top = 236.0
+offset_right = 1010.0
+offset_bottom = 556.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy26" type="TextureRect" parent="Slide3" unique_id=331612702]
+layout_mode = 0
+offset_left = 1218.0
+offset_top = 174.0
+offset_right = 1538.0
+offset_bottom = 494.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy27" type="TextureRect" parent="Slide3" unique_id=967629827]
+layout_mode = 0
+offset_left = 1315.0
+offset_top = 219.0
+offset_right = 1635.0
+offset_bottom = 539.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BigEnemy1" type="TextureRect" parent="Slide3" unique_id=1602924754]
+layout_mode = 0
+offset_left = 1085.0
+offset_top = 43.0
+offset_right = 1661.0
+offset_bottom = 619.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_h0kys")
+stretch_mode = 3
+
+[node name="BigEnemy2" type="TextureRect" parent="Slide3" unique_id=51448964]
+layout_mode = 0
+offset_left = 830.0
+offset_top = 36.0
+offset_right = 1406.0
+offset_bottom = 612.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_h0kys")
+stretch_mode = 3
+
+[node name="BigEnemy3" type="TextureRect" parent="Slide3" unique_id=341608678]
+layout_mode = 0
+offset_left = 945.00006
+offset_top = 69.0
+offset_right = 1521.0
+offset_bottom = 645.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_h0kys")
+stretch_mode = 3
+
+[node name="BigEnemy4" type="TextureRect" parent="Slide3" unique_id=1782498550]
+layout_mode = 0
+offset_left = 897.0
+offset_top = 17.0
+offset_right = 1473.0
+offset_bottom = 593.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_h0kys")
+stretch_mode = 3
+
+[node name="BigEnemy5" type="TextureRect" parent="Slide3" unique_id=2011516774]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 10.0
+offset_right = 1218.0
+offset_bottom = 586.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_h0kys")
+stretch_mode = 3
+
+[node name="DroneEnemy1" type="TextureRect" parent="Slide3" unique_id=1554005985]
+layout_mode = 0
+offset_left = 701.0
+offset_top = -8.0
+offset_right = 1309.0
+offset_bottom = 600.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy2" type="TextureRect" parent="Slide3" unique_id=998787731]
+layout_mode = 0
+offset_left = 848.0
+offset_top = 10.0
+offset_right = 1456.0
+offset_bottom = 618.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy3" type="TextureRect" parent="Slide3" unique_id=460087633]
+layout_mode = 0
+offset_left = 612.0
+offset_top = 16.0
+offset_right = 1220.0
+offset_bottom = 624.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy4" type="TextureRect" parent="Slide3" unique_id=833192990]
+layout_mode = 0
+offset_left = 973.0
+offset_top = 17.0
+offset_right = 1581.0
+offset_bottom = 625.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy5" type="TextureRect" parent="Slide3" unique_id=397250537]
+layout_mode = 0
+offset_left = 914.0
+offset_top = 7.0
+offset_right = 1522.0
+offset_bottom = 615.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy6" type="TextureRect" parent="Slide3" unique_id=719507480]
+layout_mode = 0
+offset_left = 757.0
+offset_top = 37.0
+offset_right = 1365.0
+offset_bottom = 645.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy7" type="TextureRect" parent="Slide3" unique_id=310852861]
+layout_mode = 0
+offset_left = 1015.0
+offset_top = 33.0
+offset_right = 1623.0
+offset_bottom = 641.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy8" type="TextureRect" parent="Slide3" unique_id=846734205]
+layout_mode = 0
+offset_left = 1054.0
+offset_top = 40.0
+offset_right = 1662.0
+offset_bottom = 648.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy9" type="TextureRect" parent="Slide3" unique_id=780324679]
+layout_mode = 0
+offset_left = 1067.0
+offset_top = -7.0
+offset_right = 1675.0
+offset_bottom = 601.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy10" type="TextureRect" parent="Slide3" unique_id=2135651166]
+layout_mode = 0
+offset_left = 1158.0
+offset_top = 40.0
+offset_right = 1766.0
+offset_bottom = 648.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy11" type="TextureRect" parent="Slide3" unique_id=1623239727]
+layout_mode = 0
+offset_left = 1260.0
+offset_top = 57.0
+offset_right = 1868.0
+offset_bottom = 665.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy12" type="TextureRect" parent="Slide3" unique_id=1917676991]
+layout_mode = 0
+offset_left = 1302.0
+offset_top = 109.0
+offset_right = 1910.0
+offset_bottom = 717.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy13" type="TextureRect" parent="Slide3" unique_id=18263345]
+layout_mode = 0
+offset_left = 1194.0
+offset_top = 89.0
+offset_right = 1802.0
+offset_bottom = 697.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy14" type="TextureRect" parent="Slide3" unique_id=723334311]
+layout_mode = 0
+offset_left = 557.0
+offset_top = 71.0
+offset_right = 1165.0
+offset_bottom = 679.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy15" type="TextureRect" parent="Slide3" unique_id=342127055]
+layout_mode = 0
+offset_left = 1232.0
+offset_top = 2.0
+offset_right = 1840.0
+offset_bottom = 610.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy16" type="TextureRect" parent="Slide3" unique_id=1757870]
+layout_mode = 0
+offset_left = 1124.0
+offset_top = -1.0
+offset_right = 1732.0
+offset_bottom = 607.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy17" type="TextureRect" parent="Slide3" unique_id=424145112]
+layout_mode = 0
+offset_left = 1324.0
+offset_top = -3.0
+offset_right = 1932.0
+offset_bottom = 605.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy18" type="TextureRect" parent="Slide3" unique_id=1805349672]
+layout_mode = 0
+offset_left = 1357.0
+offset_top = 59.0
+offset_right = 1965.0
+offset_bottom = 667.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Slide3" unique_id=1928566745]
+layout_mode = 0
+offset_top = 165.0
+offset_right = 1921.0
+offset_bottom = 1080.0
+text = "Earth's fleet intercepted the threat at the outer perimeter."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slide4" type="Control" parent="." unique_id=1813366778]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BasicEnemy1" type="TextureRect" parent="Slide4" unique_id=1623628246]
+layout_mode = 0
+offset_left = 612.0
+offset_top = 535.0
+offset_right = 932.0
+offset_bottom = 855.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy2" type="TextureRect" parent="Slide4" unique_id=586068847]
+layout_mode = 0
+offset_left = 668.0
+offset_top = 512.0
+offset_right = 988.0
+offset_bottom = 832.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy3" type="TextureRect" parent="Slide4" unique_id=1639925301]
+layout_mode = 0
+offset_left = 753.0
+offset_top = 553.0
+offset_right = 1073.0
+offset_bottom = 873.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy4" type="TextureRect" parent="Slide4" unique_id=280804418]
+layout_mode = 0
+offset_left = 796.0
+offset_top = 512.0
+offset_right = 1116.0
+offset_bottom = 832.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy5" type="TextureRect" parent="Slide4" unique_id=1176844596]
+layout_mode = 0
+offset_left = 850.0
+offset_top = 545.0
+offset_right = 1170.0
+offset_bottom = 865.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy6" type="TextureRect" parent="Slide4" unique_id=191112708]
+layout_mode = 0
+offset_left = 880.0
+offset_top = 523.0
+offset_right = 1200.0
+offset_bottom = 843.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy7" type="TextureRect" parent="Slide4" unique_id=19653084]
+layout_mode = 0
+offset_left = 1022.0
+offset_top = 576.0
+offset_right = 1342.0
+offset_bottom = 896.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy8" type="TextureRect" parent="Slide4" unique_id=1708074954]
+layout_mode = 0
+offset_left = 551.0
+offset_top = 589.0
+offset_right = 871.0
+offset_bottom = 909.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy9" type="TextureRect" parent="Slide4" unique_id=1277455650]
+layout_mode = 0
+offset_left = 1079.0
+offset_top = 527.0
+offset_right = 1399.0
+offset_bottom = 847.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy10" type="TextureRect" parent="Slide4" unique_id=1854699284]
+layout_mode = 0
+offset_left = 1176.0
+offset_top = 572.0
+offset_right = 1496.0
+offset_bottom = 892.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy11" type="TextureRect" parent="Slide4" unique_id=57012426]
+layout_mode = 0
+offset_left = 635.0
+offset_top = 608.0
+offset_right = 955.0
+offset_bottom = 928.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy12" type="TextureRect" parent="Slide4" unique_id=1193427820]
+layout_mode = 0
+offset_left = 691.0
+offset_top = 585.0
+offset_right = 1011.0
+offset_bottom = 905.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy13" type="TextureRect" parent="Slide4" unique_id=517265923]
+layout_mode = 0
+offset_left = 776.0
+offset_top = 626.0
+offset_right = 1096.0
+offset_bottom = 946.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy14" type="TextureRect" parent="Slide4" unique_id=1540703222]
+layout_mode = 0
+offset_left = 819.0
+offset_top = 585.0
+offset_right = 1139.0
+offset_bottom = 905.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy15" type="TextureRect" parent="Slide4" unique_id=8692930]
+layout_mode = 0
+offset_left = 873.0
+offset_top = 618.0
+offset_right = 1193.0
+offset_bottom = 938.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy16" type="TextureRect" parent="Slide4" unique_id=56505124]
+layout_mode = 0
+offset_left = 903.0
+offset_top = 596.0
+offset_right = 1223.0
+offset_bottom = 916.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy17" type="TextureRect" parent="Slide4" unique_id=2057884762]
+layout_mode = 0
+offset_left = 1045.0
+offset_top = 649.0
+offset_right = 1365.0
+offset_bottom = 969.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy18" type="TextureRect" parent="Slide4" unique_id=353566238]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 662.0
+offset_right = 894.0
+offset_bottom = 982.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy19" type="TextureRect" parent="Slide4" unique_id=916795758]
+layout_mode = 0
+offset_left = 1102.0
+offset_top = 600.0
+offset_right = 1422.0
+offset_bottom = 920.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy20" type="TextureRect" parent="Slide4" unique_id=1426405271]
+layout_mode = 0
+offset_left = 1199.0
+offset_top = 645.0
+offset_right = 1519.0
+offset_bottom = 965.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy21" type="TextureRect" parent="Slide4" unique_id=333414529]
+layout_mode = 0
+offset_left = 920.0
+offset_top = 549.0
+offset_right = 1240.0
+offset_bottom = 869.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy22" type="TextureRect" parent="Slide4" unique_id=1549289246]
+layout_mode = 0
+offset_left = 974.0
+offset_top = 582.0
+offset_right = 1294.0
+offset_bottom = 902.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy23" type="TextureRect" parent="Slide4" unique_id=1238080220]
+layout_mode = 0
+offset_left = 1004.0
+offset_top = 560.0
+offset_right = 1324.0
+offset_bottom = 880.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy24" type="TextureRect" parent="Slide4" unique_id=2025476075]
+layout_mode = 0
+offset_left = 1146.0
+offset_top = 613.0
+offset_right = 1466.0
+offset_bottom = 933.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy25" type="TextureRect" parent="Slide4" unique_id=2031005855]
+layout_mode = 0
+offset_left = 675.0
+offset_top = 626.0
+offset_right = 995.0
+offset_bottom = 946.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy26" type="TextureRect" parent="Slide4" unique_id=1814278436]
+layout_mode = 0
+offset_left = 1203.0
+offset_top = 564.0
+offset_right = 1523.0
+offset_bottom = 884.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BasicEnemy27" type="TextureRect" parent="Slide4" unique_id=1563930105]
+layout_mode = 0
+offset_left = 1300.0
+offset_top = 609.0
+offset_right = 1620.0
+offset_bottom = 929.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_7ufi4")
+stretch_mode = 3
+
+[node name="BigEnemy1" type="TextureRect" parent="Slide4" unique_id=175104952]
+layout_mode = 0
+offset_left = 1070.0
+offset_top = 433.0
+offset_right = 1646.0
+offset_bottom = 1009.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_h0kys")
+stretch_mode = 3
+
+[node name="BigEnemy2" type="TextureRect" parent="Slide4" unique_id=1986977070]
+layout_mode = 0
+offset_left = 815.0
+offset_top = 426.0
+offset_right = 1391.0
+offset_bottom = 1002.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_h0kys")
+stretch_mode = 3
+
+[node name="BigEnemy3" type="TextureRect" parent="Slide4" unique_id=2092000079]
+layout_mode = 0
+offset_left = 930.00006
+offset_top = 459.0
+offset_right = 1506.0
+offset_bottom = 1035.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_h0kys")
+stretch_mode = 3
+
+[node name="BigEnemy4" type="TextureRect" parent="Slide4" unique_id=2017611262]
+layout_mode = 0
+offset_left = 882.0
+offset_top = 407.0
+offset_right = 1458.0
+offset_bottom = 983.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_h0kys")
+stretch_mode = 3
+
+[node name="BigEnemy5" type="TextureRect" parent="Slide4" unique_id=1815591980]
+layout_mode = 0
+offset_left = 627.0
+offset_top = 400.0
+offset_right = 1203.0
+offset_bottom = 976.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_h0kys")
+stretch_mode = 3
+
+[node name="DroneEnemy1" type="TextureRect" parent="Slide4" unique_id=574407444]
+layout_mode = 0
+offset_left = 686.0
+offset_top = 382.0
+offset_right = 1294.0
+offset_bottom = 990.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy2" type="TextureRect" parent="Slide4" unique_id=976506298]
+layout_mode = 0
+offset_left = 833.0
+offset_top = 400.0
+offset_right = 1441.0
+offset_bottom = 1008.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy3" type="TextureRect" parent="Slide4" unique_id=426914763]
+layout_mode = 0
+offset_left = 597.0
+offset_top = 406.0
+offset_right = 1205.0
+offset_bottom = 1014.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy4" type="TextureRect" parent="Slide4" unique_id=1292361208]
+layout_mode = 0
+offset_left = 958.0
+offset_top = 407.0
+offset_right = 1566.0
+offset_bottom = 1015.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy5" type="TextureRect" parent="Slide4" unique_id=879540920]
+layout_mode = 0
+offset_left = 899.0
+offset_top = 397.0
+offset_right = 1507.0
+offset_bottom = 1005.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy6" type="TextureRect" parent="Slide4" unique_id=2082618888]
+layout_mode = 0
+offset_left = 742.0
+offset_top = 427.0
+offset_right = 1350.0
+offset_bottom = 1035.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy7" type="TextureRect" parent="Slide4" unique_id=324896809]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 423.0
+offset_right = 1608.0
+offset_bottom = 1031.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy8" type="TextureRect" parent="Slide4" unique_id=612295686]
+layout_mode = 0
+offset_left = 1039.0
+offset_top = 430.0
+offset_right = 1647.0
+offset_bottom = 1038.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy9" type="TextureRect" parent="Slide4" unique_id=237547598]
+layout_mode = 0
+offset_left = 1052.0
+offset_top = 383.0
+offset_right = 1660.0
+offset_bottom = 991.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy10" type="TextureRect" parent="Slide4" unique_id=1068271408]
+layout_mode = 0
+offset_left = 1143.0
+offset_top = 430.0
+offset_right = 1751.0
+offset_bottom = 1038.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy11" type="TextureRect" parent="Slide4" unique_id=1846863877]
+layout_mode = 0
+offset_left = 1245.0
+offset_top = 447.0
+offset_right = 1853.0
+offset_bottom = 1055.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy12" type="TextureRect" parent="Slide4" unique_id=572654726]
+layout_mode = 0
+offset_left = 1287.0
+offset_top = 499.0
+offset_right = 1895.0
+offset_bottom = 1107.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy13" type="TextureRect" parent="Slide4" unique_id=2083367577]
+layout_mode = 0
+offset_left = 1179.0
+offset_top = 479.0
+offset_right = 1787.0
+offset_bottom = 1087.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy14" type="TextureRect" parent="Slide4" unique_id=437667277]
+layout_mode = 0
+offset_left = 542.0
+offset_top = 461.0
+offset_right = 1150.0
+offset_bottom = 1069.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy15" type="TextureRect" parent="Slide4" unique_id=1405861197]
+layout_mode = 0
+offset_left = 1217.0
+offset_top = 392.0
+offset_right = 1825.0
+offset_bottom = 1000.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy16" type="TextureRect" parent="Slide4" unique_id=112302501]
+layout_mode = 0
+offset_left = 1109.0
+offset_top = 389.0
+offset_right = 1717.0
+offset_bottom = 997.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy17" type="TextureRect" parent="Slide4" unique_id=1457574149]
+layout_mode = 0
+offset_left = 1309.0
+offset_top = 387.0
+offset_right = 1917.0
+offset_bottom = 995.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="DroneEnemy18" type="TextureRect" parent="Slide4" unique_id=408386480]
+layout_mode = 0
+offset_left = 1342.0
+offset_top = 449.0
+offset_right = 1950.0
+offset_bottom = 1057.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_d0rr7")
+stretch_mode = 3
+
+[node name="Earth" type="TextureRect" parent="Slide4" unique_id=1560948923]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 697.9999
+offset_right = 3841.0
+offset_bottom = 1465.9999
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_dpxxx")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Slide4" unique_id=1945771791]
+layout_mode = 0
+offset_right = 1922.0
+offset_bottom = 637.0
+text = "Three weeks later, the perimeter no longer existed."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slide5" type="Control" parent="." unique_id=1512625585]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Slide5" unique_id=1508443551]
+layout_mode = 0
+offset_left = -6.0
+offset_top = -1.0
+offset_right = 3842.0
+offset_bottom = 2173.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_wby50")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Slide5" unique_id=1332853161]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 842.0
+offset_right = 1922.0
+offset_bottom = 1076.0
+text = "One signal moving toward the swarm."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IntroMusic" type="AudioStreamPlayer" parent="." unique_id=1801117049]
+volume_db = -39.726

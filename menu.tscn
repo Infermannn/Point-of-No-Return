@@ -81,6 +81,14 @@ scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("8_nrnbx")
 stretch_mode = 3
 
+[node name="BlackScreen" type="ColorRect" parent="." unique_id=875963999]
+z_index = 100
+layout_mode = 0
+offset_right = 1921.0
+offset_bottom = 1081.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MuteButton" to="." method="_on_mute_button_pressed"]

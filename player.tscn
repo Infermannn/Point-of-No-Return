@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cked5i5jeajd4" path="res://Textures/player/Fire3(1).png" id="3_i3pqv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(40, 40)
+size = Vector2(12, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpgvn"]
 atlas = ExtResource("3_i3pqv")
@@ -50,6 +50,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
+size = Vector2(28.030312, 21.493145)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
+size = Vector2(20.629974, 21.292736)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sweqy"]
+size = Vector2(21.5, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hs0m"]
+size = Vector2(32, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jxqw"]
+size = Vector2(42, 19)
+
 [node name="Player" type="Area2D" unique_id=1102285899 groups=["player"]]
 collision_mask = 6
 script = ExtResource("1_4flbx")
@@ -69,3 +84,25 @@ position = Vector2(4, 57)
 rotation = -3.1415927
 scale = Vector2(0.23026869, 0.25110355)
 sprite_frames = SubResource("SpriteFrames_hqtel")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=368336879]
+position = Vector2(-3.1262517, -6.150508)
+rotation = 0.8728177
+shape = SubResource("RectangleShape2D_i3pqv")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=1379766197]
+position = Vector2(9.664259, -9.275259)
+rotation = 0.7244993
+shape = SubResource("RectangleShape2D_hqtel")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=1704398095]
+position = Vector2(2.25, 9)
+shape = SubResource("RectangleShape2D_sweqy")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="." unique_id=1758652675]
+position = Vector2(2, 3)
+shape = SubResource("RectangleShape2D_2hs0m")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="." unique_id=275938186]
+position = Vector2(2, -0.5)
+shape = SubResource("RectangleShape2D_1jxqw")

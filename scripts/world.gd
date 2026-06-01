@@ -27,7 +27,7 @@ var original_player_pos = Vector2.ZERO
 
 var waves = [
 	# 1 - tutorial, only basics
-	{"enemies": [{"scene": "basic", "count": 6}],
+	{"enemies": [{"scene": "basic", "count": 1}],
 	 "spawn_interval": 1.5, "max_on_screen": 4, "modifiers": []},
 	
 	# 2 - more basics, first drones
@@ -40,7 +40,7 @@ var waves = [
 	
 	# 4 - first big guy in a crowd
 	{"enemies": [{"scene": "basic", "count": 6}, {"scene": "big", "count": 1}, {"scene": "drone", "count": 8}, {"scene": "basic", "count": 4}],
-	 "spawn_interval": 0.9, "max_on_screen": 7, "modifiers": []},
+	 "spawn_interval": 0.9, "max_on_screen": 6, "modifiers": []},
 	
 	# 5 - first bomber when screen is busy
 	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "bomber", "count": 1}, {"scene": "basic", "count": 8}, {"scene": "drone", "count": 6}],
@@ -48,7 +48,7 @@ var waves = [
 	
 	# 6 - first repeerc when screen is already full
 	{"enemies": [{"scene": "basic", "count": 8}, {"scene": "drone", "count": 8}, {"scene": "repeerc", "count": 3}, {"scene": "basic", "count": 6}, {"scene": "drone", "count": 4}],
-	 "spawn_interval": 0.8, "max_on_screen": 8, "modifiers": []},
+	 "spawn_interval": 0.8, "max_on_screen": 9, "modifiers": []},
 	
 	# 7 - first asteroids with pressure
 	{"enemies": [{"scene": "drone", "count": 10}, {"scene": "basic", "count": 8}, {"scene": "repeerc", "count": 4}, {"scene": "drone", "count": 8}],
@@ -64,7 +64,7 @@ var waves = [
 	
 	# 10 - big wave with asteroids
 	{"enemies": [{"scene": "drone", "count": 12}, {"scene": "repeerc", "count": 5}, {"scene": "basic", "count": 10}, {"scene": "drone", "count": 10}, {"scene": "repeerc", "count": 5}, {"scene": "basic", "count": 8}],
-	 "spawn_interval": 0.5, "max_on_screen": 11, "modifiers": [{"type": "asteroids", "interval": 2.5}]},
+	 "spawn_interval": 0.25, "max_on_screen": 11, "modifiers": [{"type": "asteroids", "interval": 3.5}]},
 	
 	# 11 - two big guys with support
 	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "repeerc", "count": 4}, {"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "basic", "count": 8}],
@@ -72,15 +72,15 @@ var waves = [
 	
 	# 12 - bomber + big guy + asteroids
 	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "bomber", "count": 1}, {"scene": "big", "count": 1}, {"scene": "repeerc", "count": 5}, {"scene": "drone", "count": 8}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 5}, {"scene": "drone", "count": 8}],
-	 "spawn_interval": 0.5, "max_on_screen": 12, "modifiers": [{"type": "asteroids", "interval": 2.0}]},
+	 "spawn_interval": 0.5, "max_on_screen": 12, "modifiers": [{"type": "asteroids", "interval": 3}]},
 	
 	# 13 - chaos
 	{"enemies": [{"scene": "basic", "count": 10}, {"scene": "drone", "count": 10}, {"scene": "repeerc", "count": 6}, {"scene": "basic", "count": 10}, {"scene": "repeerc", "count": 6}, {"scene": "drone", "count": 10}],
-	 "spawn_interval": 0.4, "max_on_screen": 13, "modifiers": [{"type": "asteroids", "interval": 2.0}]},
+	 "spawn_interval": 0.25, "max_on_screen": 12, "modifiers": [{"type": "asteroids", "interval": 2.5}]},
 	
 	# 14 - two big guys two bombers
 	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 6}, {"scene": "drone", "count": 8}, {"scene": "basic", "count": 8}, {"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 6}],
-	 "spawn_interval": 0.5, "max_on_screen": 14, "modifiers": [{"type": "asteroids", "interval": 2.5}]},
+	 "spawn_interval": 0.5, "max_on_screen": 12, "modifiers": [{"type": "asteroids", "interval": 2.5}]},
 	
 	# 15 - FINAL WAVE
 	{"enemies": [
@@ -91,7 +91,7 @@ var waves = [
 		{"scene": "big", "count": 1}, {"scene": "bomber", "count": 2}, {"scene": "repeerc", "count": 6},
 		{"scene": "drone", "count": 10}, {"scene": "basic", "count": 10}
 	],
-	 "spawn_interval": 0.35, "max_on_screen": 18, "modifiers": [{"type": "asteroids", "interval": 1.5}]},
+	 "spawn_interval": 0.5, "max_on_screen": 15, "modifiers": [{"type": "asteroids", "interval": 1.5}]},
 ]
 
 var spawn_queue = []
@@ -593,9 +593,6 @@ func start_boss_fight():
 		bullet.queue_free()
 	spawn_queue = []
 	wave_active = false
-	var hp_bar = get_tree().get_first_node_in_group("player_hp_bar")
-	if hp_bar:
-		hp_bar.visible = true
 	
 	var player = get_tree().get_first_node_in_group("player")
 	player.controls_enabled = false
