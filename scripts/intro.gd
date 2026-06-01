@@ -8,7 +8,6 @@ func _ready():
 	for slide in slides:
 		slide.visible = false
 	$BlackScreen.color = Color(0, 0, 0, 1)
-	# запускаем музыку game over
 	$IntroMusic.stream = preload("res://Music/Last_Ship_Save.mp3")
 	$IntroMusic.play()
 	show_slide(0)
@@ -18,19 +17,16 @@ func show_slide(index):
 		go_to_menu()
 		return
 	
-	# скрываем все слайды показываем нужный
 	for slide in slides:
 		slide.visible = false
 	slides[index].visible = true
 	
-	# оттемняемся
 	var tween = create_tween()
 	tween.tween_property($BlackScreen, "color:a", 0.0, 1.0)
 	await tween.finished
 	
 	await get_tree().create_timer(3.0).timeout
 	
-	# затемняемся
 	var dark_tween = create_tween()
 	dark_tween.tween_property($BlackScreen, "color:a", 1.0, 1.0)
 	await dark_tween.finished

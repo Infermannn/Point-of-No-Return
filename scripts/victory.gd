@@ -46,10 +46,6 @@ func shake_and_explode():
 	exp_tween.tween_property(explosion_rect, "size", screen, 0.3)
 	exp_tween.parallel().tween_property(explosion_rect, "position", Vector2.ZERO, 0.3)
 	await exp_tween.finished
-
-# прямоугольник темнеет за 1 секунду
-	#var fade_tween = create_tween()
-	#fade_tween.tween_property(explosion_rect, "color:a", 0.0, 1.0)
 	
 	$BlackScreen.color = Color(0, 0, 0, 0)
 	var fade_tween = create_tween()
@@ -68,9 +64,8 @@ func go_to_ending():
 
 func bad_ending():
 	$BackgroundContainer/Background.visible = false 
-	$BackgroundContainer/Background2.visible = false # замени на имя своего фона
+	$BackgroundContainer/Background2.visible = false
 	$PlayerShip.visible = false
-	# музыка появляется вместе с текстом
 	var ending_music = $EndingMusic
 	ending_music.stream = preload("res://Music/Last_Ship_Save.mp3")
 	ending_music.volume_db = -80
@@ -89,27 +84,21 @@ func bad_ending():
 	
 	await get_tree().create_timer(3.0).timeout
 	
-	# кнопка меню появляется постепенно
 	$MenuButton.modulate.a = 0.0
 	$MenuButton.visible = true
 	var btn_tween = create_tween()
 	btn_tween.tween_property($MenuButton, "modulate:a", 1.0, 1.0)
 
 func good_ending():
-	# запускаем фон
 	$BackgroundContainer.visible = true
 	$BackgroundContainer.scroll_speed = 300
 	
-	
-	# показываем корабль
 	$PlayerShip.visible = true
 	$EngineFlame.visible = true
 	$EngineFlame.play("default")
 	
-	# задержка 1 секунда
 	await get_tree().create_timer(1.0).timeout
 	
-	# индикатор уворота
 	Global.play_evade()
 	var label = Label.new()
 	label.text = "EVADE!"
@@ -123,7 +112,6 @@ func good_ending():
 	evade_tween.parallel().tween_property(label, "modulate:a", 0.0, 0.5)
 	evade_tween.tween_callback(label.queue_free)
 	
-	# оттемняемся
 	var tween = create_tween()
 	tween.tween_property($BlackScreen, "color:a", 0.0, 1.5)
 	tween.parallel().tween_method(
@@ -131,11 +119,9 @@ func good_ending():
 	)
 	Global.start_music()
 	await tween.finished
-	# остальной код...
 	
 	await get_tree().create_timer(2.0).timeout
 	
-	# текст появляется
 	$EndingText.modulate.a = 0.0
 	$EndingText.visible = true
 	$EndingText.text = "The Overseer is gone.\nThe swarm — silent.\n\nEarth stands.\nYou made it back.\n\nMission complete.\nWelcome home, pilot."
@@ -146,7 +132,6 @@ func good_ending():
 	
 	await get_tree().create_timer(2.0).timeout
 	
-	# кнопка меню
 	$MenuButton.modulate.a = 0.0
 	$MenuButton.visible = true
 	var btn_tween = create_tween()

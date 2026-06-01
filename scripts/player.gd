@@ -274,6 +274,8 @@ func take_damage(amount):
 		return
 	hp -= actual_damage
 	if hp <= 0:
+		controls_enabled = false
+		process_mode = Node.PROCESS_MODE_DISABLED
 		Global.stop_boss_music()
 		death_animation()
 		return
@@ -332,7 +334,7 @@ func show_evade_indicator():
 func death_animation():
 	controls_enabled = false
 	godmode = true
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_DISABLED
 	
 	Global.music_player.stop()
 	

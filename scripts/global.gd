@@ -44,7 +44,7 @@ var evade_player: AudioStreamPlayer
 
 func _ready():
 	evade_player = AudioStreamPlayer.new()
-	evade_player.stream = preload("res://Sounds/Evasion.wav")  # замени на свой путь
+	evade_player.stream = preload("res://Sounds/Evasion.wav")
 	evade_player.volume_db = -20
 	add_child(evade_player)
 	

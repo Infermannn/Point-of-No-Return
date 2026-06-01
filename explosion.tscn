@@ -150,13 +150,13 @@ animations = [{
 "duration": 0.15,
 "texture": SubResource("AtlasTexture_b02un")
 }],
-"loop": false,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kmxf7"]
-radius = 80.0
+radius = 48.6621
 
 [node name="explosion" type="Area2D" unique_id=1355097204]
 z_index = 10
@@ -168,8 +168,7 @@ script = ExtResource("1_vxas0")
 material = SubResource("ShaderMaterial_m5xho")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_q85pl")
-frame = 19
-frame_progress = 1.0
+frame_progress = 0.25096586
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=881699283]
 shape = SubResource("CircleShape2D_kmxf7")

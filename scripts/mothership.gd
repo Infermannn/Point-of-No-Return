@@ -1,6 +1,6 @@
 extends Area2D
 
-var hp = 1000
+var hp = 100000
 var max_hp = 0
 var normal_enemy = false
 var phase = 1

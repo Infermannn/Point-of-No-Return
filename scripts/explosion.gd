@@ -22,6 +22,6 @@ func _on_area_entered(area):
 		if area in hit_enemies:
 			return
 		hit_enemies.append(area)
-		area.hp -= damage
+		area.hp -= 150
 		if area.hp <= 0:
 			area.die()

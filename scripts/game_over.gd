@@ -10,6 +10,7 @@ func _on_try_again_pressed():
 	black.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(black)
 	Global.start_music() 
+	Global.player_hp = Global.player_max_hp
 	
 	var tween = create_tween()
 	tween.tween_property(black, "color:a", 1.0, 1.0)
