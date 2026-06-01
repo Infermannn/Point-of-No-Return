@@ -168,7 +168,7 @@ script = ExtResource("1_vxas0")
 material = SubResource("ShaderMaterial_m5xho")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_q85pl")
-frame_progress = 0.25096586
+frame_progress = 0.011039206
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=881699283]
 shape = SubResource("CircleShape2D_kmxf7")

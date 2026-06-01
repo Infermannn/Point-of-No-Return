@@ -241,9 +241,9 @@ func start_game():
 	var diff_label = get_tree().get_first_node_in_group("difficulty_label")
 	if diff_label:
 		var diff_text = "Normal"
-		if Global.difficulty == 0.5:
+		if Global.difficulty == 0.8:
 			diff_text = "Easy"
-		elif Global.difficulty == 1.5:
+		elif Global.difficulty == 1.4:
 			diff_text = "Hard"
 		diff_label.text = "Difficulty: " + diff_text
 	
