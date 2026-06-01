@@ -16,7 +16,7 @@ var explosion_scene = preload("res://explosion.tscn")
 func _ready():
 	hp *= Global.difficulty
 	connect("area_entered", _on_area_entered)
-	if stop_y == 0:  # только если не задано снаружи
+	if stop_y == 0:
 		stop_y = randf_range(50, get_viewport_rect().size.y * 0.5)
 	if Global.endless_mode:
 		hp *= Global.endless_enemy_mult

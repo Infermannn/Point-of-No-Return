@@ -19,7 +19,7 @@ var explosion_scene = preload("res://explosion.tscn")
 
 var arc_target = Vector2.ZERO
 var arc_timer = 0.0
-var arc_duration = 1.5  # время движения вниз
+var arc_duration = 1.5
 var arc_speed = 300.0
 
 var contact_damage = false
@@ -74,14 +74,11 @@ func _process(delta):
 						
 		"arc_move":
 			arc_timer += delta
-			# сначала летим вниз
 			position.y += arc_speed * delta
-			# потом плавно поворачиваем к цели
 			if arc_timer > 0.5:
 				var dir = (arc_target - global_position).normalized()
 				position += dir * arc_speed * delta * (arc_timer - 0.5) * 2
 			
-			# когда близко к цели - начинаем мигать
 			var dist = global_position.distance_to(arc_target)
 			if dist < 75 or arc_timer > arc_duration:
 				state = "blinking"
@@ -102,7 +99,7 @@ func explode(damage_multiplier):
 	#print("spawning explosion at: ", global_position)
 	var exp = explosion_scene.instantiate()
 	get_tree().get_first_node_in_group("world").add_child(exp)
-	exp.global_position = global_position # устанавливаем ПОСЛЕ add_child
+	exp.global_position = global_position
 	#print("player pos: ", get_tree().get_first_node_in_group("player").global_position)
 	#print("exp position: ", exp.position)
 	get_parent().add_child(exp)
@@ -132,4 +129,4 @@ func _on_area_entered(area):
 		if hp <= 0:
 			die()
 	if area.is_in_group("asteroid"):
-		die()  # или просто queue_free() если не хочешь взрыва
+		die()

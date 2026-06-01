@@ -38,5 +38,5 @@ func slow_down():
 	
 func stop():
 	target_speed = 0
-	speed_change_rate = 150  # медленно останавливается
+	speed_change_rate = 150
 	

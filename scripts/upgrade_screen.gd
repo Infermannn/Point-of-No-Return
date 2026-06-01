@@ -31,7 +31,7 @@ func showw():
 	check_ready()
 	reroll_cost = 0
 	var world = get_tree().get_first_node_in_group("world")
-	var show_perk = world.current_wave % 2 != 0  # нечётные волны показывают перки
+	var show_perk = world.current_wave % 2 != 0
 	
 	var perk_card = $VBoxContainer/HBoxContainer3big/Control
 	if perk_card:
@@ -288,7 +288,7 @@ func _on_reroll_pressed():
 		return
 	upgrade_points -= reroll_cost
 	reroll_cost = 1
-	current_perk = Global.get_random_perk(reroll_cost > 1)  # первый рерол исключает последний
+	current_perk = Global.get_random_perk(reroll_cost > 1)
 	update_perk_card()
 	update_buttons()
 	check_ready()
@@ -306,7 +306,6 @@ func apply_perk_effect(perk):
 	match perk:
 		"Shrinker":
 			player.scale = Vector2(0.75, 0.75)
-			# хитбокс уменьшится автоматически с scale
 		"BiggerGuns":
 			Global.bullet_scale = 1.5
 		"GlassCannon":

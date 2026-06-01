@@ -117,7 +117,6 @@ func _process(delta):
 		var input_blocker = get_tree().get_first_node_in_group("input_blocker")
 		if quit_btn:
 			if quit_btn.visible:
-				# закрываем паузу
 				quit_btn.visible = false
 				if pause_label:
 					pause_label.visible = false
@@ -128,7 +127,6 @@ func _process(delta):
 					bg.process_mode = Node.PROCESS_MODE_ALWAYS
 				Global.music_player.stream_paused = Global.muted
 			else:
-				# открываем паузу
 				quit_btn.visible = true
 				if pause_label:
 					pause_label.visible = true
@@ -157,17 +155,6 @@ func _process(delta):
 		for enemy in get_tree().get_nodes_in_group("enemy"):
 			enemy.queue_free()
 		get_tree().get_first_node_in_group("world").force_end_wave()
-		
-	#if Input.is_action_just_pressed("pause"):
-		#var upgrade_screen = get_tree().get_first_node_in_group("upgrade_screen")
-		#if upgrade_screen and upgrade_screen.visible:
-			#return 
-		#paused = not paused
-		#get_tree().paused = paused
-		#Global.music_player.stream_paused = paused
-		#var label = get_tree().get_first_node_in_group("pause_label")
-		#if label:
-			#label.visible = paused
 	
 	var direction = Vector2.ZERO
 	shoot_timer -= delta
@@ -210,7 +197,6 @@ func _process(delta):
 		var quit_btn = get_tree().get_first_node_in_group("quit_button")
 		var pause_label = get_tree().get_first_node_in_group("pause_label")
 		var world = get_tree().get_first_node_in_group("world")
-		# убрали проверку game_started
 		if quit_btn:
 			if quit_btn.visible:
 				blocker.visible = true
@@ -253,12 +239,6 @@ func _process(delta):
 		
 	if Input.is_key_pressed(KEY_CTRL) and Input.is_key_pressed(KEY_SHIFT) and Input.is_action_just_pressed("cheat_boss"):
 		get_tree().get_first_node_in_group("world").start_boss_fight()
-		
-	#if Input.is_action_just_pressed("toggle_fullscreen"):
-		#if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
-			#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		#else:
-			#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	
 func take_damage(amount):
 	if invincible or godmode:
@@ -278,14 +258,11 @@ func take_damage(amount):
 	actual_damage = max(actual_damage - Global.damage_reduction, 1)
 	if Global.last_stand and not Global.last_stand_used and float(hp) / max_hp <= 0.1:
 		Global.last_stand_used = true
-		# уничтожаем все пули
 		for bullet in get_tree().get_nodes_in_group("enemy_bullet"):
 			bullet.queue_free()
-		# взрываем риперков
 		for enemy in get_tree().get_nodes_in_group("enemy"):
 			if enemy.get_script().resource_path.contains("repeerc"):
 				enemy.die()
-		# неуязвимость и скорость
 		invincible = true
 		var old_speed = speed
 		speed = 750
@@ -294,7 +271,7 @@ func take_damage(amount):
 			return
 		invincible = false
 		speed = old_speed
-		return  # не получаем урон
+		return
 	hp -= actual_damage
 	if hp <= 0:
 		Global.stop_boss_music()
@@ -409,7 +386,7 @@ func spawn_pieces(spawn_pos):
 		
 func create_bullet_shield():
 	shield_node = Area2D.new()
-	shield_node.collision_layer = 4  # layer 3
+	shield_node.collision_layer = 4
 	shield_node.collision_mask = 2
 	var shape = CollisionShape2D.new()
 	var circle = CircleShape2D.new()
@@ -417,7 +394,6 @@ func create_bullet_shield():
 	shape.shape = circle
 	shield_node.add_child(shape)
 	
-	# визуальный круг
 	var line = Line2D.new()
 	var points = 32
 	for i in points + 1:
@@ -436,7 +412,6 @@ func _on_shield_hit(area):
 		return
 	if area.is_in_group("enemy_bullet"):
 		area.queue_free()
-	# начинаем кулдаун
 	shield_active = false
 	shield_cooldown = 15.0
 	if shield_node:

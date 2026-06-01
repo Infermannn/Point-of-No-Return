@@ -18,13 +18,12 @@ var shoot_interval = 2.0
 var laser_active = false
 var boss_fight_started = false
 
-# лазеры
 var laser_left: Line2D
 var laser_right: Line2D
 var warning_left: Line2D
 var warning_right: Line2D
 
-var cannon_idle_texture = preload("res://Textures/Mothership/LaserCannonIdle.png")  # замени на свои
+var cannon_idle_texture = preload("res://Textures/Mothership/LaserCannonIdle.png")
 var cannon_fire_texture = preload("res://Textures/Mothership/LaserCannonActive.png")
 
 var cannons_frozen = false
@@ -34,7 +33,7 @@ var glow_right: Line2D
 var mid_left: Line2D
 var mid_right: Line2D
 
-var phase1_texture = preload("res://Textures/Mothership/mothership_2_dim(2).png")  # замени на свои пути
+var phase1_texture = preload("res://Textures/Mothership/mothership_2_dim(2).png")
 var phase2_texture = preload("res://Textures/Mothership/mothership_4_bright(1).png")
 var phase3_texture = preload("res://Textures/Mothership/mothership_3_medium(1).png")
 
@@ -42,7 +41,7 @@ var hp_bar_timer = 0.0
 var hp_bar_visible = false
 
 var attack_timer = 0.0
-var attack_interval = 5.0  # задержка между атаками
+var attack_interval = 5.0 
 var current_attack = ""
 
 var repeerc_scene = preload("res://repeerc.tscn")
@@ -64,15 +63,12 @@ func _ready():
 	var screen = get_viewport_rect().size
 	position = Vector2(screen.x / 2, -300)
 	
-	# пушки смотрят в стороны во время спуска
 	$CannonLeft.rotation = deg_to_rad(180)
 	$CannonRight.rotation = deg_to_rad(0)
 	
-	# создаём лазеры
 	create_lasers()
 
 func create_lasers():
-	# предупреждение левое
 	warning_left = Line2D.new()
 	warning_left.width = 8
 	warning_left.default_color = Color(1, 0, 0, 0.5)
@@ -85,8 +81,6 @@ func create_lasers():
 	warning_right.visible = false
 	add_child(warning_right)
 	
-	# лазер левый - три слоя
-	# внешнее свечение
 	glow_left = Line2D.new()
 	glow_left.width = 64
 	glow_left.default_color = Color(1, 0, 0, 0.15)
@@ -105,7 +99,6 @@ func create_lasers():
 	laser_left.visible = false
 	add_child(laser_left)
 	
-	# лазер правый - три слоя
 	glow_right = Line2D.new()
 	glow_right.width = 64
 	glow_right.default_color = Color(1, 0, 0, 0.15)
@@ -148,7 +141,7 @@ func update_laser_positions():
 
 func show_lasers(on):
 	if on:
-		update_laser_positions()  # обновляем позиции перед показом
+		update_laser_positions()
 	laser_left.visible = on
 	laser_right.visible = on
 	glow_left.visible = on
@@ -180,17 +173,14 @@ func _process(delta):
 	if laser_active:
 		update_laser_positions()
 	
-	# система атак
 	attack_timer += delta
 	if attack_timer >= attack_interval:
 		attack_timer = 0
 		choose_attack()
 	else:
-		# принт каждую секунду
 		if int(attack_timer) != int(attack_timer - delta):
 			print("next attack in: ", int(attack_interval - attack_timer), " sec")
 	
-	# обновляем hp bar таймер
 	if hp_bar_visible:
 		hp_bar_timer -= delta
 		if hp_bar_timer <= 0:
@@ -215,7 +205,6 @@ func follow_player(delta):
 func start_boss_sequence():
 	await get_tree().create_timer(1.0).timeout
 	
-	# поворачиваем пушки к центру экрана
 	var screen = get_viewport_rect().size
 	var center = Vector2(screen.x / 2, screen.y / 2)
 	var dir_l = center - $CannonLeft.global_position
@@ -226,39 +215,32 @@ func start_boss_sequence():
 	tween.parallel().tween_property($CannonRight, "rotation", atan2(dir_r.y, dir_r.x), 1.0)
 	await tween.finished
 	
-	# возвращаем передвижение
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		player.controls_enabled = true
 	
-	# первая атака
 	await charged_shot()
 	
-	# возвращаем стрельбу
 	if player and is_instance_valid(player):
-		player.shoot_timer = -99  # разблокируем стрельбу
+		player.shoot_timer = -99 
 		
 	if player and is_instance_valid(player):
 		player.shoot_timer = -99
-		Global.start_boss_music()  # запускаем музыку босса
+		Global.start_boss_music()
 	
 	boss_fight_started = true
 
 func charged_shot():
 	laser_active = true
-	cannons_frozen = true  # останавливаем слежение
-	# остальной код...
+	cannons_frozen = true
 	laser_active = true
 	
-	# останавливаем пушки
 	var frozen_rot_l = $CannonLeft.rotation
 	var frozen_rot_r = $CannonRight.rotation
 	
-	# меняем текстуру пушек на firing
 	$CannonLeft/Sprite2D.texture = cannon_fire_texture
 	$CannonRight/Sprite2D.texture = cannon_fire_texture
 	
-	# предупреждение - мигаем 2 раза за 1 секунду
 	update_laser_positions()
 	for i in 2:
 		warning_left.visible = true
@@ -271,16 +253,13 @@ func charged_shot():
 	if not is_instance_valid(self):
 		return
 	
-	# показываем лазеры
 	show_lasers(true)
 	warning_left.visible = false
 	warning_right.visible = false
 	
-	# длительность по фазе
 	var duration = 2.0 + (phase - 1) * 1.5
 	duration = min(duration, 5.0)
 	
-	# наносим урон каждую секунду
 	var elapsed = 0.0
 	while elapsed < duration:
 		if not is_instance_valid(self):
@@ -293,15 +272,13 @@ func charged_shot():
 	if not is_instance_valid(self):
 		return
 	
-	# убираем лазеры
-	show_lasers(false)  # вместо laser_left.visible = false и т.д.
+	show_lasers(false)
 	
-	# возвращаем текстуру пушек
 	$CannonLeft/Sprite2D.texture = cannon_idle_texture
 	$CannonRight/Sprite2D.texture = cannon_idle_texture
 	
 	await get_tree().create_timer(0.5).timeout
-	cannons_frozen = false  # возобновляем слежение
+	cannons_frozen = false
 	laser_active = false
 
 func damage_in_laser():
@@ -342,29 +319,6 @@ func update_phase():
 			1: $AnimatedSprite2D.play("phase1")
 			2: $AnimatedSprite2D.play("phase2")
 			3: $AnimatedSprite2D.play("phase3")
-
-
-#func shoot_bullets():
-	#var player = get_tree().get_first_node_in_group("player")
-	#if player == null:
-		#return
-	#for cannon in [$CannonLeft, $CannonRight]:
-		#var bullet = bullet_scene.instantiate()
-		#bullet.position = cannon.get_node("MuzzlePoint").global_position
-		#bullet.direction = (player.global_position - cannon.global_position).normalized()
-		#bullet.speed = 500 * Global.difficulty
-		#bullet.damage = 120 * Global.difficulty
-		#get_parent().add_child(bullet)
-	
-	#if phase == 3:
-		#var base_dir = (player.global_position - global_position).normalized()
-		#for a in [-30, -15, 15, 30]:
-			#var bullet = bullet_scene.instantiate()
-			#bullet.position = global_position
-			#bullet.direction = base_dir.rotated(deg_to_rad(a))
-			#bullet.speed = 400 * Global.difficulty
-			#bullet.damage = 100 * Global.difficulty
-			#get_parent().add_child(bullet)
 
 func spawn_drones_attack():
 	var count = 4 if phase == 1 else (4 if phase == 2 else 4)
@@ -410,18 +364,15 @@ func update_hp_bar():
 	if not bar:
 		return
 	
-	# обновляем заполнение
 	var fill = bar.get_node("Fill")
 	var percent = float(hp) / max_hp
 	fill.size.x = 752 * percent
 	
-	# меняем цвет по фазе
 	match phase:
-		1: fill.color = Color(0.8, 0.1, 0.1)  # красный
-		2: fill.color = Color(0.9, 0.4, 0.0)  # оранжевый
-		3: fill.color = Color(1.0, 0.8, 0.0)  # жёлтый
+		1: fill.color = Color(0.8, 0.1, 0.1)
+		2: fill.color = Color(0.9, 0.4, 0.0)
+		3: fill.color = Color(1.0, 0.8, 0.0)
 	
-	# показываем и запускаем таймер исчезновения
 	bar.visible = true
 	hp_bar_visible = true
 	hp_bar_timer = 3.0
@@ -432,10 +383,9 @@ func choose_attack():
 	if not five_shot_active:
 		attacks.append("five_shot_attack")
 	
-	# дроны только если их меньше 8
 	var drone_count = 0
 	for enemy in get_tree().get_nodes_in_group("enemy"):
-		if not enemy.normal_enemy == false:  # не боссы
+		if not enemy.normal_enemy == false:
 			drone_count += 1
 	if drone_count < 5:
 		attacks.append("spawn_drones_attack")
@@ -447,7 +397,7 @@ func choose_attack():
 		return
 	
 	var chosen = attacks[randi() % attacks.size()]
-	print("attack chosen: ", chosen)  # добавь после var chosen = ...
+	print("attack chosen: ", chosen)
 	match chosen:
 		"charged_shot":
 			charged_shot()
@@ -457,25 +407,8 @@ func choose_attack():
 			spawn_repeercs()
 		"shoot_wave_attack":
 			shoot_wave_attack()
-		"five_shot_attack":  # добавь это
+		"five_shot_attack":
 			five_shot_attack()
-		#"shoot_bullets_burst":
-			#shoot_bullets_burst()
-			
-#func shoot_bullets_burst():
-	#var player = get_tree().get_first_node_in_group("player")
-	#if player == null:
-		#return
-	# очередь из 3 выстрелов
-	#for i in 3:
-		#for cannon in [$CannonLeft, $CannonRight]:
-			#var bullet = bullet_scene.instantiate()
-			#bullet.position = cannon.get_node("MuzzlePoint").global_position
-			#bullet.direction = (player.global_position - cannon.global_position).normalized()
-			#bullet.speed = 500 * Global.difficulty
-			#bullet.damage = 120 * Global.difficulty
-			#get_parent().add_child(bullet)
-		#await get_tree().create_timer(0.3).timeout
 		
 func spawn_repeercs():
 	for i in 2:
@@ -485,15 +418,13 @@ func spawn_repeercs():
 		get_parent().add_child(repeerc)
 		
 func shoot_wave_attack():
-	# 6 волн чередуя точки
 	for wave in 12:
 		if not is_instance_valid(self):
 			return
 		
 		var point = $ShootPointLeft.global_position if wave % 2 == 0 else $ShootPointRight.global_position
 		
-		# 135 градусов вниз - 6 пуль с промежутками
-		var start_angle = 0 - 67.5  # центр вниз минус половина 135
+		var start_angle = 0 - 67.5
 		for i in 6:
 			var angle = start_angle + i * (135.0 / 5.0)
 			var dir = Vector2(sin(deg_to_rad(angle)), cos(deg_to_rad(angle)))

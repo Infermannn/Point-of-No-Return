@@ -169,7 +169,7 @@ func _on_boss_track_finished():
 	boss_music_player.stream = boss_tracks[boss_current_track]
 	boss_music_player.play()
 	
-var active_perks = []  # взятые перки
+var active_perks = []
 var available_perks = ["Shrinker", "BiggerGuns", "GlassCannon", "SecondaryTurrets", "ActiveCamo", "BetterMaterials", "BulletShield", "BaitThem", "RepairDrones", "ExplosiveRounds", "HydraMK1", "LastStand", "Focus"]
 
 func get_random_perk(exclude_last = true):

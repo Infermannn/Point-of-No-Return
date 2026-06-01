@@ -1,18 +1,14 @@
 extends Control
 
 func _ready():
-	# чёрный экран изначально
 	$BlackScreen.color = Color(0, 0, 0, 1)
 	
-	# оттемняемся за 1 секунду
 	var tween = create_tween()
 	tween.tween_property($BlackScreen, "color:a", 0.0, 1.0)
 	await tween.finished
 	
-	# тряска босса 3 секунды
 	await shake_and_explode()
 	
-	# затемняемся
 	var dark_tween = create_tween()
 	dark_tween.tween_property($BlackScreen, "color:a", 1.0, 1.0)
 	await dark_tween.finished
@@ -21,8 +17,7 @@ func _ready():
 	get_tree().change_scene_to_file("res://menu.tscn")
 
 func shake_and_explode():
-	# тряска
-	var boss_sprite = $BossSprite  # Sprite2D с текстурой босса
+	var boss_sprite = $BossSprite
 	var textures = [
 		preload("res://Textures/Mothership/mothership_2_dim(2).png"),
 		preload("res://Textures/Mothership/mothership_4_bright(1).png"),
@@ -46,7 +41,6 @@ func shake_and_explode():
 	boss_sprite.position = original_pos
 	boss_sprite.visible = false
 	
-	# взрыв
 	var screen = get_viewport_rect().size
 	var explosion_rect = ColorRect.new()
 	explosion_rect.color = Color(1, 0.5, 0, 1)

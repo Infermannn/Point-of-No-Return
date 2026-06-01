@@ -114,7 +114,6 @@ func _ready():
 		player.visible = false
 	$BackgroundContainer.visible = false
 	
-	# чёрный экран
 	var fade = ColorRect.new()
 	fade.color = Color(0, 0, 0, 1)
 	fade.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -267,7 +266,7 @@ func start_next_wave():
 		return
 	
 	if current_wave >= waves.size():
-		start_boss_fight()  # было get_tree().change_scene_to_file("res://victory.tscn")
+		start_boss_fight()
 		return
 	start_wave(current_wave)
 
@@ -417,7 +416,7 @@ func process_intro(delta):
 			if player:
 				if original_player_pos == Vector2.ZERO:
 					original_player_pos = player.position
-				shake_amount = lerp(shake_amount, 3.0, delta * 0.5)  # нарастает
+				shake_amount = lerp(shake_amount, 3.0, delta * 0.5)
 				player.position = original_player_pos + Vector2(
 					randf_range(-shake_amount, shake_amount),
 					randf_range(-shake_amount, shake_amount)
@@ -460,7 +459,7 @@ func process_intro(delta):
 			player.get_node("EngineFlame").visible = true
 			player.get_node("EngineFlame").play("default")
 			if player and original_player_pos != Vector2.ZERO:
-				player.position = original_player_pos  # возвращаем позицию
+				player.position = original_player_pos
 				original_player_pos = Vector2.ZERO
 				shake_amount = 0.0
 			for enemy in intro_enemies:
@@ -588,7 +587,6 @@ func start_boss_fight():
 	if kills_label:
 		kills_label.visible = false
 	Global.stop_music()
-	# убираем всех врагов и пули
 	for enemy in get_tree().get_nodes_in_group("enemy"):
 		enemy.queue_free()
 	for bullet in get_tree().get_nodes_in_group("enemy_bullet"):
@@ -607,21 +605,16 @@ func start_boss_fight():
 	
 	$BackgroundContainer.stop()
 	
-	# спавним босса
 	var boss = mothership_scene.instantiate()
 	add_child(boss)
 	
-	# ждём пока фон полностью остановится
 	var bg = get_node("BackgroundContainer")
 	while bg.scroll_speed > 1.0:
 		if not is_instance_valid(self) or get_tree() == null:
 			return
 		await get_tree().process_frame
 	
-	# ждём пока босс займёт позицию
 	while is_instance_valid(boss) and boss.entering:
 		if not is_instance_valid(self) or get_tree() == null:
 			return
 		await get_tree().process_frame
-	
-	# босс сам вернёт управление в start_boss_sequence
