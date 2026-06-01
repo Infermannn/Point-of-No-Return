@@ -59,7 +59,7 @@ var big_bullet_timer = 0.0
 var big_bullet_interval = 7.0
 
 var laser_timer = 0.0
-var laser_cooldown = 5.0  # между концом и началом следующей атаки
+var laser_cooldown = 5.0
 var laser_on_cooldown = false
 
 func _ready():
