@@ -118,6 +118,7 @@ func _process(delta):
 		if quit_btn:
 			if quit_btn.visible:
 				quit_btn.visible = false
+				invincible = false
 				if pause_label:
 					pause_label.visible = false
 				if input_blocker:
@@ -133,6 +134,7 @@ func _process(delta):
 				if input_blocker:
 					input_blocker.visible = true
 				get_tree().paused = true
+				invincible = true
 				if bg:
 					bg.process_mode = Node.PROCESS_MODE_DISABLED
 				Global.music_player.stream_paused = true
@@ -252,9 +254,9 @@ func take_damage(amount):
 	invincible = true
 	var actual_damage = amount
 	if Global.glass_cannon:
-		actual_damage *= 2
+		actual_damage *= 1.75
 	if Global.bait_them:
-		actual_damage *= 2
+		actual_damage *= 1.50
 	actual_damage = max(actual_damage - Global.damage_reduction, 1)
 	if Global.last_stand and not Global.last_stand_used and float(hp) / max_hp <= 0.1:
 		Global.last_stand_used = true
@@ -393,7 +395,7 @@ func create_bullet_shield():
 	shield_node.collision_mask = 2
 	var shape = CollisionShape2D.new()
 	var circle = CircleShape2D.new()
-	circle.radius = 80
+	circle.radius = 50
 	shape.shape = circle
 	shield_node.add_child(shape)
 	
@@ -401,7 +403,7 @@ func create_bullet_shield():
 	var points = 32
 	for i in points + 1:
 		var angle = i * TAU / points
-		line.add_point(Vector2(cos(angle), sin(angle)) * 80)
+		line.add_point(Vector2(cos(angle), sin(angle)) * 50)
 	line.width = 3
 	line.default_color = Color(0.3, 0.7, 1, 0.6)
 	shield_node.add_child(line)
@@ -416,7 +418,7 @@ func _on_shield_hit(area):
 	if area.is_in_group("enemy_bullet"):
 		area.queue_free()
 	shield_active = false
-	shield_cooldown = 15.0
+	shield_cooldown = 10.0
 	if shield_node:
 		shield_node.queue_free()
 		shield_node = null

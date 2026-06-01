@@ -59,39 +59,39 @@ var waves = [
 	 "spawn_interval": 0.7, "max_on_screen": 10, "modifiers": []},
 	
 	# 9 - double bomber
-	{"enemies": [{"scene": "big", "count": 1}, {"scene": "drone", "count": 24}, {"scene": "bomber", "count": 2}, {"scene": "repeerc", "count": 24}, {"scene": "drone", "count": 18}, {"scene": "bomber", "count": 1}],
-	 "spawn_interval": 0.6, "max_on_screen": 15, "modifiers": []},
+	{"enemies": [{"scene": "big", "count": 1}, {"scene": "drone", "count": 20}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 12}, {"scene": "drone", "count": 18}, {"scene": "bomber", "count": 1}],
+	 "spawn_interval": 0.4, "max_on_screen": 12, "modifiers": []},
 	
 	# 10 - big wave with asteroids
 	{"enemies": [{"scene": "drone", "count": 12}, {"scene": "repeerc", "count": 5}, {"scene": "basic", "count": 10}, {"scene": "drone", "count": 10}, {"scene": "repeerc", "count": 5}, {"scene": "basic", "count": 8}],
-	 "spawn_interval": 0.25, "max_on_screen": 14, "modifiers": [{"type": "asteroids", "interval": 3.5}]},
+	 "spawn_interval": 0.25, "max_on_screen": 12, "modifiers": [{"type": "asteroids", "interval": 3.5}]},
 	
 	# 11 - two big guys with support
 	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "repeerc", "count": 4}, {"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "basic", "count": 8}],
-	 "spawn_interval": 0.6, "max_on_screen": 14, "modifiers": []},
+	 "spawn_interval": 0.6, "max_on_screen": 12, "modifiers": []},
 	
 	# 12 - bomber + big guy + asteroids
 	{"enemies": [{"scene": "drone", "count": 18}, {"scene": "bomber", "count": 1}, {"scene": "big", "count": 1}, {"scene": "repeerc", "count": 5}, {"scene": "drone", "count": 8}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 5}, {"scene": "drone", "count": 8}],
-	 "spawn_interval": 0.5, "max_on_screen": 14, "modifiers": [{"type": "asteroids", "interval": 3}]},
+	 "spawn_interval": 0.3, "max_on_screen": 12, "modifiers": [{"type": "asteroids", "interval": 3}]},
 	
 	# 13 - chaos
 	{"enemies": [{"scene": "basic", "count": 20}, {"scene": "drone", "count": 30}, {"scene": "repeerc", "count": 30}, {"scene": "basic", "count": 10}, {"scene": "repeerc", "count": 23}, {"scene": "drone", "count": 20}],
-	 "spawn_interval": 0.15, "max_on_screen": 17, "modifiers": [{"type": "asteroids", "interval": 2.5}]},
+	 "spawn_interval": 0.15, "max_on_screen": 12, "modifiers": [{"type": "asteroids", "interval": 2.5}]},
 	
 	# 14 - two big guys two bombers
 	{"enemies": [{"scene": "drone", "count": 8}, {"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 6}, {"scene": "drone", "count": 8}, {"scene": "basic", "count": 8}, {"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}, {"scene": "repeerc", "count": 6}],
-	 "spawn_interval": 0.5, "max_on_screen": 14, "modifiers": [{"type": "asteroids", "interval": 2.5}]},
+	 "spawn_interval": 0.4, "max_on_screen": 12, "modifiers": [{"type": "asteroids", "interval": 2.5}]},
 	
 	# 15 - FINAL WAVE
 	{"enemies": [
-		{"scene": "drone", "count": 10}, {"scene": "big", "count": 1}, {"scene": "bomber", "count": 1},
+		{"scene": "drone", "count": 10}, {"scene": "bomber", "count": 1},
 		{"scene": "repeerc", "count": 6}, {"scene": "drone", "count": 10}, {"scene": "basic", "count": 10},
 		{"scene": "big", "count": 1}, {"scene": "bomber", "count": 1}, {"scene": "drone", "count": 10},
 		{"scene": "repeerc", "count": 6}, {"scene": "basic", "count": 10}, {"scene": "drone", "count": 10},
-		{"scene": "big", "count": 1}, {"scene": "bomber", "count": 2}, {"scene": "repeerc", "count": 6},
+		{"scene": "big", "count": 1}, {"scene": "repeerc", "count": 6},
 		{"scene": "drone", "count": 10}, {"scene": "basic", "count": 10}
 	],
-	 "spawn_interval": 0.5, "max_on_screen": 20, "modifiers": [{"type": "asteroids", "interval": 1.5}]},
+	 "spawn_interval": 0.4, "max_on_screen": 16, "modifiers": [{"type": "asteroids", "interval": 1.5}]},
 ]
 
 var spawn_queue = []
@@ -243,7 +243,7 @@ func start_game():
 		var diff_text = "Normal"
 		if Global.difficulty == 0.8:
 			diff_text = "Easy"
-		elif Global.difficulty == 1.4:
+		elif Global.difficulty == 1.35:
 			diff_text = "Hard"
 		diff_label.text = "Difficulty: " + diff_text
 	

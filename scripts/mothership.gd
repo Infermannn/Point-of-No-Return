@@ -58,6 +58,10 @@ var big_bullet_scene = preload("res://big_bullet.tscn")
 var big_bullet_timer = 0.0
 var big_bullet_interval = 7.0
 
+var laser_timer = 0.0
+var laser_cooldown = 5.0  # между концом и началом следующей атаки
+var laser_on_cooldown = false
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	max_hp = hp
@@ -176,6 +180,13 @@ func _process(delta):
 	if big_bullet_timer >= big_bullet_interval:
 		big_bullet_timer = 0
 		shoot_big_bullet()
+		
+	if not laser_active and not laser_on_cooldown:
+		laser_timer += delta
+		if laser_timer >= laser_cooldown:
+			laser_timer = 0
+			laser_on_cooldown = true
+			charged_shot_standalone()
 
 	
 	follow_player(delta)
@@ -220,6 +231,7 @@ func start_boss_sequence():
 	if hp_bar:
 		hp_bar.visible = false
 	if player:
+		player.invincible = false
 		player.hp = 1
 	
 	var screen = get_viewport_rect().size
@@ -251,10 +263,6 @@ func start_boss_sequence():
 func charged_shot():
 	laser_active = true
 	cannons_frozen = true
-	laser_active = true
-	
-	var frozen_rot_l = $CannonLeft.rotation
-	var frozen_rot_r = $CannonRight.rotation
 	
 	$CannonLeft/Sprite2D.texture = cannon_fire_texture
 	$CannonRight/Sprite2D.texture = cannon_fire_texture
@@ -263,10 +271,10 @@ func charged_shot():
 	for i in 2:
 		warning_left.visible = true
 		warning_right.visible = true
-		await get_tree().create_timer(0.25).timeout
+		await get_tree().create_timer(0.25, false, true).timeout
 		warning_left.visible = false
 		warning_right.visible = false
-		await get_tree().create_timer(0.25).timeout
+		await get_tree().create_timer(0.25, false, true).timeout
 	
 	if not is_instance_valid(self):
 		return
@@ -284,7 +292,7 @@ func charged_shot():
 			return
 		update_laser_positions()
 		damage_in_laser()
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(1.0, false, true).timeout
 		elapsed += 1.0
 	
 	if not is_instance_valid(self):
@@ -295,7 +303,7 @@ func charged_shot():
 	$CannonLeft/Sprite2D.texture = cannon_idle_texture
 	$CannonRight/Sprite2D.texture = cannon_idle_texture
 	
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.5, false, true).timeout
 	cannons_frozen = false
 	laser_active = false
 
@@ -313,6 +321,7 @@ func damage_in_laser():
 		var cross = abs(dir.x * to_player.y - dir.y * to_player.x)
 		var dot = dir.dot(to_player)
 		if cross < laser_width and dot > 0:
+			player.invincible = false
 			player.take_damage(500)
 
 func update_phase():
@@ -408,8 +417,8 @@ func choose_attack():
 	if drone_count < 5:
 		attacks.append("spawn_drones_attack")
 	
-	if not laser_active:
-		attacks.append("charged_shot")
+	#if not laser_active:
+		#attacks.append("charged_shot")
 	
 	if attacks.is_empty():
 		return
@@ -417,8 +426,8 @@ func choose_attack():
 	var chosen = attacks[randi() % attacks.size()]
 	print("attack chosen: ", chosen)
 	match chosen:
-		"charged_shot":
-			charged_shot()
+		#"charged_shot":
+			#charged_shot()
 		"spawn_drones_attack":
 			spawn_drones_attack()
 		"spawn_repeercs":
@@ -487,3 +496,7 @@ func shoot_big_bullet():
 	big_bullet.direction = (player.global_position - global_position).normalized()
 	big_bullet.damage = 200 * Global.difficulty
 	get_parent().add_child(big_bullet)
+	
+func charged_shot_standalone():
+	await charged_shot()
+	laser_on_cooldown = false
