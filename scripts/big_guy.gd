@@ -1,7 +1,7 @@
 extends Area2D
 
-var hp = 4000
-var speed = 250
+var hp = 3400
+var speed = 240
 var reached_position = false
 var stop_y = 0
 var move_direction_x = 1
